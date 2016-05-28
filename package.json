@@ -1,0 +1,31 @@
+{
+  "name": "builder-coderoad",
+  "version": "0.1.0",
+  "description": "Tutorial builder for Atom-Coderoad",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "coderoad",
+    "tutorial",
+    "builder",
+    "tutorial",
+    "creator",
+    "tutorial",
+    "atom",
+    "education"
+  ],
+  "author": "Shawn McKay <shawn.j.mckay@gmail.com>",
+  "license": "ISC",
+    "bugs": {
+    "url": "https://github.com/coderoad/builder-coderoad"
+  },
+  "repository": "https://github.com/coderoad/builder-coderoad",
+  "dependencies": {
+    "core-coderoad": "0.1.0"
+  },
+  "activationCommands": {
+    "atom-workspace": "cb-viewer:toggle"
+  }
+}

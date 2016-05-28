@@ -1,0 +1,5 @@
+src
+tsconfig.json
+tsd.json
+tslint.json
+.gitattributes
