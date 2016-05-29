@@ -35,8 +35,8 @@ const buttonStyles = {
 
 const Welcome: React.StatelessComponent<{}> = () => (
   <div style={styles} className='cr-bg'>
-      <div style={titleStyles}>CodeRoad</div>
-      <div style={taglineStyles}>Tutorials in your Editor</div>
+      <div style={titleStyles}>CodeRoad Builder</div>
+      <div style={taglineStyles}>Create Tutorials</div>
       <br /><br />
       <RouteButton
         label='Start'

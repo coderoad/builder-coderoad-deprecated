@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
 // module reducers
-import {page, pagePosition, tasks, taskActions, taskTests} from './modules/page';
+import {page, pagePosition, tasks, taskTests} from './modules/page';
 
 import {reducer as alert} from 'core-coderoad/lib/alert';
 import {reducer as editor, dir} from 'core-coderoad/lib/editor';
@@ -15,5 +15,5 @@ export default combineReducers({
   alert, checks, editor, dir,
   packageJson, page, pagePosition, route, tasks,
   tutorial, tutorials,
-  taskActions, taskTests, windowToggle
+  taskTests, windowToggle
 });

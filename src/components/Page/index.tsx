@@ -3,9 +3,6 @@ import Divider from 'material-ui/Divider';
 import {Card} from 'material-ui/Card';
 import {ContentCard} from '../index';
 import Tasks from './Tasks';
-import Hints from './Hints';
-import PageToolbar from './PageToolbar';
-import ProgressBar from './ProgressBar';
 
 const styles = {
   width: '100%',
@@ -34,20 +31,6 @@ const Page: React.StatelessComponent<{
         page={page}
       />
 
-      <PageToolbar
-        tasks={tasks}
-        taskPosition={taskPosition}
-      >
-        <Hints
-          task={task}
-          hintPosition={hintPosition}
-          />
-        <ProgressBar
-          taskLength={tasks.length}
-          taskPosition={taskPosition}
-          completed={completed}
-        />
-      </PageToolbar>
     </section>
   );
 };
