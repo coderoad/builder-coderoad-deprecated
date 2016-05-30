@@ -1,5 +1,5 @@
 import {PAGE_SET} from './types';
-import {hintPositionSet, routeSet} from '../../actions';
+import {routeSet} from '../../actions';
 export {editorOpen, editorSave, editorSet, editorInsert} from '../../actions';
 
 export function pageNext(): ReduxThunk.ThunkInterface | Action {
@@ -12,11 +12,6 @@ export function pageNext(): ReduxThunk.ThunkInterface | Action {
 export function pageSet(pagePosition = 0): ReduxThunk.ThunkInterface {
   return (dispatch, getState): void => {
     const {dir, progress, tutorial, route} = getState();
-    // routes
-    if (pagePosition >= progress.pages.length) {
-      return dispatch(routeSet('final'));
-    }
-    dispatch(hintPositionSet(0));
     // create absolute paths for 'task-tests'
     const tasks = tutorial.pages[pagePosition].tasks || [];
     dispatch({
