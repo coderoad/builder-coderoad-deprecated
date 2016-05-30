@@ -6,11 +6,17 @@ import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton';
 import {tutorialConfigSave, routeSet} from '../../actions';
+import languageItems from './languageItems';
+import runnerItems from './runnerItems';
 
 const styles = {
   margin: '10px',
   padding: '30px 20px',
   textAlign: 'center',
+};
+
+const buttonStyles = {
+  margin: '30px 10px 20px 10px',
 };
 
 @connect(null, dispatch => {
@@ -68,16 +74,7 @@ export default class TutorialConfig extends React.Component <{
           value={this.state.language}
           onChange={this.handleSelect.bind(this, 'language')}
         >
-          <MenuItem
-            key={1}
-            value={'JS'}
-            primaryText='JS'
-          />
-          <MenuItem
-            key={2}
-            value={'Python'}
-            primaryText='Python'
-          />
+          {languageItems()}
         </SelectField>
         <br />
         <SelectField
@@ -85,20 +82,17 @@ export default class TutorialConfig extends React.Component <{
           value={this.state.runner}
           onChange={this.handleSelect.bind(this, 'runner')}
         >
-          <MenuItem
-            key={1}
-            value={'mocha-coderoad'}
-            primaryText='Mocha-CodeRoad'
-          />
+          {runnerItems(this.state.language)}
         </SelectField>
         <br />
-        <br />
         <RaisedButton
+          style={buttonStyles}
           label='Save'
           primary={true}
           onTouchTap={this.save.bind(this)}
         />
         <RaisedButton
+          style={buttonStyles}
           label='Continue'
           secondary={true}
           onTouchTap={this.props.routeToInfo.bind(this)}
