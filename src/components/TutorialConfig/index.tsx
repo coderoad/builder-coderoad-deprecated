@@ -5,12 +5,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton';
-import {tutorialConfigSave} from '../../actions';
-  // name: '',
-  // repo: '',
-  // language: '',
-  // runner: '',
-  // runnerOptions: {}
+import {tutorialConfigSave, routeSet} from '../../actions';
 
 const styles = {
   margin: '10px',
@@ -20,12 +15,14 @@ const styles = {
 
 @connect(null, dispatch => {
   return {
-    save: (config: Tutorial.ConfigSet) => dispatch(tutorialConfigSave(config))
+    save: (config: Tutorial.ConfigSet) => dispatch(tutorialConfigSave(config)),
+    routeToInfo: () => dispatch(routeSet('tutorialInfo'))
   };
 })
 export default class TutorialConfig extends React.Component <{
   tutorialConfig: Tutorial.ConfigSet,
-  save?: (config: Tutorial.ConfigSet) => any;
+  save?: (config: Tutorial.ConfigSet) => any,
+  routeToInfo?: () => any
 }, {
   name: string, repo: string, language: string,
   runner: string, runnerOptions?: Object
@@ -40,12 +37,16 @@ export default class TutorialConfig extends React.Component <{
       runnerOptions: {}
     };
   }
-  handleChange(value, event) {
+  handleText(prop, event) {
+    this.handleChange(prop, event.target.value);
+  }
+  handleSelect(prop, event, index, value) {
+    this.handleChange(prop, value);
+  }
+  handleChange(prop, val) {
     const obj = {};
-    obj[value] = event.target.value;
-    this.setState(
-      Object.assign({}, this.state, obj)
-    );
+    obj[prop] = val;
+    this.setState(Object.assign({}, this.state, obj));
   }
   save() {
     this.props.save(this.state);
@@ -59,28 +60,49 @@ export default class TutorialConfig extends React.Component <{
         <TextField
           floatingLabelText='Tutorial Package Name'
           value={this.state.name}
-          onChange={this.handleChange.bind(this, 'name', event)}
+          onChange={this.handleText.bind(this, 'name')}
         />
         <br />
         <SelectField
           floatingLabelText='Language'
           value={this.state.language}
-          onChange={this.handleChange.bind(this, 'language', event)}
+          onChange={this.handleSelect.bind(this, 'language')}
         >
-          <MenuItem value={'JS'} primaryText='JS' />
-          <MenuItem value={'Python'} primaryText='Python' />
+          <MenuItem
+            key={1}
+            value={'JS'}
+            primaryText='JS'
+          />
+          <MenuItem
+            key={2}
+            value={'Python'}
+            primaryText='Python'
+          />
         </SelectField>
         <br />
         <SelectField
           floatingLabelText='Test Runner'
           value={this.state.runner}
-          onChange={this.handleChange.bind(this, 'runner', event)}
+          onChange={this.handleSelect.bind(this, 'runner')}
         >
-          <MenuItem value={'mocha-coderoad'} primaryText='Mocha-CodeRoad' />
+          <MenuItem
+            key={1}
+            value={'mocha-coderoad'}
+            primaryText='Mocha-CodeRoad'
+          />
         </SelectField>
         <br />
         <br />
-        <RaisedButton label='Save' primary={true} onTouchTap={this.save.bind(this)}/>
+        <RaisedButton
+          label='Save'
+          primary={true}
+          onTouchTap={this.save.bind(this)}
+        />
+        <RaisedButton
+          label='Continue'
+          secondary={true}
+          onTouchTap={this.props.routeToInfo.bind(this)}
+        />
       </Card>
     );
   }
