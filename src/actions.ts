@@ -1,4 +1,6 @@
 export {pageSet, pageNext} from './modules/page/actions';
+export {tutorialConfigSave} from './modules/tutorial-config';
+export {tutorialInfoSave} from './modules/tutorial-info';
 
 export {alertOpen, alertClose, alertReplay} from 'core-coderoad/lib/alert';
 export {editorDevToolsToggle, editorOpen, editorInsert,

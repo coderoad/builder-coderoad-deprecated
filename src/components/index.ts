@@ -4,6 +4,8 @@ export {default as Routes} from './Routes';
 export {default as Start} from './Start';
 export {default as Checks} from './Start/Checks';
 export {default as Tutorials} from './Tutorials';
+export {default as TutorialConfig} from './TutorialConfig';
+export {default as TutorialInfo} from './TutorialInfo';
 
 export {default as Alert} from './common/Alert';
 export {default as Markdown} from './common/Markdown';
