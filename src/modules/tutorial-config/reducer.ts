@@ -1,10 +1,10 @@
 import {TUTORIAL_CONFIG_SAVE} from './types';
 
 const _config: Tutorial.ConfigSet = {
-  name: '',
+  name: 'coderoad-',
   repo: '',
-  language: '',
-  runner: '',
+  language: 'JS',
+  runner: 'mocha-coderoad',
   runnerOptions: {}
 };
 

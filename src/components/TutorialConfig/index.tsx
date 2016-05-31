@@ -35,13 +35,7 @@ export default class TutorialConfig extends React.Component <{
 }> {
   constructor(props) {
     super(props);
-    this.state = {
-      name: 'coderoad-',
-      repo: '',
-      language: 'JS',
-      runner: 'mocha-coderoad',
-      runnerOptions: {}
-    };
+    this.state = this.props.tutorialConfig;
   }
   handleText(prop, event) {
     this.handleChange(prop, event.target.value);
@@ -65,7 +59,7 @@ export default class TutorialConfig extends React.Component <{
         />
         <TextField
           floatingLabelText='Tutorial Package Name'
-          value={this.state.name}
+          defaultValue={this.state.name}
           onChange={this.handleText.bind(this, 'name')}
         />
         <br />

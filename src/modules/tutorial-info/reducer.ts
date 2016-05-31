@@ -3,7 +3,8 @@ import {TUTORIAL_INFO_SAVE} from './types';
 const _info: Tutorial.Info = {
   name: '',
   description: '',
-  version: ''
+  version: [0, 1, 0],
+  keywords: ['coderoad', 'tutorial'],
 };
 
 export default function tutorialConfig(
