@@ -1,6 +1,7 @@
 const CompositeDisposable = require('atom').CompositeDisposable;
 import store from './store';
-import Root from './components/root';
+import Root from './components/Root';
+import Top from './components/top-panel/Top';
 
 let subscriptions = null;
 
@@ -20,6 +21,7 @@ export function onActivate(): AtomCore.Disposable {
 export function onDeactivate(): void {
   // unmount React
   Root.unmount();
+  Top.unmount();
   // unsubscribe from Redux store
   store.subscribe(() => null);
   // cleanup subscriptions
