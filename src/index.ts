@@ -2,7 +2,7 @@ import * as React from 'react';
 import render from './components/render';
 import renderTop from './components/top-panel/render';
 import Root from './components/Root';
-import Top from './components/top-panel/Top';
+import Top from './components/TopPanel/Top';
 import loadPolyfills from 'core-coderoad/lib/polyfills';
 import {onActivate, onDeactivate} from './subscriptions';
 import store from './store';

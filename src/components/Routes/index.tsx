@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Page, Tutorials, Start, TutorialConfig, TutorialInfo} from '../index';
+import {Page, Start, TutorialConfig, TutorialInfo} from '../index';
 
 export default class Routes extends React.Component<{
   route: string, page: CR.Page, tutorials: Tutorial.Info[],
@@ -13,8 +13,6 @@ export default class Routes extends React.Component<{
         return <Page {...this.props} />;
       case 'start':
         return <Start {...this.props} />;
-      case 'tutorials':
-        return <Tutorials {...this.props} />;
       case 'tutorialConfig':
         return <TutorialConfig {...this.props} />;
       case 'tutorialInfo':

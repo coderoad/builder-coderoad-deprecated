@@ -8,5 +8,4 @@ export {editorDevToolsToggle, editorOpen, editorInsert,
 editorSave, editorSet} from 'core-coderoad/lib/editor';
 export {routeSet} from 'core-coderoad/lib/route';
 export {tutorialSet} from 'core-coderoad/lib/tutorial';
-export {tutorialsFind, tutorialUpdate} from 'core-coderoad/lib/tutorials';
 export {windowToggle} from 'core-coderoad/lib/window';
