@@ -35,27 +35,6 @@ const SetupChecks: React.StatelessComponent<{
             /* onTouchTap={openDirectory} */
           />
         </StepCheck>
-
-        <StepCheck
-          label='package.json'
-          completed={hasPackageJson}
-        >
-          Create a package.json by running<br />
-          <code>> npm init -y`</code><br />
-          <FlatButton
-            label='Create package.json'
-            secondary={true}
-            /* onTouchTap={createPackageJson} */
-          />
-        </StepCheck>
-
-        <StepCheck
-          label='install a tutorial'
-          completed={hasTutorial}
-        >
-          Install a tutorial using npm. For example:<br />
-          <code>> npm install --save-dev coderoad-functional-school</code><br />
-        </StepCheck>
       </DynamicStepper>
     </CardText>
     <CardActions>

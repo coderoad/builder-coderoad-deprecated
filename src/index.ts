@@ -1,5 +1,6 @@
 import * as React from 'react';
 import render from './components/render';
+import renderTop from './components/top-panel/render';
 import Root from './components/Root';
 import Top from './components/top-panel/Top';
 import loadPolyfills from 'core-coderoad/lib/polyfills';
@@ -30,6 +31,7 @@ class Main {
     onActivate();
     // render React component
     render(this.root);
+    renderTop(this.top);
   }
   deactivate(): void {
     // remove subscriptions & unmount react app

@@ -15,6 +15,13 @@ export function onActivate(): AtomCore.Disposable {
     })
   );
 
+  // atom.workspace.observeTextEditors((editor: AtomCore.IEditor) => {
+  //   subscriptions.add(
+  //     editor.onDidSave(() => {
+  //       store.dispatch(compilePage(pageIndex, content));
+  //     }));
+  // });
+
   return subscriptions;
 }
 

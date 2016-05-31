@@ -10,7 +10,7 @@ export default function render(target: HTMLElement) {
   ReactDOM.render(
       <Provider store={store}>
         <MuiThemeProvider muiTheme={muiTheme}>
-          <TopPanel />
+          <TopPanel tutorial={store.tutorial} />
         </MuiThemeProvider>
       </Provider>,
     target
