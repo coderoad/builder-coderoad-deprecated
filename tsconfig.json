@@ -53,6 +53,7 @@
         "src/modules/tutorial/index.ts",
         "src/modules/tutorial/reducer.ts",
         "src/modules/tutorial/types.ts",
+        "src/modules/tutorial/utils/create.ts",
         "src/reducers.ts",
         "src/store.ts",
         "src/subscriptions.ts",
