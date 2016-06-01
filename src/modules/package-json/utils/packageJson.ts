@@ -1,9 +1,8 @@
 import {join} from 'path';
 import {readFileSync, writeFileSync} from 'fs';
 import fileExists from 'node-file-exists';
-import {sortPackageJson} from 'sort-package-json';
 
-export function readPackageJson(dir: string): boolean {
+export function readPackageJson(dir: string): Object|boolean {
   const pathToPJ = join(dir, './package.json');
   if (!fileExists(pathToPJ)) { return false; }
   try {
@@ -14,8 +13,5 @@ export function readPackageJson(dir: string): boolean {
 }
 
 export function writePackageJson(dir: string, content: Object): void {
-  writeFileSync(
-    join(dir, './package.json'),
-    sortPackageJson(JSON.stringify(content, null, 2))
-  );
+  writeFileSync(join(dir, './package.json'), content);
 }

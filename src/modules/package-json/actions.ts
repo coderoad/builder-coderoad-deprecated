@@ -1,12 +1,8 @@
-import {TUTORIAL_CONFIG_SAVE, TUTORIAL_INFO_SAVE} from './types';
+import {PJ_SAVE} from './types';
 
-export function tutorialConfigSave(config: Tutorial.ConfigSet) {
+export function tutorialConfigSave(pj: Tutorial.PJ) {
   return (dispatch, getState) => {
     const {dir} = getState();
-    dispatch({ type: TUTORIAL_CONFIG_SAVE, payload: { config, dir } });
+    dispatch({ type: PJ_SAVE, payload: { pj, dir } });
   };
-}
-
-export function tutorialInfoSave(info: Tutorial.Info) {
-  return { type: TUTORIAL_INFO_SAVE, payload: { info }};
 }

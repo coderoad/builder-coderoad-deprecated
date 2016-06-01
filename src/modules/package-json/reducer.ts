@@ -1,38 +1,45 @@
-import {TUTORIAL_CONFIG_SAVE, TUTORIAL_INFO_SAVE} from './types';
+import {PJ_SAVE} from './types';
 import {readPackageJson, writePackageJson} from './utils/packageJson';
+import {sortPackageJson} from 'sort-package-json';
 
-const _config: Tutorial.PJ = {
+const _pj: Tutorial.PJ = {
   name: 'coderoad-',
   version: '0.1.0',
+  author: '',
   description: '',
+  main: 'coderoad.json',
+  files: ['coderoad.json', 'tutorial'],
   keywords: ['coderoad', 'tutorial'],
   config: {
     language: 'JS',
     runner: 'mocha-coderoad',
     runnerOptions: {}
+  },
+  engines: {
+    node : '>=0.10.3'
   }
 };
 
 const defaultPJ = {};
 
 export default function tutorialConfig(
-  c = _config, action: Action
-): Tutorial.ConfigSet {
+  p = _pj, action: Action
+): Tutorial.PJ {
   switch (action.type) {
 
-    case TUTORIAL_CONFIG_SAVE:
-      const {config, dir} = action.payload;
-      const pj = readPackageJson(dir);
-      const content = !!pj
-        ? Object.assign({}, pj, config)
-        : config;
+    case PJ_SAVE:
+      const {pj, dir} = action.payload;
+      // if package.json exists, augment it
+      const pjExists = readPackageJson(dir);
+      const nextPj: Tutorial.PJ = !!pjExists
+        ? Object.assign({}, pjExists, pj)
+        : pj;
+      // sort package.json fields
+      const content = sortPackageJson(JSON.stringify(nextPj, null, 2));
       writePackageJson(dir, content);
-      return action.payload.config;
-
-    case TUTORIAL_INFO_SAVE:
-      return action.payload.info;
+      return nextPj;
 
     default:
-      return c;
+      return p;
   }
 }

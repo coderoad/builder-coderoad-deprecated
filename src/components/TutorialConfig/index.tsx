@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+import {resolve} from 'path';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -10,32 +11,35 @@ import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 
 const styles = {
-  margin: '10px',
-  padding: '30px 20px',
-  textAlign: 'center',
+  card: {
+    margin: '10px',
+    padding: '30px 20px',
+    textAlign: 'center',
+  },
+  button: {
+    margin: '30px 10px 20px 10px',
+  },
 };
 
-const buttonStyles = {
-  margin: '30px 10px 20px 10px',
-};
 
 @connect(null, dispatch => {
   return {
-    save: (config: Tutorial.ConfigSet) => dispatch(tutorialConfigSave(config)),
-    routeToInfo: () => dispatch(routeSet('tutorialInfo'))
+    save: (pj: Tutorial.PJ) => dispatch(tutorialConfigSave(pj)),
+    routeToPage: () => dispatch(routeSet('page'))
   };
 })
 export default class TutorialConfig extends React.Component <{
   packageJson: any,
-  save?: (config: Tutorial.ConfigSet) => any,
+  save?: (pj: Tutorial.PJ) => any,
   routeToInfo?: () => any
 }, {
-  name: string, repo: string, language: string,
-  runner: string, runnerOptions?: Object
+  pj: Tutorial.PJ
 }> {
   constructor(props) {
     super(props);
-    this.state = this.props.packageJson;
+    this.state = {
+        pj: this.props.packageJson
+    };
   }
   handleText(prop, event) {
     this.handleChange(prop, event.target.value);
@@ -50,13 +54,14 @@ export default class TutorialConfig extends React.Component <{
     switch (prop) {
       // base
       case 'name':
-        this.setState(Object.assign({}, this.state, obj));
+        this.setState({pj: Object.assign({}, this.state.pj, obj)});
         break;
       // config
       case 'language':
       case 'runner':
-        const config = Object.assign({}, this.state.config, obj);
-        this.setState(Object.assign({}, this.state, { config }));
+        const config = Object.assign({}, this.state.pj.config, obj);
+        const pj = Object.assign({}, this.state.pj, { config });
+        this.setState({pj});
         return;
       case 'repo':
         const repo = {
@@ -65,31 +70,32 @@ export default class TutorialConfig extends React.Component <{
             url: prop
           },
           bugs: {
-            url: prop + '/issues'
+            url: resolve(prop, 'issues')
           }
         };
-        this.setState(Object.assign({}, this.state, repo));
+        this.setState({pj: Object.assign({}, this.state.pj, repo)});
         return;
     }
   }
   save() {
-    this.props.save(this.state);
+    this.props.save(this.state.pj);
   }
   render() {
+    const {pj} = this.state;
     return (
-      <Card style={styles}>
+      <Card style={styles.card}>
         <CardHeader
           title='Tutorial Configuration'
         />
         <TextField
           floatingLabelText='Tutorial Package Name'
-          defaultValue={this.state.name}
+          defaultValue={pj.name}
           onChange={this.handleText.bind(this, 'name')}
         />
         <br />
         <SelectField
           floatingLabelText='Language'
-          value={this.state.config.language}
+          value={pj.config.language}
           onChange={this.handleSelect.bind(this, 'language')}
         >
           {languageItems()}
@@ -97,20 +103,20 @@ export default class TutorialConfig extends React.Component <{
         <br />
         <SelectField
           floatingLabelText='Test Runner'
-          value={this.state.config.runner}
+          value={pj.config.runner}
           onChange={this.handleSelect.bind(this, 'runner')}
         >
-          {runnerItems(this.state.config.language)}
+          {runnerItems(pj.config.language)}
         </SelectField>
         <br />
         <RaisedButton
-          style={buttonStyles}
+          style={styles.button}
           label='Save'
           primary={true}
           onTouchTap={this.save.bind(this)}
         />
         <RaisedButton
-          style={buttonStyles}
+          style={styles.button}
           label='Continue'
           secondary={true}
           onTouchTap={this.props.routeToInfo.bind(this)}

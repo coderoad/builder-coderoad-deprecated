@@ -1,2 +1,1 @@
-export const TUTORIAL_CONFIG_SAVE = 'TUTORIAL_CONFIG_SAVE';
-export const TUTORIAL_INFO_SAVE = 'TUTORIAL_INFO_SAVE';
+export const PJ_SAVE = 'PJ_SAVE';
