@@ -1,7 +1,7 @@
 const CompositeDisposable = require('atom').CompositeDisposable;
 import store from './store';
 import Root from './components/Root';
-import Top from './components/top-panel/Top';
+import Top from './components/TopPanel/Top';
 
 let subscriptions = null;
 

@@ -12,7 +12,11 @@ export default function packageJson(
       const {dir} = action.payload;
       const pathToPackageJson = join(dir, 'package.json');
       if (fileExists(pathToPackageJson)) {
-        return JSON.parse(readFileSync(pathToPackageJson, 'utf8'));
+        try {
+          return JSON.parse(readFileSync(pathToPackageJson, 'utf8'));
+        } catch (e) {
+          return null;
+        }
       }
       return null;
 

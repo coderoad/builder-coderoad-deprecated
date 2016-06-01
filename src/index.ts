@@ -1,8 +1,8 @@
 import * as React from 'react';
-import render from './components/render';
-import renderTop from './components/top-panel/render';
 import Root from './components/Root';
+import render from './components/render';
 import Top from './components/TopPanel/Top';
+import renderTop from './components/TopPanel/render';
 import loadPolyfills from 'core-coderoad/lib/polyfills';
 import {onActivate, onDeactivate} from './subscriptions';
 import store from './store';

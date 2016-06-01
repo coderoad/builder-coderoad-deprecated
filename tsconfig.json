@@ -49,6 +49,7 @@
         "src/modules/tutorial-config/index.ts",
         "src/modules/tutorial-config/reducer.ts",
         "src/modules/tutorial-config/types.ts",
+        "src/modules/tutorial-config/utils/packageJson.ts",
         "src/modules/tutorial-info/actions.ts",
         "src/modules/tutorial-info/index.ts",
         "src/modules/tutorial-info/reducer.ts",
