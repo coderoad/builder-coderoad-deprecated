@@ -6,7 +6,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {tutorialConfigSave, routeSet} from '../../actions';
+import {pjSave, tutorialInit, routeSet} from '../../actions';
 import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 
@@ -24,8 +24,11 @@ const styles = {
 
 @connect(null, dispatch => {
   return {
-    save: (pj: Tutorial.PJ) => dispatch(tutorialConfigSave(pj)),
-    routeToPage: () => dispatch(routeSet('page'))
+    save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
+    routeToPage: () => {
+      dispatch(tutorialInit());
+      dispatch(routeSet('page'));
+    }
   };
 })
 export default class TutorialConfig extends React.Component <{
@@ -119,7 +122,7 @@ export default class TutorialConfig extends React.Component <{
           style={styles.button}
           label='Continue'
           secondary={true}
-          onTouchTap={this.props.routeToInfo.bind(this)}
+          onTouchTap={this.props.routeToPage.bind(this)}
         />
       </Card>
     );

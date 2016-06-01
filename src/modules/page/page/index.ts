@@ -14,8 +14,7 @@ export default function pageReducer(
     case PAGE_SET:
       const {pagePosition, tutorial} = action.payload;
       const {title, description, onPageComplete} = tutorial.pages[pagePosition];
-      // clear dev console
-      // clearConsole();
+      
       return {
         title,
         description,

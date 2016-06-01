@@ -5,7 +5,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton';
-import {tutorialInfoSave, routeSet} from '../../actions';
+import {pjSave, routeSet} from '../../actions';
 
 const styles = {
   margin: '10px',
@@ -23,18 +23,20 @@ const buttonStyles = {
 
 @connect(null, dispatch => {
   return {
-    save: (config: Tutorial.ConfigSet) => dispatch(tutorialConfigSave(config)),
+    save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
     routeToTutorial: () => dispatch(routeSet('page'))
   };
 })
 export default class TutorialInfo extends React.Component<{
   packageJson: any, save?: any, routeToTutorial?: any
 }, {
-  name: string, description: string, version: string
+  pj: Tutorial.PJ
 }> {
   constructor(props) {
     super(props);
-    this.state = this.props.packageJson;
+    this.state = {
+      pj: this.props.packageJson
+    };
   }
   handleText(prop, event) {
     this.handleChange(prop, event.target.value);
@@ -45,10 +47,10 @@ export default class TutorialInfo extends React.Component<{
   handleChange(prop, val) {
     const obj = {};
     obj[prop] = val;
-    this.setState(Object.assign({}, this.state, obj));
+    this.setState({pj: Object.assign({}, this.state, obj)});
   }
   save() {
-    this.props.save(this.state);
+    this.props.save(this.state.pj);
   }
   render() {
     return (
@@ -58,26 +60,26 @@ export default class TutorialInfo extends React.Component<{
         />
         <TextField
           floatingLabelText='Title'
-          defaultValue={this.state.name}
+          defaultValue={this.state.pj.name}
           onChange={this.handleText.bind(this, 'name')}
         />
         <br />
         <TextField
           floatingLabelText='Description'
-          defaultValue={this.state.description}
+          defaultValue={this.state.pj.description}
           onChange={this.handleText.bind(this, 'description')}
         />
         <br />
         <TextField
           floatingLabelText='Version'
-          defaultValue={this.state.version.join('.')}
+          defaultValue={this.state.pj.version}
           disabled={true}
           onChange={this.handleText.bind(this, 'version')}
         />
         <br />
         <TextField
           floatingLabelText='Keywords'
-          defaultValue={this.state.keywords.join(', ')}
+          defaultValue={this.state.pj.keywords.join(', ')}
           multiLine={true}
           onChange={this.handleText.bind(this, 'keywords')}
         />

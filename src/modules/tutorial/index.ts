@@ -1,2 +1,2 @@
-export {pjSave} from './actions';
+export {tutorialInit} from './actions';
 export {default as reducer} from './reducer';
