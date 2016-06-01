@@ -1,8 +1,11 @@
-import {TUTORIAL_CONFIG_SAVE} from './types';
+import {TUTORIAL_CONFIG_SAVE, TUTORIAL_INFO_SAVE} from './types';
 import {readPackageJson, writePackageJson} from './utils/packageJson';
 
-const _config: Tutorial.ConfigSet = {
+const _config: Tutorial.PJ = {
   name: 'coderoad-',
+  version: '0.1.0',
+  description: '',
+  keywords: ['coderoad', 'tutorial'],
   config: {
     language: 'JS',
     runner: 'mocha-coderoad',
@@ -25,6 +28,9 @@ export default function tutorialConfig(
         : config;
       writePackageJson(dir, content);
       return action.payload.config;
+
+    case TUTORIAL_INFO_SAVE:
+      return action.payload.info;
 
     default:
       return c;

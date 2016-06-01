@@ -1,6 +1,5 @@
 export {pageSet, pageNext} from './modules/page/actions';
-export {tutorialConfigSave} from './modules/tutorial-config';
-export {tutorialInfoSave} from './modules/tutorial-info';
+export {tutorialInfoSave, tutorialConfigSave} from './modules/package-json';
 export {setupVerify, setupPackage} from './modules/setup';
 
 export {alertOpen, alertClose, alertReplay} from 'core-coderoad/lib/alert';

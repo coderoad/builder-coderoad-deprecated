@@ -26,7 +26,7 @@ const buttonStyles = {
   };
 })
 export default class TutorialConfig extends React.Component <{
-  tutorialConfig: Tutorial.ConfigSet,
+  packageJson: any,
   save?: (config: Tutorial.ConfigSet) => any,
   routeToInfo?: () => any
 }, {
@@ -35,7 +35,7 @@ export default class TutorialConfig extends React.Component <{
 }> {
   constructor(props) {
     super(props);
-    this.state = this.props.tutorialConfig;
+    this.state = this.props.packageJson;
   }
   handleText(prop, event) {
     this.handleChange(prop, event.target.value);

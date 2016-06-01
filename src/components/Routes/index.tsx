@@ -4,8 +4,7 @@ import {Page, Start, TutorialConfig, TutorialInfo} from '../index';
 export default class Routes extends React.Component<{
   route: string, page: CR.Page, tutorials: Tutorial.Info[],
   checks: CR.Checks, pagePosition: CR.PagePosition, tasks: CR.Task[],
-  tutorial: CR.Tutorial, tutorialConfig: Tutorial.ConfigSet,
-  tutorialInfo: Tutorial.Info
+  tutorial: CR.Tutorial, packageJson: any
 }, {}> {
   render() {
     switch (this.props.route) {

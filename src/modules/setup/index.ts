@@ -1,3 +1,2 @@
-export {default as checks} from './checks';
-export {default as packageJson} from './package-json';
+export {default as reducer} from './reducer';
 export {setupVerify, setupPackage} from './actions';

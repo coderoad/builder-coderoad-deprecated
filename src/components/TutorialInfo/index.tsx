@@ -28,13 +28,13 @@ const buttonStyles = {
   };
 })
 export default class TutorialInfo extends React.Component<{
-  tutorialInfo: Tutorial.Info, save?: any, routeToTutorial?: any
+  packageJson: any, save?: any, routeToTutorial?: any
 }, {
   name: string, description: string, version: string
 }> {
   constructor(props) {
     super(props);
-    this.state = this.props.tutorialInfo;
+    this.state = this.props.packageJson;
   }
   handleText(prop, event) {
     this.handleChange(prop, event.target.value);
