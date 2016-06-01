@@ -3,10 +3,11 @@ import {readPackageJson, writePackageJson} from './utils/packageJson';
 
 const _config: Tutorial.ConfigSet = {
   name: 'coderoad-',
-  repo: '',
-  language: 'JS',
-  runner: 'mocha-coderoad',
-  runnerOptions: {}
+  config: {
+    language: 'JS',
+    runner: 'mocha-coderoad',
+    runnerOptions: {}
+  }
 };
 
 const defaultPJ = {};

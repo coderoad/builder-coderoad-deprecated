@@ -43,10 +43,34 @@ export default class TutorialConfig extends React.Component <{
   handleSelect(prop, event, index, value) {
     this.handleChange(prop, value);
   }
-  handleChange(prop, val) {
+  handleChange(prop: string, val: any) {
     const obj = {};
     obj[prop] = val;
-    this.setState(Object.assign({}, this.state, obj));
+    let target = null;
+    switch (prop) {
+      // base
+      case 'name':
+        this.setState(Object.assign({}, this.state, obj));
+        break;
+      // config
+      case 'language':
+      case 'runner':
+        const config = Object.assign({}, this.state.config, obj);
+        this.setState(Object.assign({}, this.state, { config }));
+        return;
+      case 'repo':
+        const repo = {
+          repository: {
+            type: 'git',
+            url: prop
+          },
+          bugs: {
+            url: prop + '/issues'
+          }
+        };
+        this.setState(Object.assign({}, this.state, repo));
+        return;
+    }
   }
   save() {
     this.props.save(this.state);
@@ -65,7 +89,7 @@ export default class TutorialConfig extends React.Component <{
         <br />
         <SelectField
           floatingLabelText='Language'
-          value={this.state.language}
+          value={this.state.config.language}
           onChange={this.handleSelect.bind(this, 'language')}
         >
           {languageItems()}
@@ -73,10 +97,10 @@ export default class TutorialConfig extends React.Component <{
         <br />
         <SelectField
           floatingLabelText='Test Runner'
-          value={this.state.runner}
+          value={this.state.config.runner}
           onChange={this.handleSelect.bind(this, 'runner')}
         >
-          {runnerItems(this.state.language)}
+          {runnerItems(this.state.config.language)}
         </SelectField>
         <br />
         <RaisedButton
