@@ -87,6 +87,7 @@
         "src/components/Start/Welcome/index.tsx",
         "src/components/TopPanel/pageTabs.tsx",
         "src/components/TopPanel/render.tsx",
+        "src/components/TopPanel/TopApp.tsx",
         "src/components/TopPanel/TopPanel.tsx",
         "src/components/TutorialConfig/index.tsx",
         "src/components/TutorialConfig/languageItems.tsx",

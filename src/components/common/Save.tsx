@@ -11,7 +11,7 @@ const styles = {
   top: '10px',
 };
 
-@connect(null, (dispatch, state) => {
+@connect(null, dispatch => {
   return {
     save: () => dispatch(editorSave())
   };

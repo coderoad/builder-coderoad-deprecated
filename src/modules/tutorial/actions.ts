@@ -1,4 +1,6 @@
-import {TUTORIAL_INIT, TUTORIAL_LOAD, TUTORIAL_BUILD} from './types';
+import {
+  TUTORIAL_INIT, TUTORIAL_LOAD, TUTORIAL_BUILD, TUTORIAL_PAGE_ADD
+} from './types';
 
 export function tutorialInit() {
   return function(dispatch, getState) {
@@ -21,4 +23,9 @@ export function tutorialBuild() {
     const {dir} = getState();
     dispatch({ type: TUTORIAL_BUILD, payload: { dir } });
   };
+}
+
+export function tutorialPageAdd() {
+  console.log('called tutorialPageAdd');
+  return { type: TUTORIAL_PAGE_ADD };
 }
