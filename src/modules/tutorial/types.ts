@@ -1,2 +1,3 @@
 export const TUTORIAL_INIT = 'TUTORIAL_INIT';
+export const TUTORIAL_LOAD = 'TUTORIAL_LOAD';
 export const TUTORIAL_ADD_PAGE = 'TUTORIAL_ADD_PAGE';

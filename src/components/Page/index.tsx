@@ -10,10 +10,13 @@ const styles = {
 };
 
 const Page: React.StatelessComponent<{
-  page: CR.Page, tasks: CR.Task[],
-  pagePosition: number
-}> = ({page, tasks, pagePosition}) => {
+  tutorial: CR.Tutorial, pagePosition: number
+}> = ({tutorial, pagePosition}) => {
   // const completed = progress.pages[pagePosition];
+  const page = tutorial.pages[pagePosition];
+
+  if (!page) { return null; }
+
   return (
     <section style={styles} className='cr-page'>
       <ContentCard

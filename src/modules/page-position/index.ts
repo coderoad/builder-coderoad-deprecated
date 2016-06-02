@@ -1,2 +1,2 @@
-export {dataLoad} from './actions';
+export {pageSet} from './actions';
 export {default as reducer} from './reducer';
