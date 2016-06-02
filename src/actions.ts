@@ -1,4 +1,5 @@
-export {pageSet, pageNext} from './modules/page/actions';
+export {dataLoad} from './modules/data';
+export {pageSet, pageNext} from './modules/page';
 export {pjSave} from './modules/package-json';
 export {setupVerify, setupPackage} from './modules/setup';
 export {tutorialInit} from './modules/tutorial';
