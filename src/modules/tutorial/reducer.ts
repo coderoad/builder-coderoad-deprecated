@@ -1,5 +1,5 @@
-import {TUTORIAL_INIT, TUTORIAL_LOAD} from './types';
-import {create} from 'coderoad-cli';
+import {TUTORIAL_INIT, TUTORIAL_BUILD, TUTORIAL_LOAD} from './types';
+import {create, build} from 'coderoad-cli';
 import {readFileSync} from 'fs';
 import {join} from 'path';
 
@@ -26,6 +26,11 @@ export default function tutorial(t = _tutorial, action: Action) {
       if (_tutorial.title.length < 1) {
         t = Object.assign({}, t, { title: name });
       }
+      return t;
+
+    case TUTORIAL_BUILD:
+      const {dir} = action.payload;
+      build(dir, join('tutorial', 'tutorial.md'));
       return t;
 
     case TUTORIAL_LOAD:
