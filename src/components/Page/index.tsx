@@ -2,7 +2,7 @@ import * as React from 'react';
 import Divider from 'material-ui/Divider';
 import {Card} from 'material-ui/Card';
 import {ContentCard} from '../index';
-// import Tasks from './Tasks';
+import Tasks from './Tasks';
 
 const styles = {
   width: '100%',
@@ -12,7 +12,6 @@ const styles = {
 const Page: React.StatelessComponent<{
   tutorial: CR.Tutorial, pagePosition: number
 }> = ({tutorial, pagePosition}) => {
-  // const completed = progress.pages[pagePosition];
   const page = tutorial.pages[pagePosition];
 
   if (!page) { return null; }
@@ -24,13 +23,10 @@ const Page: React.StatelessComponent<{
         content={page.description}
       />
 
-      {/*}<Tasks
-        tasks={tasks}
-        taskPosition={taskPosition}
-        testRun={testRun}
-        completed={completed}
+      <Tasks
+        tasks={page.tasks}
         page={page}
-      />*/}
+      />
 
     </section>
   );

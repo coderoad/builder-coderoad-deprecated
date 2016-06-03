@@ -31,16 +31,13 @@ function getStatus(
 }
 
 const Task: React.StatelessComponent<{
-  task: CR.Task, taskPosition: number, index: number, testRun: boolean
-}> = ({task, taskPosition, index, testRun}) => {
-  const backgroundColor = getStatus(index, taskPosition, testRun);
-  const isCurrentTask = taskPosition === index;
+  task: CR.Task, index: number
+}> = ({task, index}) => {
   return (
     <ListItem
       key={index}
-      style={Object.assign({}, styles.task, {backgroundColor})}
+      style={styles.task}
     >
-      {taskCheckbox(isCurrentTask, testRun)}
       <span style={styles.index}>{index + 1}.</span>
       <div style={styles.description}>
         <Markdown >{task.description}</Markdown>

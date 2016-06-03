@@ -15,9 +15,9 @@ const styles = {
 };
 
 const TasksComplete: React.StatelessComponent<{
-  page: CR.Page, completed: boolean
-}> = ({page, completed}) => {
-  if (!completed || !page.onPageComplete) { return null; }
+  page: CR.Page
+}> = ({page}) => {
+  if (!page.onPageComplete) { return null; }
   return (
     <Card style={styles.card}>
       <CardText>
