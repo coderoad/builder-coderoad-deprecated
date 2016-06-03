@@ -1,13 +1,13 @@
 import * as React from 'react';
 import MenuLink from './MenuLink';
 
+const routes = [
+  'tutorialConfig',
+  'tutorialInfo',
+  'page'
+];
+
+// return all routes in list except route provided
 export default function menuRightRouteOptions(route: string) {
-  switch (route) {
-    case 'final':
-    case 'page':
-    case 'progress':
-      return <MenuLink route='tutorials' />;
-    default:
-      return null;
-  };
+  return routes.filter(r => route !== r).map(r => <MenuLink route={r} />);
 }
