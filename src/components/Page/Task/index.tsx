@@ -36,10 +36,12 @@ function getStatus(
 const Task: React.StatelessComponent<{
   task: CR.Task, index: number
 }> = ({task, index}) => (
+  <div>
   <ListItem
     key={index}
     style={styles.task}
   >
+
     <span style={styles.index}>{index + 1}.</span>
     <div style={styles.description}>
       <Markdown >{task.description}</Markdown>
@@ -47,10 +49,10 @@ const Task: React.StatelessComponent<{
 
     <Tests tests={task.tests} />
 
-    <TaskActions actions={task.actions}/>
-
     <Hints hints={task.hints} />
 
   </ListItem>
+  <TaskActions actions={task.actions}/>
+  </div>
 );
 export default Task;

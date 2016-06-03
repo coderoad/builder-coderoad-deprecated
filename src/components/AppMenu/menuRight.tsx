@@ -2,7 +2,6 @@ import * as React from 'react';
 import IconMenu from 'material-ui/IconMenu';
 import Divider from 'material-ui/Divider';
 import Quit from './Quit';
-// import issuesLink from './issuesLink';
 import menuIconRight from './menuIconRight';
 import menuRightRouteOptions from './menuRightRouteOptions';
 
@@ -19,7 +18,6 @@ export default function menuRight(route: string) {
       anchorOrigin={origin}
     >
       {menuRightRouteOptions(route)}
-      {/*issuesLink()*/}
       <Divider />
       <Quit />
     </IconMenu>
