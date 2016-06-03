@@ -4,7 +4,7 @@ import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import VerifyButton from './VerifyButton';
 // import {openDirectory, createPackageJson} from '../../../reducers/checks/action-setup';
-import DynamicStepper from './DynamicStepper';
+import {DynamicStepper} from '../../index';
 import StepCheck from './StepCheck';
 
 const SetupChecks: React.StatelessComponent<{

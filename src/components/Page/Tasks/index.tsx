@@ -7,40 +7,31 @@ import Task from '../Task';
 import {lightGreen200} from 'material-ui/styles/colors';
 import TasksComplete from '../TasksComplete';
 
-function visibleTasks(tasks: CR.Task[], taskPosition: number): CR.Task[] {
-  return tasks.slice(0, taskPosition + 1);
-}
-
 const styles = {
   margin: '10px 5px'
 };
 
-export default class Tasks extends React.Component<{
-    tasks: CR.Task[], page: CR.Page
-}, {}> {
-  render() {
-    const {tasks, page} = this.props;
-    return (
-    <div>
-      <Card style={styles}>
-        <List>
-          <Subheader>Tasks</Subheader>
-          {tasks.map((task: CR.Task, index: number) => (
-            <Task
-              key={index}
-              index={index}
-              task={task}
-            />)
-          )}
-        </List>
-      </Card>
+const Tasks: React.StatelessComponent<{
+  tasks: CR.Task[], page: CR.Page
+}> = ({tasks, page}) => (
+  <div>
+    <Card style={styles}>
+      <List>
+        <Subheader>Tasks</Subheader>
+        {tasks.map((task: CR.Task, index: number) => (
+          <Task
+            key={index.toString()}
+            index={index}
+            task={task}
+          />)
+        )}
+      </List>
+    </Card>
 
-        <TasksComplete
-          page={page}
-        />
+    <TasksComplete
+      page={page}
+    />
 
-        <div ref='listEnd' />
-    </div>
-    );
-  }
-}
+  </div>
+);
+export default Tasks;

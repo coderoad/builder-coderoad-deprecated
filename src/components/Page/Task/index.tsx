@@ -3,6 +3,9 @@ import {Markdown} from '../../index';
 import taskCheckbox from './taskCheckbox';
 import {ListItem} from 'material-ui/List';
 import {lightGreen200, orange200} from 'material-ui/styles/colors';
+import Tests from '../Tests';
+import TaskActions from '../TaskActions';
+import Hints from '../Hints';
 
 const styles = {
   task: {
@@ -32,17 +35,22 @@ function getStatus(
 
 const Task: React.StatelessComponent<{
   task: CR.Task, index: number
-}> = ({task, index}) => {
-  return (
-    <ListItem
-      key={index}
-      style={styles.task}
-    >
-      <span style={styles.index}>{index + 1}.</span>
-      <div style={styles.description}>
-        <Markdown >{task.description}</Markdown>
-      </div>
-    </ListItem>
-  );
-};
+}> = ({task, index}) => (
+  <ListItem
+    key={index}
+    style={styles.task}
+  >
+    <span style={styles.index}>{index + 1}.</span>
+    <div style={styles.description}>
+      <Markdown >{task.description}</Markdown>
+    </div>
+
+    <Tests tests={task.tests} />
+
+    <TaskActions actions={task.actions}/>
+
+    <Hints hints={task.hints} />
+
+  </ListItem>
+);
 export default Task;
