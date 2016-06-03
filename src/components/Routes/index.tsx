@@ -17,6 +17,11 @@ export default class Routes extends React.Component<{
         return <TutorialConfig {...this.props} />;
       case 'tutorialInfo':
         return <TutorialInfo {...this.props} />;
+
+      // TODO
+      // case 'tutorialPublish':
+      //   return <TutorialPublish {...props} />;
+
       default:
         throw 'Error: Route not found.';
     }
