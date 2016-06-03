@@ -9,7 +9,7 @@ import DynamicStepper from './DynamicStepper';
 import StepCheck from './StepCheck';
 
 const SystemChecks: React.StatelessComponent<{
-  checks: CR.Checks
+  checks: BuilderChecks
 }> = ({checks}) => {
   const {system} = checks;
   if (system.passed) {

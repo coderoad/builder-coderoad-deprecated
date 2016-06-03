@@ -1,7 +1,7 @@
 import {SETUP_VERIFY} from './types';
 import setupVerify from './utils/verify';
 
-const _checks: CR.Checks = {
+const _checks: BuilderChecks = {
   passed: false,
   system: {
     node: false,
@@ -15,7 +15,7 @@ const _checks: CR.Checks = {
 
 export default function checks(
   checks = _checks, action: Action
-): CR.Checks {
+): BuilderChecks {
   switch (action.type) {
 
     case SETUP_VERIFY:

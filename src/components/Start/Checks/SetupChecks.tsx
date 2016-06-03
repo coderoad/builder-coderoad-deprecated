@@ -8,14 +8,14 @@ import DynamicStepper from './DynamicStepper';
 import StepCheck from './StepCheck';
 
 const SetupChecks: React.StatelessComponent<{
-  checks: CR.Checks
+  checks: BuilderChecks
 }> = ({checks}) => {
   const {setup} = checks;
   if (setup.passed) {
     return null;
   }
-  const {hasDir, hasPackageJson, hasTutorial} = setup;
-  const status = [hasDir, hasPackageJson, hasTutorial];
+  const {hasDir} = setup;
+  const status = [hasDir];
   return (
   <Card className='cr-check'>
     <CardHeader

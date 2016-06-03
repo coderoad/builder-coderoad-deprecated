@@ -3,7 +3,7 @@ import {Page, Start, TutorialConfig, TutorialInfo} from '../index';
 import Top from '../TopPanel/Top';
 
 export default class Routes extends React.Component<{
-  route: string, checks: CR.Checks, pagePosition: CR.PagePosition,
+  route: string, checks: BuilderChecks, pagePosition: CR.PagePosition,
   tutorial: CR.Tutorial, packageJson: PackageJson
 }, {}> {
   render() {

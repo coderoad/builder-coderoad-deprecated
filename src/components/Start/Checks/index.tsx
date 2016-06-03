@@ -10,7 +10,7 @@ const styles = {
 };
 
 const Checks: React.StatelessComponent<{
-  checks: CR.Checks
+  checks: BuilderChecks
 }> = ({checks}) => {
   if (!checks) {
     return <ContentCard

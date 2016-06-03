@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const InstallGuide: React.StatelessComponent<{
-  checks: CR.Checks
+  checks: BuilderChecks
 }> = ({checks}) => {
   if (!checks || !checks.passed) {
     return null;

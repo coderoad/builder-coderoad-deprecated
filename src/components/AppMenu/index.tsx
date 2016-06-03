@@ -5,7 +5,7 @@ import menuRight from './menuRight';
 import {onDeactivate} from '../../subscriptions';
 
 const styles = {
-  zIndex: '1 !important'
+  zIndex: '1',
 };
 
 const AppMenu: React.StatelessComponent<{
@@ -15,7 +15,7 @@ const AppMenu: React.StatelessComponent<{
     <AppBar
       title='CodeRoad'
       className='cr-menu-bar'
-      styles={styles}
+      style={{styles}}
       iconElementLeft={<CloseWindow />}
       iconElementRight={menuRight(route)}
     />
