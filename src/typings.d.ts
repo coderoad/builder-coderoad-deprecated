@@ -1,15 +1,28 @@
 /// <reference path="../node_modules/core-coderoad/src/typings/tsd.d.ts" />
 
-interface BuilderChecks {
-  passed?: boolean;
-  system: {
+declare namespace Builder {
+
+  interface Checks {
     passed?: boolean;
-    node: boolean;
-    npm: boolean;
-    xcode: boolean;
-  };
-  setup: {
-    passed?: boolean;
-    hasDir: boolean;
-  };
+    system: {
+      passed?: boolean;
+      node: boolean;
+      npm: boolean;
+      xcode: boolean;
+    };
+    setup: {
+      passed?: boolean;
+      hasDir: boolean;
+    };
+  }
+
+  interface State {
+    checks: Checks;
+    route: string;
+    pagePosition: CR.PagePosition;
+    tutorial: CR.Tutorial;
+    packageJson: PackageJson;
+    windowToggle: boolean;
+    alert: CR.Alert;
+  }
 }

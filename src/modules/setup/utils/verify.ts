@@ -6,10 +6,10 @@ function allTrue(obj: Object): boolean {
 
 export default function setupVerify(
   dir: string, packageJson: PackageJson
-): CR.Checks {
+): Builder.Checks {
   const hasDir = !!dir;
 
-  let checks: CR.Checks = {
+  let checks: Builder.Checks = {
     system: {
       node: !!nodeMinVersion(),
       npm: !!npmMinVersion(),

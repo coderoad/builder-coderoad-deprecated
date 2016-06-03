@@ -29,13 +29,13 @@ export default function tutorial(t = _tutorial, action: Action) {
       return t;
 
     case TUTORIAL_BUILD:
-      const {dir} = action.payload;
-      build(dir, join('tutorial', 'tutorial.md'));
+      build(action.payload.dir, join('tutorial', 'tutorial.md'));
       return t;
 
     case TUTORIAL_LOAD:
-      const {dir} = action.payload;
-      const data = JSON.parse(readFileSync(join(dir, 'coderoad.json'), 'utf8'));
+      const data = JSON.parse(readFileSync(
+        join(action.payload.dir, 'coderoad.json'), 'utf8')
+      );
       // TODO: validate coderoad.json data
 
       return data;

@@ -10,7 +10,7 @@ const headerStyles = {
 };
 
 export const Start: React.StatelessComponent<{
-  checks: BuilderChecks
+  checks: Builder.Checks
 }> = ({checks}) => (
   <section className='cr-start'>
     <div style={headerStyles}>

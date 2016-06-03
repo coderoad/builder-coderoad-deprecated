@@ -5,10 +5,10 @@ import Routes from './Routes';
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 
-@connect((store: CR.State) => {
+@connect((store: Builder.State) => {
   return { store };
 })
-export default class App extends React.Component<{store?: CR.State}, {}> {
+export default class App extends React.Component<{store?: Builder.State}, {}> {
   render(): React.ReactElement<{}> {
     const store = this.props.store;
     return (

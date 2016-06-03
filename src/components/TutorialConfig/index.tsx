@@ -21,7 +21,6 @@ const styles = {
   },
 };
 
-
 @connect(null, dispatch => {
   return {
     save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
@@ -34,7 +33,7 @@ const styles = {
 export default class TutorialConfig extends React.Component <{
   packageJson: any,
   save?: (pj: Tutorial.PJ) => any,
-  routeToInfo?: () => any
+  routeToPage?: () => any
 }, {
   pj: Tutorial.PJ
 }> {
