@@ -14,7 +14,7 @@ const styles = {
   };
 })
 export default class MenuLink extends React.Component<{
-  route: string, title?: string, routeTo?: any
+  route: string, title?: string, routeTo?: (route: string) => any;
 }, {}> {
   render() {
     const {route, title, routeTo} = this.props;

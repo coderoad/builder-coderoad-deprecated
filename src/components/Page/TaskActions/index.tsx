@@ -2,25 +2,32 @@ import * as React from 'react';
 import {
   Step, Stepper, StepButton, StepContent, StepLabel
 } from 'material-ui/Stepper';
-import Subheader from 'material-ui/Subheader';
 import {DynamicStepper} from '../../index';
 
 const TaskActions: React.StatelessComponent<{
   actions: string[]
-}> = ({actions}) => (
-  <div>
-    <Subheader>Actions</Subheader>
+}> = ({actions}) => {
+
+  // TODO: sort actions with higher accuracy
+  const actionsList = actions.map(a => {
+    return {
+      action: a.substring(0, a.indexOf('(')),
+      content: a.substring(a.indexOf('(') + 2, a.length - 2)
+    };
+  });
+
+  return (
     <DynamicStepper status={actions.map(action => false)}>
-      {actions.map(action => (
+      {actionsList.map(a => (
         <Step>
-          <StepLabel>{action}</StepLabel>
+          <StepLabel>{a.action}</StepLabel>
           <StepContent>
-            <p>Test Test</p>
+            <p>{a.content}</p>
           </StepContent>
         </Step>
       ))}
     </DynamicStepper>
-  </div>
-);
+  );
+};
 
 export default TaskActions;

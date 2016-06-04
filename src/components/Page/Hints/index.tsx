@@ -1,10 +1,11 @@
 import * as React from 'react';
+import {List, ListItem} from 'material-ui/List';
 
 const Hints: React.StatelessComponent<{
   hints: string[]
 }> = ({hints}) => (
-  <div>
-  {hints.map(hint => <p>{hint}</p>)}
-  </div>
+  <List>
+    {hints.map(hint => <ListItem secondaryText={<p>{hint}</p>} />)}
+  </List>
 );
 export default Hints;
