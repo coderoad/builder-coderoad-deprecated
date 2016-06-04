@@ -5,8 +5,18 @@ import Add from 'material-ui/svg-icons/content/add';
 import {pageSet, tutorialPageAdd} from '../../actions';
 
 const styles = {
-  tabs: {
+  all: {
     marginRight: '400px',
+    height: '33px',
+    top: '-15px',
+    position: 'relative',
+  },
+  tabs: {
+    height: '33px',
+    backgroundColor: 'black',
+  },
+  tab: {
+    fontSize: '12px',
   },
 };
 
@@ -27,17 +37,21 @@ export default class TopPanel extends React.Component<{
     if (!tutorial || !tutorial.pages) { return null; }
 
     return (
-      <Tabs style={styles.tabs}>
+      <Tabs tabItemContainerStyle={styles.tabs} style={styles.all}>
          {tutorial.pages.map((page: CR.Page, index) => {
            return (
               <Tab
+                style={styles.tab}
                 key={index.toString()}
                 label={page.title.substring(0, 10)}
                 onClick={pageSet.bind(this, index)}
               />
            );
          })}
-       <Tab icon={<Add onClick={pageAdd}/>} />
+       <Tab
+        style={styles.tab}
+        label='+'
+      />
      </Tabs>
    );
   }

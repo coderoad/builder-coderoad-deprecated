@@ -42,7 +42,7 @@ export default class TaskActions extends React.Component<{
             </StepButton>
             <StepContent>
               {a.singleLine ? ''
-                : <Markdown>{a.content}</Markdown>
+                : <Markdown>{'```js\n' + a.content + '\n```'}</Markdown>
               }
             </StepContent>
           </Step>

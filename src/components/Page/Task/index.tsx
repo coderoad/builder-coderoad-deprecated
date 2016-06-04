@@ -6,7 +6,7 @@ import {lightGreen200, orange200} from 'material-ui/styles/colors';
 
 const styles = {
   margin: '5px',
-  padding: '10px 5px',
+  padding: '10px 10px',
 };
 
 function getStatus(
