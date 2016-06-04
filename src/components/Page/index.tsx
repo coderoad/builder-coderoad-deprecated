@@ -13,6 +13,7 @@ const Page: React.StatelessComponent<{
   tutorial: CR.Tutorial, pagePosition: number
 }> = ({tutorial, pagePosition}) => {
   const page = tutorial.pages[pagePosition];
+  console.log(page);
 
   if (!page) { return null; }
 

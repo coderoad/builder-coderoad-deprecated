@@ -12,7 +12,9 @@ const Hints: React.StatelessComponent<{
   hints: string[]
 }> = ({hints}) => (
   <List>
-    {hints.map((hint, index) => <ListItem secondaryText={
+    {!hints || !hints.length
+      ? []
+      : hints.map((hint, index) => <ListItem secondaryText={
       <p>{index + 1}. {hint}</p>
     } />)}
     <ListItem secondaryText={
