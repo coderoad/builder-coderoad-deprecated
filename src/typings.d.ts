@@ -25,4 +25,10 @@ declare namespace Builder {
     windowToggle: boolean;
     alert: CR.Alert;
   }
+
+  interface ActionObject {
+    action: string;
+    content: string;
+    singleLine?: boolean;
+  }
 }

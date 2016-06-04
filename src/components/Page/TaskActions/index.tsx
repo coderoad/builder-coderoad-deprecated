@@ -2,32 +2,52 @@ import * as React from 'react';
 import {
   Step, Stepper, StepButton, StepContent, StepLabel
 } from 'material-ui/Stepper';
-import {DynamicStepper} from '../../index';
+import {Markdown} from '../../index';
 
-const TaskActions: React.StatelessComponent<{
+export default class TaskActions extends React.Component<{
   actions: string[]
-}> = ({actions}) => {
-
-  // TODO: sort actions with higher accuracy
-  const actionsList = actions.map(a => {
-    return {
-      action: a.substring(0, a.indexOf('(')),
-      content: a.substring(a.indexOf('(') + 2, a.length - 2)
+}, {
+  stepIndex: number
+}> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stepIndex: 0,
     };
-  });
-
-  return (
-    <DynamicStepper status={actions.map(action => false)}>
-      {actionsList.map(a => (
-        <Step>
-          <StepLabel>{a.action}</StepLabel>
-          <StepContent>
-            <p>{a.content}</p>
-          </StepContent>
-        </Step>
-      ))}
-    </DynamicStepper>
-  );
-};
-
-export default TaskActions;
+  }
+  render() {
+    const {actions} = this.props;
+    const {stepIndex} = this.state;
+    // TODO: sort actions with higher accuracy
+    const actionList = actions.map(a => {
+      const obj: Builder.ActionObject = {
+        action: a.substring(0, a.indexOf('(')),
+        content: a.substring(a.indexOf('(') + 2, a.length - 2)
+      };
+      if (obj.action === 'open') {
+        obj.singleLine = true;
+      }
+      return obj;
+    });
+    return (
+      <Stepper
+        activeStep={stepIndex}
+        linear={false}
+        orientation='vertical'
+      >
+        {actionList.map((a, index) => (
+          <Step>
+            <StepButton onClick={() => this.setState({stepIndex: index})}>
+            {a.action + (a.singleLine ? ' ' + a.content : '')}
+            </StepButton>
+            <StepContent>
+              {a.singleLine ? ''
+                : <Markdown>{a.content}</Markdown>
+              }
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
+    );
+  }
+}
