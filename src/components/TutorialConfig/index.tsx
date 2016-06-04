@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, tutorialInit, routeSet} from '../../actions';
 import languageItems from './languageItems';
 import runnerItems from './runnerItems';
+import Top from '../TopPanel/Top';
 
 const styles = {
   card: {
@@ -42,6 +43,9 @@ export default class TutorialConfig extends React.Component <{
     this.state = {
         pj: this.props.packageJson
     };
+  }
+  componentDidMount() {
+    Top.toggle(false);
   }
   handleText(prop, event) {
     this.handleChange(prop, event.target.value);

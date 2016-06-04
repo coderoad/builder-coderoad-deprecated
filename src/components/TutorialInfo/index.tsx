@@ -3,9 +3,10 @@ import {connect} from 'react-redux';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import {Card, CardHeader} from 'material-ui/Card'
+import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, routeSet} from '../../actions';
+import Top from '../TopPanel/Top';
 
 const styles = {
   margin: '10px',
@@ -37,6 +38,9 @@ export default class TutorialInfo extends React.Component<{
     this.state = {
       pj: this.props.packageJson
     };
+  }
+  componentDidMount() {
+    Top.toggle(false);
   }
   handleText(prop, event) {
     this.handleChange(prop, event.target.value);

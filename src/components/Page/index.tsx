@@ -3,33 +3,36 @@ import Divider from 'material-ui/Divider';
 import {Card} from 'material-ui/Card';
 import {ContentCard} from '../index';
 import Tasks from './Tasks';
+import Top from '../TopPanel/Top';
 
 const styles = {
   width: '100%',
   overflowY: 'scroll',
 };
 
-const Page: React.StatelessComponent<{
+export default class Page extends React.Component<{
   tutorial: CR.Tutorial, pagePosition: number
-}> = ({tutorial, pagePosition}) => {
-  const page = tutorial.pages[pagePosition];
-  console.log(page);
+}, {}> {
+  componentDidMount() {
+    Top.toggle(true);
+  }
+  render() {
+    const {tutorial, pagePosition} = this.props;
+    const page = tutorial.pages[pagePosition];
 
-  if (!page) { return null; }
+    if (!page) { return null; }
 
-  return (
-    <section style={styles} className='cr-page'>
-      <ContentCard
-        title={page.title}
-        content={page.description}
-      />
-
-      <Tasks
-        tasks={page.tasks}
-        page={page}
-      />
-
-    </section>
-  );
+    return (
+      <section style={styles} className='cr-page'>
+        <ContentCard
+          title={page.title}
+          content={page.description}
+        />
+        <Tasks
+          tasks={page.tasks}
+          page={page}
+        />
+      </section>
+    );
+  }
 };
-export default Page;

@@ -10,7 +10,7 @@ const Top = {
     return this.top;
   },
   toggle: (open?: boolean) => {
-    this.top.hidden = open || !this.top.hidden;
+    this.top.hidden = !open || !this.top.hidden;
   },
   unmount: () => {
     ReactDOM.unmountComponentAtNode(this.root);

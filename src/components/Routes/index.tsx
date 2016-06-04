@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Page, Start, TutorialConfig, TutorialInfo} from '../index';
-import Top from '../TopPanel/Top';
 
 export default class Routes extends React.Component<{
   route: string, checks: Builder.Checks, pagePosition: CR.PagePosition,
@@ -9,7 +8,6 @@ export default class Routes extends React.Component<{
   render() {
     switch (this.props.route) {
       case 'page':
-        Top.toggle(false);
         return <Page {...this.props} />;
       case 'start':
         return <Start {...this.props} />;
