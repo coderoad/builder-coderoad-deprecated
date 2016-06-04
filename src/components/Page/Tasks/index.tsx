@@ -21,8 +21,8 @@ const styles = {
 };
 
 const Tasks: React.StatelessComponent<{
-  tasks: CR.Task[], page: CR.Page
-}> = ({tasks, page}) => (
+  tasks: CR.Task[], page: CR.Page, config: Tutorial.Config
+}> = ({tasks, page, config}) => (
   <div>
     {tasks.map((task: CR.Task, index: number) => (
       <Card style={styles.card}>
@@ -31,6 +31,7 @@ const Tasks: React.StatelessComponent<{
         <Tests
           style={{float: 'right'}}
           tests={task.tests}
+          config={config}
         />
         </CardTitle>
         <Tabs tabItemContainerStyle={styles.tabBar}>

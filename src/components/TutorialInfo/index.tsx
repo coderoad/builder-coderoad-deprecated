@@ -18,10 +18,6 @@ const buttonStyles = {
   margin: '30px 10px 20px 10px',
 };
 
-  // name: '',
-  // description: '',
-  // version: ''
-
 @connect(null, dispatch => {
   return {
     save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),

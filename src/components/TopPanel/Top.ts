@@ -6,11 +6,11 @@ const Top = {
     this.top = document.createElement('div');
     this.top.setAttribute('id', 'crb-top');
     this.top.style.height = '33px';
-    this.top.hidden = true;
+    Top.toggle(false);
     return this.top;
   },
   toggle: (open?: boolean) => {
-    this.top.hidden = !open || !this.top.hidden;
+    this.top.hidden = !open;
   },
   unmount: () => {
     ReactDOM.unmountComponentAtNode(this.root);

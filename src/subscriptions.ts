@@ -1,5 +1,6 @@
 const CompositeDisposable = require('atom').CompositeDisposable;
 import store from './store';
+import {windowToggle} from './actions';
 import Root from './components/Root';
 import Top from './components/TopPanel/Top';
 
@@ -11,7 +12,7 @@ export function onActivate(): AtomCore.Disposable {
 
   subscriptions.add(
     atom.commands.add('atom-workspace', {
-      'cb-viewer:toggle': () => store.dispatch({ type: 'WINDOW_TOGGLE'})
+      'cb-viewer:toggle': () => store.dispatch(windowToggle())
     })
   );
 

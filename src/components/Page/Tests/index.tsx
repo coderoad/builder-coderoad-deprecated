@@ -1,11 +1,30 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
+import {join} from 'path';
+import {editorOpen} from '../../../actions';
+import tutorialConfigOptions from '../../../config-options';
 
-
-const Tests: React.StatelessComponent<{
-  tests: string[], style: Object
-}> = ({tests, style}) => (
-  <div style={style}>
-  {tests.map(test => <p>{test}</p>)}
-  </div>
-);
-export default Tests;
+@connect(null, dispatch => {
+  return {
+    open: (file: string) => {
+      dispatch(editorOpen(join('tutorial', file)));
+    }
+  };
+})
+export default class Tests extends React.Component<{
+  tests: string[], config: Tutorial.Config, style?: Object, open?: (file: string) => any
+}, {}> {
+  render() {
+    const {tests, config, style, open} = this.props;
+    const suffix = tutorialConfigOptions[config.language].suffix;
+    return (
+      <div style={style}>
+        {tests.map(test => (
+          <button onClick={
+            open.bind(this, test.concat('.' + suffix))
+          }>{test}</button>
+        ))}
+      </div>
+    );
+  }
+}

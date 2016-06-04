@@ -11,13 +11,16 @@ const styles = {
 };
 
 export default class Page extends React.Component<{
-  tutorial: CR.Tutorial, pagePosition: number
+  tutorial: CR.Tutorial, pagePosition: number, packageJson: PackageJson
 }, {}> {
   componentDidMount() {
     Top.toggle(true);
   }
+  componentDidUnmount() {
+    Top.toggle(false);
+  }
   render() {
-    const {tutorial, pagePosition} = this.props;
+    const {tutorial, pagePosition, packageJson} = this.props;
     const page = tutorial.pages[pagePosition];
 
     if (!page) { return null; }
@@ -31,6 +34,7 @@ export default class Page extends React.Component<{
         <Tasks
           tasks={page.tasks}
           page={page}
+          config={packageJson.config}
         />
       </section>
     );

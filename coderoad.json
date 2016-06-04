@@ -1,0 +1,66 @@
+{
+  "info": {
+    "title": "Project Title",
+    "description": "Project description."
+  },
+  "pages": [
+    {
+      "title": "Add & Subtract",
+      "description": "Writing basic functions.\n\nA function has inputs and outputs. The inputs we call \"parameters\" and wrap them in `(` brackets `)`.\n\nThe output is `return`ed from the function.\n\n```\n                    // input\nfunction doSomething(parameter) {\n  // output\n  return parameter;\n}\n```\n\nTry making your own basic functions.",
+      "tasks": [
+        {
+          "description": "write a function `addOne` that adds one to a number",
+          "tests": [
+            "01/01"
+          ],
+          "hints": [
+            "return the parameter + 1",
+            "second hint"
+          ],
+          "actions": [
+            "open('page-01.js')",
+            "set('// addOne\nfunction addOne(x) {\n  return ::>\n}\n')"
+          ]
+        },
+        {
+          "description": "write a function `subtractOne` that subtracts one from a number",
+          "tests": [
+            "01/02"
+          ],
+          "hints": [
+            "return the parameter - 1"
+          ],
+          "actions": [
+            "insert('\n// subtractOne\nfunction subtractOne(x) {\n  return ::>\n}\n')"
+          ]
+        }
+      ],
+      "onPageComplete": "Continue to learn more about multiply & divide"
+    },
+    {
+      "title": "Divide & Multiply",
+      "description": "Writing basic functions continued.\n\nWe'll write two more basic functions, this time without any help.",
+      "tasks": [
+        {
+          "description": "write a function `divideOne` divides a number by 1",
+          "tests": [
+            "02/01"
+          ],
+          "actions": [
+            "open('page-02.js')",
+            "set('// divideOne\nfunction divideOne(x) {\n  return ::>\n}\n')"
+          ]
+        },
+        {
+          "description": "write a function `mutiplyone` that multiplies a number by 1",
+          "tests": [
+            "02/02"
+          ],
+          "actions": [
+            "insert('\n// multiplyOne\nfunction multiplyOne(x) {\n  return ::>\n}\n')"
+          ]
+        }
+      ]
+    }
+  ]
+}
