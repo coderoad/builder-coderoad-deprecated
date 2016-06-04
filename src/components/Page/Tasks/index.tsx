@@ -26,7 +26,13 @@ const Tasks: React.StatelessComponent<{
   <div>
     {tasks.map((task: CR.Task, index: number) => (
       <Card style={styles.card}>
-        <CardTitle subtitle={'Task ' + index} />
+        <CardTitle>
+        Task {index + 1}
+        <Tests
+          style={{float: 'right'}}
+          tests={task.tests}
+        />
+        </CardTitle>
         <Tabs tabItemContainerStyle={styles.tabBar}>
 
           <Tab label='Description'>
@@ -35,7 +41,6 @@ const Tasks: React.StatelessComponent<{
               index={index}
               task={task}
             />
-            <Tests tests={task.tests} />
           </Tab>
 
           <Tab label='Actions'>
