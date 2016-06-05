@@ -1,7 +1,10 @@
 export {pageSet} from './modules/page-position';
 export {pjSave} from './modules/package-json';
 export {setupVerify, setupPackage} from './modules/setup';
-export {tutorialInit, tutorialLoad, tutorialBuild, tutorialPageAdd} from './modules/tutorial';
+export {
+  tutorialInit, tutorialLoad, tutorialBuild, tutorialPageAdd,
+  tutorialTaskAdd, tutorialHintAdd, tutorialActionAdd
+} from './modules/tutorial';
 export {windowToggle} from './modules/window';
 export {editorOpenPage, editorOpenTest} from './modules/editor-paths';
 

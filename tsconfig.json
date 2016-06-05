@@ -52,6 +52,8 @@
         "src/modules/tutorial/index.ts",
         "src/modules/tutorial/reducer.ts",
         "src/modules/tutorial/types.ts",
+        "src/modules/tutorial/utils/pageNew.ts",
+        "src/modules/tutorial/utils/taskUpdate.ts",
         "src/modules/window/actions.ts",
         "src/modules/window/index.ts",
         "src/modules/window/reducer.ts",

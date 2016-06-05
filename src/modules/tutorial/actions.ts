@@ -1,5 +1,6 @@
 import {
-  TUTORIAL_INIT, TUTORIAL_LOAD, TUTORIAL_BUILD, TUTORIAL_PAGE_ADD
+  TUTORIAL_INIT, TUTORIAL_LOAD, TUTORIAL_BUILD,
+  TUTORIAL_PAGE_ADD, TUTORIAL_TASK_ADD, TUTORIAL_HINT_ADD, TUTORIAL_ACTION_ADD
 } from './types';
 
 export function tutorialInit() {
@@ -26,6 +27,17 @@ export function tutorialBuild() {
 }
 
 export function tutorialPageAdd() {
-  console.log('called tutorialPageAdd');
   return { type: TUTORIAL_PAGE_ADD };
+}
+
+export function tutorialTaskAdd(pagePosition: number, taskPosition: number) {
+  return { type: TUTORIAL_TASK_ADD, payload: { pagePosition, taskPosition } };
+}
+
+export function tutorialActionAdd(pagePosition: number, taskPosition: number) {
+  return { type: TUTORIAL_ACTION_ADD, payload: { pagePosition, taskPosition } };
+}
+
+export function tutorialHintAdd(pagePosition: number, taskPosition: number) {
+  return { type: TUTORIAL_HINT_ADD, payload: { pagePosition, taskPosition } };
 }

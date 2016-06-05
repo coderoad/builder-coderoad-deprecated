@@ -58,6 +58,7 @@ export default class TopPanel extends React.Component<{
        <Tab
         style={Object.assign({}, styles.tab, styles.add)}
         label='+'
+        onActive={pageAdd}
       />
      </Tabs>
    );
