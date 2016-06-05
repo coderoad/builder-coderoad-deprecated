@@ -17,7 +17,7 @@ const styles = {
 const TasksComplete: React.StatelessComponent<{
   page: CR.Page
 }> = ({page}) => {
-  if (!page.onPageComplete) { return null; }
+  // if (!page.onPageComplete) { return null; }
   return (
     <Card style={styles.card}>
       <CardHeader
@@ -25,7 +25,9 @@ const TasksComplete: React.StatelessComponent<{
         showExpandableButton={true}
       />
       <CardText expandable={true}>
-        <Markdown style={styles.text}>{page.onPageComplete}</Markdown>
+        <Markdown style={styles.text}>
+          {page.onPageComplete || 'add on page complete message'}
+        </Markdown>
       </CardText>
     </Card>
   );
