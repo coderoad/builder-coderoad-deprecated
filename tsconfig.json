@@ -29,6 +29,7 @@
         "src/components/TopPanel/Top.ts",
         "src/config-options.ts",
         "src/index.ts",
+        "src/modules/editor-paths/index.ts",
         "src/modules/package-json/actions.ts",
         "src/modules/package-json/index.ts",
         "src/modules/package-json/reducer.ts",

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {List} from 'material-ui/List';
-import {Card, CardTitle} from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Subheader from 'material-ui/Subheader';
 import Task from '../Task';
@@ -16,11 +16,23 @@ const styles = {
   card: {
     margin: '5px',
   },
+  cardContent: {
+    margin: '0px',
+    padding: '0px',
+  },
   tabBar: {
     backgroundColor: 'black',
   },
   addTask: {
     textAlign: 'center',
+  },
+  test: {
+    float: 'right',
+    marginRight: '30px',
+  },
+  title: {
+    float: 'left',
+    marginLeft: '10px',
   },
 };
 
@@ -30,14 +42,18 @@ const Tasks: React.StatelessComponent<{
   <div>
     {tasks.map((task: CR.Task, index: number) => (
       <Card style={styles.card}>
-        <CardTitle>
-        Task {index + 1}
+        <CardHeader
+          actAsExpander={true}
+          showExpandableButton={true}
+        >
+        <span style={styles.title}>Task {index + 1}</span>
         <Tests
-          style={{float: 'right'}}
+          style={styles.test}
           tests={task.tests}
           config={config}
         />
-        </CardTitle>
+        </CardHeader>
+        <CardText expandable={true} style={styles.cardContent}>
         <Tabs tabItemContainerStyle={styles.tabBar}>
 
           <Tab label='Description'>
@@ -57,6 +73,7 @@ const Tasks: React.StatelessComponent<{
           </Tab>
 
       </Tabs>
+      </CardText>
     </Card>)
   )}
 

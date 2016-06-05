@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+import {join} from 'path';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Add from 'material-ui/svg-icons/content/add';
-import {pageSet, tutorialPageAdd} from '../../actions';
+import {pageSet, tutorialPageAdd, editorOpenPage} from '../../actions';
 
 const styles = {
   all: {
@@ -22,7 +23,10 @@ const styles = {
 
 @connect(null, dispatch => {
   return {
-    pageSet: (index: number) => dispatch(pageSet(index)),
+    pageSet: (index: number) => {
+      dispatch(pageSet(index));
+      dispatch(editorOpenPage(index));
+    },
     pageAdd: () => dispatch(tutorialPageAdd())
   };
 })

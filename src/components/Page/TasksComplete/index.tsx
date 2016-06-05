@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Card, CardText} from 'material-ui/Card';
+import {Card, CardText, CardHeader} from 'material-ui/Card';
 import {Markdown} from '../../index';
 import {cyan500, grey100} from 'material-ui/styles/colors';
 
@@ -20,7 +20,11 @@ const TasksComplete: React.StatelessComponent<{
   if (!page.onPageComplete) { return null; }
   return (
     <Card style={styles.card}>
-      <CardText>
+      <CardHeader
+        actAsExpander={true}
+        showExpandableButton={true}
+      />
+      <CardText expandable={true}>
         <Markdown style={styles.text}>{page.onPageComplete}</Markdown>
       </CardText>
     </Card>

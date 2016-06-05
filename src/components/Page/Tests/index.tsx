@@ -5,6 +5,12 @@ import {editorOpen} from '../../../actions';
 import tutorialConfigOptions from '../../../config-options';
 import FlatButton from 'material-ui/FlatButton';
 
+const styles = {
+  button: {
+    bottom: '8px',
+  },
+};
+
 @connect(null, dispatch => {
   return {
     open: (file: string) => {
@@ -22,8 +28,9 @@ export default class Tests extends React.Component<{
       <div style={style}>
         {tests.map(test => (
           <FlatButton
+            style={styles.button}
             onClick={open.bind(this, test.concat('.' + suffix))}
-            label={test}
+            label={'Test'}
             secondary={true}
           />
         ))}
