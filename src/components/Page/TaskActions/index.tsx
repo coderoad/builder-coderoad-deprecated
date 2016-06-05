@@ -3,6 +3,7 @@ import {
   Step, Stepper, StepButton, StepContent, StepLabel
 } from 'material-ui/Stepper';
 import {Markdown} from '../../index';
+import AddButton from '../AddButton';
 
 export default class TaskActions extends React.Component<{
   actions: string[]
@@ -47,6 +48,7 @@ export default class TaskActions extends React.Component<{
             </StepContent>
           </Step>
         ))}
+        <AddButton />
       </Stepper>
     );
   }

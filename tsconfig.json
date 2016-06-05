@@ -73,6 +73,7 @@
         "src/components/common/RouteButton.tsx",
         "src/components/common/Save.tsx",
         "src/components/common/ToggleDevTools.tsx",
+        "src/components/Page/AddButton/index.tsx",
         "src/components/Page/EditPage/index.tsx",
         "src/components/Page/Hints/index.tsx",
         "src/components/Page/index.tsx",

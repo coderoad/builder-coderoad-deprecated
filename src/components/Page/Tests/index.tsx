@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {join} from 'path';
 import {editorOpen} from '../../../actions';
 import tutorialConfigOptions from '../../../config-options';
+import FlatButton from 'material-ui/FlatButton';
 
 @connect(null, dispatch => {
   return {
@@ -20,9 +21,11 @@ export default class Tests extends React.Component<{
     return (
       <div style={style}>
         {tests.map(test => (
-          <button onClick={
-            open.bind(this, test.concat('.' + suffix))
-          }>{test}</button>
+          <FlatButton
+            onClick={open.bind(this, test.concat('.' + suffix))}
+            label={test}
+            secondary={true}
+          />
         ))}
       </div>
     );

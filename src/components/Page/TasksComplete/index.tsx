@@ -6,7 +6,7 @@ import {cyan500, grey100} from 'material-ui/styles/colors';
 const styles = {
   card: {
     backgroundColor: cyan500,
-    margin: '10px 5px',
+    margin: '5px',
   },
   text: {
     color: grey100,

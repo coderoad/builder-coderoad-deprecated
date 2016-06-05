@@ -10,6 +10,7 @@ import TasksComplete from '../TasksComplete';
 import Tests from '../Tests';
 import TaskActions from '../TaskActions';
 import Hints from '../Hints';
+import AddButton from '../AddButton';
 
 const styles = {
   card: {
@@ -17,7 +18,10 @@ const styles = {
   },
   tabBar: {
     backgroundColor: 'black',
-  }
+  },
+  addTask: {
+    textAlign: 'center',
+  },
 };
 
 const Tasks: React.StatelessComponent<{
@@ -55,6 +59,8 @@ const Tasks: React.StatelessComponent<{
       </Tabs>
     </Card>)
   )}
+
+    <AddButton />
 
     <TasksComplete
       page={page}
