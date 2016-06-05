@@ -5,15 +5,17 @@ import {
 import {create, build} from 'coderoad-cli';
 import {readFileSync} from 'fs';
 import {join} from 'path';
-// import taskUpdate from './utils/taskUpdate';
-import pageNew from './utils/pageNew';
+import taskUpdate from './utils/taskUpdate';
+import pageGet from './utils/pageGet';
+import taskGet from './utils/taskGet';
+import * as merge from 'lodash.merge';
 
 const _tutorial: CR.Tutorial = {
   info: {
     title: '',
     description: '',
   },
-  pages: [].concat(pageNew(0))
+  pages: [].concat(pageGet(0))
 };
 
 export default function tutorial(t = _tutorial, action: Action): CR.Tutorial {
@@ -44,12 +46,31 @@ export default function tutorial(t = _tutorial, action: Action): CR.Tutorial {
 
     case TUTORIAL_PAGE_ADD:
       // add a new page template
-      const pages = t.pages.concat(pageNew(t.pages.length));
+      const pages = t.pages.concat(pageGet(t.pages.length));
       return Object.assign({}, t, {pages});
 
-    // case TUTORIAL_ADD_HINT:
-    //   const {pagePosition, taskPosition} = action.payload;
-    //   t.pages[pagePosition].tasks[taskPosition].hints.concat('')
+    case TUTORIAL_TASK_ADD:
+      const {pagePosition} = action.payload;
+      // add task
+      const tasks = t.pages[pagePosition].tasks;
+      tasks.push(taskGet(pagePosition, tasks.length));
+      // TODO: remove mutation, use merge
+      // update page tasks
+      const updatedPage = Object.assign({}, t.pages[pagePosition], {tasks});
+      t.pages[pagePosition] = updatedPage;
+      // update pages
+      return Object.assign({}, t);
+
+    case TUTORIAL_ACTION_ADD:
+      const {pagePosition, taskPosition, tutorialAction} = action.payload;
+      const tut = taskUpdate(t, pagePosition, taskPosition, 'actions', tutorialAction);
+      return tut;
+
+    case TUTORIAL_HINT_ADD:
+      const {pagePosition, taskPosition} = action.payload;
+      const tut = taskUpdate(t, pagePosition, taskPosition, 'hints', '');
+      return tut;
+
 
     default:
       return t;

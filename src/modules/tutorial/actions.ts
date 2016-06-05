@@ -34,8 +34,8 @@ export function tutorialTaskAdd(pagePosition: number, taskPosition: number) {
   return { type: TUTORIAL_TASK_ADD, payload: { pagePosition, taskPosition } };
 }
 
-export function tutorialActionAdd(pagePosition: number, taskPosition: number) {
-  return { type: TUTORIAL_ACTION_ADD, payload: { pagePosition, taskPosition } };
+export function tutorialActionAdd(pagePosition: number, taskPosition: number, tutorialAction: Object) {
+  return { type: TUTORIAL_ACTION_ADD, payload: { pagePosition, taskPosition, tutorialAction } };
 }
 
 export function tutorialHintAdd(pagePosition: number, taskPosition: number) {
