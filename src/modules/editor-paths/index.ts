@@ -7,12 +7,14 @@ function twoDigitify(n: number): string {
 }
 
 export function editorOpenPage(index: number) {
-  const filePath = join(
-    'tutorial',
-    twoDigitify(index + 1),
-    'index.md'
-  );
-  return dispatch => editorOpen(filePath);
+  return dispatch => {
+    const filePath = join(
+      'tutorial',
+      twoDigitify(index + 1),
+      'index.md'
+    );
+    dispatch(editorOpen(filePath));
+  };
 }
 
 export function editorOpenTest(pageIndex: number, testIndex: number) {
@@ -24,6 +26,6 @@ export function editorOpenTest(pageIndex: number, testIndex: number) {
       twoDigitify(pageIndex),
       twoDigitify(testIndex) + '.' + suffix
     );
-    editorOpen(filePath);
+    dispatch(editorOpen(filePath));
   };
 }

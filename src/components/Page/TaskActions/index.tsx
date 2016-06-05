@@ -4,6 +4,7 @@ import {
 } from 'material-ui/Stepper';
 import {Markdown} from '../../index';
 import AddButton from '../AddButton';
+import getTaskObject from './task-object';
 
 export default class TaskActions extends React.Component<{
   actions: string[]
@@ -20,16 +21,7 @@ export default class TaskActions extends React.Component<{
     const {actions} = this.props;
     const {stepIndex} = this.state;
     // TODO: sort actions with higher accuracy
-    const actionList = actions.map(a => {
-      const obj: Builder.ActionObject = {
-        action: a.substring(0, a.indexOf('(')),
-        content: a.substring(a.indexOf('(') + 2, a.length - 2)
-      };
-      if (obj.action === 'open') {
-        obj.singleLine = true;
-      }
-      return obj;
-    });
+    const actionList: Builder.ActionObject[] = actions.map(a => getTaskObject(a));
     return (
       <Stepper
         activeStep={stepIndex}
