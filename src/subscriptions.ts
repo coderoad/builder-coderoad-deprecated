@@ -1,6 +1,6 @@
 const CompositeDisposable = require('atom').CompositeDisposable;
 import store from './store';
-import {windowToggle} from './actions';
+import {windowToggle, tutorialBuild, tutorialLoad} from './actions';
 import Root from './components/Root';
 import Top from './components/TopPanel/Top';
 
@@ -16,12 +16,13 @@ export function onActivate(): AtomCore.Disposable {
     })
   );
 
-  // atom.workspace.observeTextEditors((editor: AtomCore.IEditor) => {
-  //   subscriptions.add(
-  //     editor.onDidSave(() => {
-  //       store.dispatch(compilePage(pageIndex, content));
-  //     }));
-  // });
+  atom.workspace.observeTextEditors((editor: AtomCore.IEditor) => {
+    subscriptions.add(
+      editor.onDidSave(() => {
+        store.dispatch(tutorialBuild());
+        store.dispatch(tutorialLoad());
+      }));
+  });
 
   return subscriptions;
 }

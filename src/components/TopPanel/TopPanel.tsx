@@ -19,6 +19,9 @@ const styles = {
   tab: {
     fontSize: '12px',
   },
+  add: {
+    color: 'rgb(0, 188, 212)',
+  },
 };
 
 @connect(null, dispatch => {
@@ -53,7 +56,7 @@ export default class TopPanel extends React.Component<{
            );
          })}
        <Tab
-        style={styles.tab}
+        style={Object.assign({}, styles.tab, styles.add)}
         label='+'
       />
      </Tabs>

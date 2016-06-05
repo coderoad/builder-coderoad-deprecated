@@ -36,13 +36,11 @@
     "react-tap-event-plugin": "1.0.0",
     "redux": "3.5.2",
     "redux-logger": "2.6.1",
+    "redux-throttle-actions": "1.0.1",
     "redux-thunk": "2.1.0",
-    "sort-package-json": "^1.4.0"
+    "sort-package-json": "1.4.0"
   },
   "activationCommands": {
     "atom-workspace": "cb-viewer:toggle"
-  },
-  "devDependencies": {
-    "nyc": "^6.4.4"
   }
 }
