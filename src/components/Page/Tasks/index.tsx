@@ -41,7 +41,10 @@ const Tasks: React.StatelessComponent<{
 }> = ({tasks, page, config}) => (
   <div>
     {tasks.map((task: CR.Task, index: number) => (
-      <Card style={styles.card}>
+      <Card
+        style={styles.card}
+        initiallyExpanded={index === 0}
+      >
         <CardHeader
           actAsExpander={true}
           showExpandableButton={true}

@@ -30,6 +30,7 @@ export default class Page extends React.Component<{
         <ContentCard
           title={page.title}
           content={page.description}
+          open={true}
         />
         <Tasks
           tasks={page.tasks}

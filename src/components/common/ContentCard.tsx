@@ -7,11 +7,19 @@ const styles = {
 };
 
 const ContentCard: React.StatelessComponent<{
-  title: string, content: string
-}> = ({title, content}) => (
-  <Card style={styles}>
-    {title ? <CardHeader title={title} /> : null}
-    <CardText>
+  title: string, content: string, open?: boolean
+}> = ({title, content, open}) => (
+  <Card
+    style={styles}
+    initiallyExpanded={open || false}
+  >
+    {title
+      ? <CardHeader
+        title={title}
+        actAsExpander={true}
+        showExpandableButton={true}
+      /> : null}
+    <CardText expandable={true}>
       <Markdown>{content}</Markdown>
     </CardText>
   </Card>
