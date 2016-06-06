@@ -44,7 +44,7 @@ const Tasks: React.StatelessComponent<{
       <Card
         style={styles.card}
         initiallyExpanded={index === 0}
-      >
+        >
         <CardHeader
           actAsExpander={true}
           showExpandableButton={true}
@@ -68,11 +68,17 @@ const Tasks: React.StatelessComponent<{
           </Tab>
 
           <Tab label='Actions'>
-            <TaskActions actions={task.actions}/>
+            <TaskActions
+              actions={task.actions}
+              taskPosition={index}
+            />
           </Tab>
 
           <Tab label='Hints'>
-            <Hints hints={task.hints} />
+            <Hints
+            hints={task.hints}
+            taskPosition={index}
+            />
           </Tab>
 
       </Tabs>

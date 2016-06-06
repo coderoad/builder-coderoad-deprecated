@@ -1,13 +1,20 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
 import {
   Step, Stepper, StepButton, StepContent, StepLabel
 } from 'material-ui/Stepper';
 import {Markdown} from '../../index';
 import AddButton from '../AddButton';
 import getTaskObject from './task-object';
+import {tutorialActionAdd} from '../../../actions';
 
+@connect(null, dispatch => {
+  return {
+    addAction: (actionString: string) => dispatch(tutorialActionAdd(this.props.taskPosition, actionString))
+  };
+})
 export default class TaskActions extends React.Component<{
-  actions: string[]
+  actions: string[], taskPosition: number, addAction?: any
 }, {
   stepIndex: number
 }> {
@@ -18,7 +25,7 @@ export default class TaskActions extends React.Component<{
     };
   }
   render() {
-    const {actions} = this.props;
+    const {actions, addAction} = this.props;
     const {stepIndex} = this.state;
     // TODO: sort actions with higher accuracy
     const actionList: Builder.ActionObject[] = actions.map(a => getTaskObject(a));
@@ -40,7 +47,7 @@ export default class TaskActions extends React.Component<{
             </StepContent>
           </Step>
         ))}
-        <AddButton />
+        <AddButton callback={addAction.bind(this, 'test(`test`)')}/>
       </Stepper>
     );
   }

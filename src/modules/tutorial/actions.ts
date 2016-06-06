@@ -30,14 +30,23 @@ export function tutorialPageAdd() {
   return { type: TUTORIAL_PAGE_ADD };
 }
 
-export function tutorialTaskAdd(pagePosition: number, taskPosition: number) {
-  return { type: TUTORIAL_TASK_ADD, payload: { pagePosition, taskPosition } };
+export function tutorialTaskAdd(taskPosition: number) {
+  return (dispatch, getState) => {
+    const {pagePosition} = getState();
+    dispatch({ type: TUTORIAL_TASK_ADD, payload: { pagePosition, taskPosition } });
+  };
 }
 
-export function tutorialActionAdd(pagePosition: number, taskPosition: number, tutorialAction: Object) {
-  return { type: TUTORIAL_ACTION_ADD, payload: { pagePosition, taskPosition, tutorialAction } };
+export function tutorialActionAdd(taskPosition: number, tutorialAction: Object) {
+  return (dispatch, getState) => {
+    const {pagePosition} = getState();
+    dispatch({ type: TUTORIAL_ACTION_ADD, payload: { pagePosition, taskPosition, tutorialAction } });
+  };
 }
 
-export function tutorialHintAdd(pagePosition: number, taskPosition: number) {
-  return { type: TUTORIAL_HINT_ADD, payload: { pagePosition, taskPosition } };
+export function tutorialHintAdd(taskPosition: number, hint: string) {
+  return (dispatch, getState) => {
+    const {pagePosition} = getState();
+    dispatch({ type: TUTORIAL_HINT_ADD, payload: { pagePosition, taskPosition, hint }});
+  };
 }

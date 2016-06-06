@@ -54,7 +54,7 @@ export default function tutorial(t = _tutorial, action: Action): CR.Tutorial {
       // add task
       const tasks = t.pages[pagePosition].tasks;
       tasks.push(taskGet(pagePosition, tasks.length));
-      // TODO: remove mutation, use merge
+      // TODO: remove mutation, use merge`
       // update page tasks
       const updatedPage = Object.assign({}, t.pages[pagePosition], {tasks});
       t.pages[pagePosition] = updatedPage;
@@ -67,8 +67,8 @@ export default function tutorial(t = _tutorial, action: Action): CR.Tutorial {
       return tut;
 
     case TUTORIAL_HINT_ADD:
-      const {pagePosition, taskPosition} = action.payload;
-      const tut = taskUpdate(t, pagePosition, taskPosition, 'hints', '');
+      const {pagePosition, taskPosition, hint} = action.payload;
+      const tut = taskUpdate(t, pagePosition, taskPosition, 'hints', hint);
       return tut;
 
 
