@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField';
 
 const styles = {
   text: {
-    margin: '10px',
+    margin: '10px 15px',
   },
 };
 
