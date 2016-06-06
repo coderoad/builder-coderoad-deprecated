@@ -27,10 +27,11 @@ function formatText(text: string): string {
 };
 
 const Markdown: React.StatelessComponent<{
-  children?: string, style?: Object
-}> = ({style, children}) => (
+  children?: string, style?: Object, onClick?: any
+}> = ({style, children, onClick}) => (
   <span
     className='cr-markdown'
+    onClick={onClick}
     style={style ? style : null}
     dangerouslySetInnerHTML={
       {__html: formatText(children)}

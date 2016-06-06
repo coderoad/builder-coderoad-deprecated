@@ -19,8 +19,10 @@ export function onActivate(): AtomCore.Disposable {
   atom.workspace.observeTextEditors((editor: AtomCore.IEditor) => {
     subscriptions.add(
       editor.onDidSave(() => {
-        store.dispatch(tutorialBuild());
-        store.dispatch(tutorialLoad());
+        if (store.getState().window) {
+          store.dispatch(tutorialBuild());
+          store.dispatch(tutorialLoad());
+        }
       }));
   });
 
