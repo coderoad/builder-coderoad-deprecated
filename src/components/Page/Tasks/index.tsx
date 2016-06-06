@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import {connect} from 'react-redux';
 import {List} from 'material-ui/List';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import {Tabs, Tab} from 'material-ui/Tabs';
@@ -11,6 +11,7 @@ import Tests from '../Tests';
 import TaskActions from '../TaskActions';
 import Hints from '../Hints';
 import AddButton from '../AddButton';
+import {tutorialTaskAdd} from '../../../actions';
 
 const styles = {
   card: {
@@ -36,62 +37,71 @@ const styles = {
   },
 };
 
-const Tasks: React.StatelessComponent<{
-  tasks: CR.Task[], page: CR.Page, config: Tutorial.Config
-}> = ({tasks, page, config}) => (
-  <div>
-    {tasks.map((task: CR.Task, index: number) => (
-      <Card
-        style={styles.card}
-        initiallyExpanded={index === 0}
-        >
-        <CardHeader
-          actAsExpander={true}
-          showExpandableButton={true}
-        >
-        <span style={styles.title}>Task {index + 1}</span>
-        <Tests
-          style={styles.test}
-          tests={task.tests}
-          config={config}
+@connect(null, dispatch => {
+  return {
+    taskAdd: () => dispatch(tutorialTaskAdd())
+  };
+})
+export default class Tasks extends React.Component<{
+  tasks: CR.Task[], page: CR.Page, config: Tutorial.Config, taskAdd?: any
+}, {}> {
+  render() {
+    const {tasks, page, config, taskAdd} = this.props;
+    return (
+      <div>
+        {tasks.map((task: CR.Task, index: number) => (
+          <Card
+            style={styles.card}
+            initiallyExpanded={index === 0}
+            >
+            <CardHeader
+              actAsExpander={true}
+              showExpandableButton={true}
+            >
+              <span style={styles.title}>Task {index + 1}</span>
+              <Tests
+                style={styles.test}
+                tests={task.tests}
+                config={config}
+              />
+            </CardHeader>
+            <CardText expandable={true} style={styles.cardContent}>
+              <Tabs tabItemContainerStyle={styles.tabBar}>
+
+                <Tab label='Description'>
+                  <Task
+                    key={index.toString()}
+                    index={index}
+                    task={task}
+                  />
+                </Tab>
+
+                <Tab label='Actions'>
+                  <TaskActions
+                    actions={task.actions}
+                    taskPosition={index}
+                  />
+                </Tab>
+
+                <Tab label='Hints'>
+                  <Hints
+                  hints={task.hints}
+                  taskPosition={index}
+                  />
+                </Tab>
+
+              </Tabs>
+            </CardText>
+          </Card>)
+        )}
+
+        <AddButton callback={taskAdd}/>
+
+        <TasksComplete
+          page={page}
         />
-        </CardHeader>
-        <CardText expandable={true} style={styles.cardContent}>
-        <Tabs tabItemContainerStyle={styles.tabBar}>
 
-          <Tab label='Description'>
-            <Task
-              key={index.toString()}
-              index={index}
-              task={task}
-            />
-          </Tab>
-
-          <Tab label='Actions'>
-            <TaskActions
-              actions={task.actions}
-              taskPosition={index}
-            />
-          </Tab>
-
-          <Tab label='Hints'>
-            <Hints
-            hints={task.hints}
-            taskPosition={index}
-            />
-          </Tab>
-
-      </Tabs>
-      </CardText>
-    </Card>)
-  )}
-
-    <AddButton />
-
-    <TasksComplete
-      page={page}
-    />
-
-  </div>
-);
-export default Tasks;
+      </div>
+    );
+  }
+}

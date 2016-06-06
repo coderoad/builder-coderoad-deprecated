@@ -30,9 +30,10 @@ export function tutorialPageAdd() {
   return { type: TUTORIAL_PAGE_ADD };
 }
 
-export function tutorialTaskAdd(taskPosition: number) {
+export function tutorialTaskAdd() {
   return (dispatch, getState) => {
     const {pagePosition} = getState();
+    const taskPosition = getState().tutorial.pages[pagePosition].tasks.length || 0;
     dispatch({ type: TUTORIAL_TASK_ADD, payload: { pagePosition, taskPosition } });
   };
 }
