@@ -6,9 +6,9 @@ export {
   tutorialTaskAdd, tutorialHintAdd, tutorialActionAdd
 } from './modules/tutorial';
 export {windowToggle} from './modules/window';
-export {editorOpenPage, editorOpenTest} from './modules/editor-paths';
+export {editorMarkdownOpen, editorTestOpen} from './modules/editor-paths';
 
 export {alertOpen, alertClose, alertReplay} from 'core-coderoad/lib/alert';
 export {editorDevToolsToggle, editorOpen, editorInsert,
-editorSave, editorSet} from 'core-coderoad/lib/editor';
+editorSave, editorSet, editorScroll} from 'core-coderoad/lib/editor';
 export {routeSet} from 'core-coderoad/lib/route';

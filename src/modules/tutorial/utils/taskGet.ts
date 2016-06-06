@@ -1,8 +1,5 @@
 import {join} from 'path';
-
-function twoDigitify(n: number): string {
-  return n > 9 ? '' + n : '0' + n;
-}
+import twoDigitify from '../../../services/twoDigitify';
 
 export default function taskGet(
   pagePosition: number, taskPosition: number

@@ -1,7 +1,9 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
 import {Card, CardText, CardHeader} from 'material-ui/Card';
 import {Markdown} from '../../index';
 import {cyan500, grey100} from 'material-ui/styles/colors';
+import {editorMarkdownOpen} from '../../../actions';
 
 const styles = {
   card: {
@@ -14,22 +16,30 @@ const styles = {
   },
 };
 
-const TasksComplete: React.StatelessComponent<{
-  page: CR.Page
-}> = ({page}) => {
-  // if (!page.onPageComplete) { return null; }
-  return (
-    <Card style={styles.card}>
-      <CardHeader
-        actAsExpander={true}
-        showExpandableButton={true}
-      />
-      <CardText expandable={true}>
-        <Markdown style={styles.text}>
-          {page.onPageComplete || 'add on page complete message'}
-        </Markdown>
-      </CardText>
-    </Card>
-  );
-};
-export default TasksComplete;
+@connect(null, dispatch => {
+  return {
+    markdownOpen: () => dispatch(editorMarkdownOpen(null, '@onPageComplete'))
+  };
+})
+export default class TasksComplete extends React.Component<{
+  page: CR.Page, markdownOpen?: any
+}, {}> {
+  render() {
+    const {page, markdownOpen} = this.props;
+    return (
+      <Card style={styles.card}>
+        <CardHeader
+          actAsExpander={true}
+          showExpandableButton={true}
+        />
+        <CardText expandable={true}>
+          <div onClick={markdownOpen}>
+            <Markdown style={styles.text}>
+              {page.onPageComplete || 'add on page complete message'}
+            </Markdown>
+          </div>
+        </CardText>
+      </Card>
+    );
+  }
+}

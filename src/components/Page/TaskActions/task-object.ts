@@ -8,10 +8,10 @@ export default function getTaskObject(a: string): Builder.ActionObject {
     obj.singleLine = true;
   }
 
-  const cursor = /::>/g;
-  if (!!obj.content.match(cursor)) {
-    obj.content = obj.content.replace(cursor, '→');
-  }
+  // const cursor = /::>/g;
+  // if (!!obj.content.match(cursor)) {
+  //   obj.content = obj.content.replace(cursor, '→');
+  // }
 
   return obj;
 }

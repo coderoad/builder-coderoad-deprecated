@@ -6,7 +6,7 @@ import {
 import {Markdown} from '../../index';
 import AddButton from '../AddButton';
 import getTaskObject from './task-object';
-import {tutorialActionAdd} from '../../../actions';
+import {tutorialActionAdd, editorMarkdownOpen} from '../../../actions';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -23,11 +23,14 @@ const styles = {
 
 @connect(null, dispatch => {
   return {
-    addAction: (actionString: string) => dispatch(tutorialActionAdd(this.props.taskPosition, actionString))
+    addAction: (actionString: string) => dispatch(tutorialActionAdd(this.props.taskPosition, actionString)),
+    markdownOpen: (content: string) => {
+      dispatch(editorMarkdownOpen(null, content));
+    }
   };
 })
 export default class TaskActions extends React.Component<{
-  actions: string[], taskPosition: number, addAction?: any
+  actions: string[], taskPosition: number, addAction?: any, markdownOpen?: any
 }, {
   stepIndex: number, as: {action: string, content: string}
 }> {
@@ -61,7 +64,7 @@ export default class TaskActions extends React.Component<{
     });
   }
   render() {
-    const {actions, addAction} = this.props;
+    const {actions, addAction, markdownOpen} = this.props;
     const {stepIndex} = this.state;
     // TODO: sort actions with higher accuracy
     const actionList: Builder.ActionObject[] = actions.map(a => getTaskObject(a));
@@ -80,7 +83,9 @@ export default class TaskActions extends React.Component<{
             </StepButton>
             <StepContent>
               {a.singleLine ? ''
-                : <Markdown>{'```js\n' + a.content + '\n```'}</Markdown>
+                : <div onClick={markdownOpen.bind(this, a.content)}>
+                  <Markdown>{'```js\n' + a.content + '\n```'}</Markdown>
+                </div>
               }
             </StepContent>
           </Step>

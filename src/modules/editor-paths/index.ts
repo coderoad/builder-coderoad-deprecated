@@ -1,29 +1,31 @@
 import {join} from 'path';
-import {editorOpen} from '../../actions';
+import {editorOpen, editorScroll} from '../../actions';
 import tutorialConfigOptions from '../../config-options';
+import twoDigitify from '../../services/twoDigitify';
 
-function twoDigitify(n: number): string {
-  return n > 9 ? '' + n : '0' + n;
-}
-
-export function editorOpenPage(index: number) {
-  return dispatch => {
+export function editorMarkdownOpen(index?: number, content?: string) {
+  console.log(index, content);
+  return (dispatch, getState) => {
     const filePath = join(
       'tutorial',
-      twoDigitify(index + 1),
+      twoDigitify(index + 1 || getState().pagePosition + 1),
       'index.md'
     );
     dispatch(editorOpen(filePath));
+    if (content) {
+      content = content.replace(/↵/mg, '\n');
+      dispatch(editorScroll(content));
+    }
   };
 }
 
-export function editorOpenTest(pageIndex: number, testIndex: number) {
+export function editorTestOpen(pageIndex: number, testIndex: number) {
   return (dispatch, getState) => {
     // get language suffix, ex: .js
     const suffix = tutorialConfigOptions[getState().packageJson.config].suffix;
     const filePath = join(
       'tutorial',
-      twoDigitify(pageIndex),
+      twoDigitify(pageIndex || getState().pagePosition),
       twoDigitify(testIndex) + '.' + suffix
     );
     dispatch(editorOpen(filePath));

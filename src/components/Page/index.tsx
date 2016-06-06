@@ -36,6 +36,7 @@ export default class Page extends React.Component<{
           tasks={page.tasks}
           page={page}
           config={packageJson.config}
+          pagePosition={pagePosition}
         />
       </section>
     );

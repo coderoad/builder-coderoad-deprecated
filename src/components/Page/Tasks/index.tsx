@@ -11,7 +11,9 @@ import Tests from '../Tests';
 import TaskActions from '../TaskActions';
 import Hints from '../Hints';
 import AddButton from '../AddButton';
-import {tutorialTaskAdd} from '../../../actions';
+import {tutorialTaskAdd, editorMarkdownOpen} from '../../../actions';
+import twoDigitify from '../../../services/twoDigitify';
+import {join} from 'path';
 
 const styles = {
   card: {
@@ -39,14 +41,17 @@ const styles = {
 
 @connect(null, dispatch => {
   return {
-    taskAdd: () => dispatch(tutorialTaskAdd())
+    taskAdd: () => dispatch(tutorialTaskAdd()),
+    markdownOpen: (content: string) => {
+      dispatch(editorMarkdownOpen(null, content));
+    }
   };
 })
 export default class Tasks extends React.Component<{
-  tasks: CR.Task[], page: CR.Page, config: Tutorial.Config, taskAdd?: any
+  tasks: CR.Task[], page: CR.Page, config: Tutorial.Config, taskAdd?: any, markdownOpen?: any, pagePosition: number
 }, {}> {
   render() {
-    const {tasks, page, config, taskAdd} = this.props;
+    const {tasks, page, config, taskAdd, markdownOpen, pagePosition} = this.props;
     return (
       <div>
         {tasks.map((task: CR.Task, index: number) => (
@@ -69,11 +74,13 @@ export default class Tasks extends React.Component<{
               <Tabs tabItemContainerStyle={styles.tabBar}>
 
                 <Tab label='Description'>
-                  <Task
-                    key={index.toString()}
-                    index={index}
-                    task={task}
-                  />
+                  <div onClick={markdownOpen.bind(this, task.description)}>
+                    <Task
+                      key={index.toString()}
+                      index={index}
+                      task={task}
+                    />
+                  </div>
                 </Tab>
 
                 <Tab label='Actions'>

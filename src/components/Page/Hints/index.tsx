@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {List, ListItem} from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import AddButton from '../AddButton';
-import {tutorialHintAdd} from '../../../actions';
+import {tutorialHintAdd, editorMarkdownOpen} from '../../../actions';
 import TextField from 'material-ui/TextField';
 
 const styles = {
@@ -14,11 +14,12 @@ const styles = {
 
 @connect(null, dispatch => {
   return {
-    addHint: () => dispatch(tutorialHintAdd(this.props.taskPosition, this.state.text))
+    addHint: () => dispatch(tutorialHintAdd(this.props.taskPosition, this.state.text)),
+    markdownOpen: (content: string) => dispatch(editorMarkdownOpen(null, content))
   };
 })
 export default class Hints extends React.Component<{
-  hints: string[], taskPosition: number, addHint?: any
+  hints: string[], taskPosition: number, addHint?: any, markdownOpen?: any
 }, {
   text: string;
 }> {
@@ -35,7 +36,7 @@ export default class Hints extends React.Component<{
     });
   }
   render() {
-    const {hints} = this.props;
+    const {hints, markdownOpen} = this.props;
     const {text} = this.state;
     return (
       <List>
@@ -44,7 +45,8 @@ export default class Hints extends React.Component<{
           : hints.map((hint, index) => (
             <ListItem secondaryText={
               <p>{index + 1}. {hint}</p>
-            } />
+            }
+            onClick={markdownOpen.bind(this, hint)}/>
           ))
         }
         <TextField

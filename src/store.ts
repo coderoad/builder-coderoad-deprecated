@@ -6,7 +6,7 @@ import throttleActions from 'redux-throttle-actions';
 
 const middlewares = [thunk];
 
-const devMode = false;
+const devMode = true;
 if (devMode) {
   const logger = createLogger();
   middlewares.push(logger);
