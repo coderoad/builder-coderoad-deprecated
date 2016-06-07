@@ -56,6 +56,7 @@ export default class Tasks extends React.Component<{
       <div>
         {tasks.map((task: CR.Task, index: number) => (
           <Card
+            key={index.toString()}
             style={styles.card}
             initiallyExpanded={index === 0}
             >

@@ -69,13 +69,14 @@ export default class TaskActions extends React.Component<{
     // TODO: sort actions with higher accuracy
     const actionList: Builder.ActionObject[] = actions.map(a => getTaskObject(a));
     return (
+      <section>
       <Stepper
         activeStep={stepIndex}
         linear={false}
         orientation='vertical'
-      >
+        >
         {actionList.map((a, index) => (
-          <Step>
+          <Step key={index.toString()}>
             <StepButton onClick={() => this.setState({
               stepIndex: index, as: this.state.as}
             )}>
@@ -90,23 +91,24 @@ export default class TaskActions extends React.Component<{
             </StepContent>
           </Step>
         ))}
-        <span style={styles.form}>
-          <SelectField
-            value={this.state.as.action}
-            onChange={this.handleSelect.bind(this)}
-            style={styles.select}
-          >
-            <MenuItem value={'open'} primaryText='open' />
-            <MenuItem value={'set'} primaryText='set' />
-            <MenuItem value={'set'} primaryText='insert' />
-          </SelectField>
-          <TextField
-            hintText='Content'
-            value={this.state.as.content}
-            onChange={this.handleText.bind(this)}
-          />
-        </span>
       </Stepper>
+      <span style={styles.form}>
+        <SelectField
+          value={this.state.as.action}
+          onChange={this.handleSelect.bind(this)}
+          style={styles.select}
+        >
+          <MenuItem key='open' value='open' primaryText='open' />
+          <MenuItem key='set' value='set' primaryText='set' />
+          <MenuItem key='insert' value='insert' primaryText='insert' />
+        </SelectField>
+        <TextField
+          hintText='Content'
+          value={this.state.as.content}
+          onChange={this.handleText.bind(this)}
+        />
+      </span>
+      </section>
     );
   }
 }

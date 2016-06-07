@@ -43,10 +43,12 @@ export default class Hints extends React.Component<{
         {!hints || !hints.length
           ? []
           : hints.map((hint, index) => (
-            <ListItem secondaryText={
-              <p>{index + 1}. {hint}</p>
-            }
-            onClick={markdownOpen.bind(this, hint)}/>
+            <ListItem
+              key={index.toString()}
+              secondaryText={
+                <p>{index + 1}. {hint}</p>
+              }
+              onClick={markdownOpen.bind(this, hint)}/>
           ))
         }
         <TextField

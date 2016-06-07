@@ -16,6 +16,7 @@ export default function menuRightRouteOptions(route: string) {
   // return all routes in list except route provided
   return routes.filter(r => route !== r.route).map(r => (
     <MenuLink
+      key={r.name}
       route={r.route}
       title={r.name}
     />

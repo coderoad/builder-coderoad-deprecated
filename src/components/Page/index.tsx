@@ -12,7 +12,6 @@ const styles = {
   overflowY: 'scroll',
 };
 
-
 @connect(null, dispatch => {
   return {
     markdownOpen: (content: string) => dispatch(editorMarkdownOpen(null, content))
@@ -25,13 +24,12 @@ export default class Page extends React.Component<{
   componentDidMount() {
     Top.toggle(true);
   }
-  componentDidUnmount() {
+  componentWillUnmount() {
     Top.toggle(false);
   }
   render() {
     const {tutorial, pagePosition, packageJson, markdownOpen} = this.props;
     const page = tutorial.pages[pagePosition];
-
     if (!page) { return null; }
 
     return (

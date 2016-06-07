@@ -19,7 +19,7 @@ export default function menuRight(route: string) {
     >
       {menuRightRouteOptions(route)}
       <Divider />
-      <Quit />
+      <Quit key='quit'/>
     </IconMenu>
   );
 }

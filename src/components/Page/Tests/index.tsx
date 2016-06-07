@@ -26,8 +26,9 @@ export default class Tests extends React.Component<{
     const suffix = tutorialConfigOptions[config.language].suffix;
     return (
       <div style={style}>
-        {tests.map(test => (
+        {tests.map((test, index) => (
           <FlatButton
+            key={index.toString()}
             style={styles.button}
             onClick={open.bind(this, test.concat('.' + suffix))}
             label={'Test'}
