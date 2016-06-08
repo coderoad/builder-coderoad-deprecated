@@ -6,7 +6,7 @@ import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 
 @connect(state => ({
-  windowToggle: state.windowToggle
+  windowToggle: state.windowToggle,
 }))
 export default class App extends React.Component<{
   windowToggle?: boolean

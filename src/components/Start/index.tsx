@@ -23,7 +23,7 @@ export default class Start extends React.Component<{
         <div style={headerStyles}>
         {checks.passed
           ? <Welcome  />
-          : <Checks />}
+          : <Checks checks={checks}/>}
         </div>
       </section>
     );

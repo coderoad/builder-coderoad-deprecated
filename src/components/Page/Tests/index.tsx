@@ -17,7 +17,8 @@ const styles = {
   },
 }))
 export default class Tests extends React.Component<{
-  tests: string[], config: Tutorial.Config, style?: Object, open?: (file: string) => any
+  tests: string[], config: Tutorial.Config, style?: Object,
+  open?: (file: string) => any
 }, {}> {
   render() {
     const {tests, config, style, open} = this.props;
