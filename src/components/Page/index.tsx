@@ -12,14 +12,17 @@ const styles = {
   overflowY: 'scroll',
 };
 
-@connect(null, dispatch => {
-  return {
-    markdownOpen: (content: string) => dispatch(editorMarkdownOpen(null, content))
-  };
-})
+@connect(state => ({
+    tutorial: state.tutorial,
+    pagePosition: state.pagePosition,
+    packageJson: state.packageJson,
+    page: state.tutorial.pages[state.pagePosition]
+}), dispatch => ({
+    markdownOpen: (content: string) => dispatch(editorMarkdownOpen(null, content)),
+}))
 export default class Page extends React.Component<{
-  tutorial: CR.Tutorial, pagePosition: number, packageJson: PackageJson,
-  markdownOpen?: (content: string) => any
+  tutorial?: CR.Tutorial, pagePosition?: number, packageJson?: PackageJson,
+  markdownOpen?: (content: string) => any, page?: CR.Page
 }, {}> {
   componentDidMount() {
     Top.toggle(true);
@@ -28,8 +31,7 @@ export default class Page extends React.Component<{
     Top.toggle(false);
   }
   render() {
-    const {tutorial, pagePosition, packageJson, markdownOpen} = this.props;
-    const page = tutorial.pages[pagePosition];
+    const {tutorial, pagePosition, packageJson, page, markdownOpen} = this.props;
     if (!page) { return null; }
 
     return (

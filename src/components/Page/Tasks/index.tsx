@@ -39,14 +39,12 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => {
-  return {
-    taskAdd: () => dispatch(tutorialTaskAdd()),
-    markdownOpen: (content: string) => {
-      dispatch(editorMarkdownOpen(null, content));
-    }
-  };
-})
+@connect(null, dispatch => ({
+  taskAdd: () => dispatch(tutorialTaskAdd()),
+  markdownOpen: (content: string) => {
+    dispatch(editorMarkdownOpen(null, content));
+  },
+}))
 export default class Tasks extends React.Component<{
   tasks: CR.Task[], page: CR.Page, config: Tutorial.Config, taskAdd?: any, markdownOpen?: any, pagePosition: number
 }, {}> {

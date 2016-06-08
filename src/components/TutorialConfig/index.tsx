@@ -22,17 +22,17 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => {
-  return {
-    save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
-    routeToPage: () => {
-      dispatch(tutorialInit());
-      dispatch(routeSet('page'));
-    }
-  };
-})
+@connect(state => ({
+  packageJson: state.packageJson,
+}), dispatch => ({
+  save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
+  routeToPage: () => {
+    dispatch(tutorialInit());
+    dispatch(routeSet('page'));
+  }
+}))
 export default class TutorialConfig extends React.Component <{
-  packageJson: any,
+  packageJson?: any,
   save?: (pj: Tutorial.PJ) => any,
   routeToPage?: () => any
 }, {

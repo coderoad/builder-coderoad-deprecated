@@ -21,14 +21,12 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => {
-  return {
-    addAction: (actionString: string) => dispatch(tutorialActionAdd(this.props.taskPosition, actionString)),
-    markdownOpen: (content: string) => {
+@connect(null, dispatch => ({
+  addAction: (actionString: string) => dispatch(tutorialActionAdd(this.props.taskPosition, actionString)),
+  markdownOpen: (content: string) => {
       dispatch(editorMarkdownOpen(null, content));
-    }
-  };
-})
+  },
+}))
 export default class TaskActions extends React.Component<{
   actions: string[], taskPosition: number, addAction?: any, markdownOpen?: any
 }, {

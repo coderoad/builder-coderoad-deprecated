@@ -1,20 +1,23 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
 import {Page, Start, TutorialConfig, TutorialInfo} from '../index';
 
+@connect(state => ({
+  route: state.route,
+}))
 export default class Routes extends React.Component<{
-  route: string, checks: Builder.Checks, pagePosition: CR.PagePosition,
-  tutorial: CR.Tutorial, packageJson: PackageJson
+  route?: string
 }, {}> {
   render() {
     switch (this.props.route) {
       case 'page':
-        return <Page {...this.props} />;
+        return <Page />;
       case 'start':
-        return <Start {...this.props} />;
+        return <Start />;
       case 'tutorialConfig':
-        return <TutorialConfig {...this.props} />;
+        return <TutorialConfig />;
       case 'tutorialInfo':
-        return <TutorialInfo {...this.props} />;
+        return <TutorialInfo />;
 
       // TODO
       // case 'tutorialPublish':

@@ -18,14 +18,14 @@ const buttonStyles = {
   margin: '30px 10px 20px 10px',
 };
 
-@connect(null, dispatch => {
-  return {
-    save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
-    routeToTutorial: () => dispatch(routeSet('page'))
-  };
-})
+@connect(state => ({
+  packageJson: state.packageJson,
+}), dispatch => ({
+  save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
+  routeToTutorial: () => dispatch(routeSet('page'))
+}))
 export default class TutorialInfo extends React.Component<{
-  packageJson: any, save?: any, routeToTutorial?: any
+  packageJson?: any, save?: any, routeToTutorial?: any
 }, {
   pj: Tutorial.PJ
 }> {

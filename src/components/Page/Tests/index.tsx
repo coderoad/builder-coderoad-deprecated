@@ -11,13 +11,11 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => {
-  return {
-    open: (file: string) => {
-      dispatch(editorOpen(join('tutorial', file)));
-    }
-  };
-})
+@connect(null, dispatch => ({
+  open: (file: string) => {
+    dispatch(editorOpen(join('tutorial', file)));
+  },
+}))
 export default class Tests extends React.Component<{
   tests: string[], config: Tutorial.Config, style?: Object, open?: (file: string) => any
 }, {}> {
