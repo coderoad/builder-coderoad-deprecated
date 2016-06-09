@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import {reducer as form} from 'redux-form';
 
 // module reducers
 import {reducer as pagePosition} from './modules/page-position';
@@ -15,5 +16,5 @@ import {reducer as route} from 'core-coderoad/lib/route';
 export default combineReducers({
   alert, checks, editor, dir,
   packageJson, pagePosition, route,
-  tutorial, windowToggle
+  tutorial, windowToggle, form
 });

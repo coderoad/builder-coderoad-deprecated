@@ -10,6 +10,7 @@ import {pjSave, tutorialInit, routeSet} from '../../actions';
 import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 import Top from '../TopPanel/Top';
+import {reduxForm} from 'redux-form';
 
 const styles = {
   card: {
@@ -31,7 +32,7 @@ const styles = {
     dispatch(routeSet('page'));
   }
 }))
-export default class TutorialConfig extends React.Component <{
+class TutorialConfig extends React.Component <{
   packageJson?: any,
   save?: (pj: Tutorial.PJ) => any,
   routeToPage?: () => any
@@ -131,3 +132,8 @@ export default class TutorialConfig extends React.Component <{
     );
   }
 }
+
+export default reduxForm({
+  form: 'config',
+  fields: ['name', 'language', 'runner'],
+})(TutorialConfig);

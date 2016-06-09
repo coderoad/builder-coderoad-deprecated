@@ -23,6 +23,7 @@
     "files": [
         "src/typings/builder.d.ts",
         "src/typings/lodash.d.ts",
+        "src/typings/redux-form.d.ts",
         "src/typings/typings.d.ts",
         "src/actions.ts",
         "src/components/index.ts",
