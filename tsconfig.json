@@ -63,6 +63,7 @@
         "src/modules/window/reducer.ts",
         "src/modules/window/types.ts",
         "src/reducers.ts",
+        "src/selectors.ts",
         "src/services/twoDigitify.ts",
         "src/store.ts",
         "src/subscriptions.ts",

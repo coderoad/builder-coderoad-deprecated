@@ -23,7 +23,12 @@ const PageDescription: React.StatelessComponent<{
         /> : null}
       <CardText expandable={true}>
         {contentArray.map((c: string, index) => (
-          <Markdown key={index.toString()} onClick={click.bind(this, c)}>{c}</Markdown>
+          <Markdown
+            key={index.toString()}
+            onClick={click.bind(this, c)}
+          >
+          {c}
+          </Markdown>
         ))}
       </CardText>
     </Card>

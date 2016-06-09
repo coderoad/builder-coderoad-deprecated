@@ -6,7 +6,6 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import Subheader from 'material-ui/Subheader';
 import Task from '../Task';
 import {lightGreen200} from 'material-ui/styles/colors';
-import TasksComplete from '../TasksComplete';
 import Tests from '../Tests';
 import TaskActions from '../TaskActions';
 import Hints from '../Hints';
@@ -14,6 +13,7 @@ import AddButton from '../AddButton';
 import {tutorialTaskAdd, editorMarkdownOpen} from '../../../actions';
 import twoDigitify from '../../../services/twoDigitify';
 import {join} from 'path';
+import {tasksSelector} from '../../../selectors';
 
 const styles = {
   card: {
@@ -39,17 +39,19 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => ({
+@connect(state => ({
+  tasks: tasksSelector(state),
+}), dispatch => ({
   taskAdd: () => dispatch(tutorialTaskAdd()),
   markdownOpen: (content: string) => {
     dispatch(editorMarkdownOpen(null, content));
   },
 }))
 export default class Tasks extends React.Component<{
-  tasks: CR.Task[], page: CR.Page, config: Tutorial.Config, taskAdd?: any, markdownOpen?: any, pagePosition: number
+  tasks?: CR.Task[], taskAdd?: any, markdownOpen?: any
 }, {}> {
   render() {
-    const {tasks, page, config, taskAdd, markdownOpen, pagePosition} = this.props;
+    const {tasks, taskAdd, markdownOpen} = this.props;
     return (
       <div>
         {tasks.map((task: CR.Task, index: number) => (
@@ -66,7 +68,6 @@ export default class Tasks extends React.Component<{
               <Tests
                 style={styles.test}
                 tests={task.tests}
-                config={config}
               />
             </CardHeader>
             <CardText expandable={true} style={styles.cardContent}>
@@ -102,10 +103,6 @@ export default class Tasks extends React.Component<{
         )}
 
         <AddButton callback={taskAdd}/>
-
-        <TasksComplete
-          page={page}
-        />
 
       </div>
     );

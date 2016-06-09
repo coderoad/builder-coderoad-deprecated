@@ -26,7 +26,6 @@ const styles = {
 
 @connect(state => ({
     tutorial: state.tutorial,
-    pagePosition: state.pagePosition,
 }), dispatch => ({
     pageSet: (index: number) => {
       dispatch(pageSet(index));
@@ -35,11 +34,10 @@ const styles = {
     pageAdd: () => dispatch(tutorialPageAdd()),
 }))
 export default class TopPanel extends React.Component<{
-  tutorial?: CR.Tutorial, pagePosition?: number,
-  pageSet?: (index: number) => any, pageAdd?: () => any
+  tutorial?: CR.Tutorial, pageSet?: (index: number) => any, pageAdd?: () => any
 }, {}> {
   render() {
-    const {tutorial, pagePosition, pageSet, pageAdd} = this.props;
+    const {tutorial, pageSet, pageAdd} = this.props;
 
     // no tutorial or pages? no need for a tab bar
     if (!tutorial || !tutorial.pages) { return null; }

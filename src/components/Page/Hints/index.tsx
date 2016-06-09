@@ -5,6 +5,7 @@ import FontIcon from 'material-ui/FontIcon';
 import AddButton from '../AddButton';
 import {tutorialHintAdd, editorMarkdownOpen} from '../../../actions';
 import TextField from 'material-ui/TextField';
+import {hintsSelector} from '../../../selectors';
 
 const styles = {
   text: {

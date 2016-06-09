@@ -4,8 +4,10 @@ import Divider from 'material-ui/Divider';
 import {Card} from 'material-ui/Card';
 import PageDescription from './PageDescription';
 import Tasks from './Tasks';
+import TasksComplete from './TasksComplete';
 import Top from '../TopPanel/Top';
 import {editorMarkdownOpen} from '../../actions';
+import {pageSelector} from '../../selectors';
 
 const styles = {
   width: '100%',
@@ -13,15 +15,11 @@ const styles = {
 };
 
 @connect(state => ({
-    tutorial: state.tutorial,
-    pagePosition: state.pagePosition,
-    packageJson: state.packageJson,
-    page: state.tutorial.pages[state.pagePosition]
+    page: pageSelector(state),
 }), dispatch => ({
     markdownOpen: (content: string) => dispatch(editorMarkdownOpen(null, content)),
 }))
 export default class Page extends React.Component<{
-  tutorial?: CR.Tutorial, pagePosition?: number, packageJson?: PackageJson,
   markdownOpen?: (content: string) => any, page?: CR.Page
 }, {}> {
   componentDidMount() {
@@ -31,7 +29,7 @@ export default class Page extends React.Component<{
     Top.toggle(false);
   }
   render() {
-    const {tutorial, pagePosition, packageJson, page, markdownOpen} = this.props;
+    const {page, markdownOpen} = this.props;
     if (!page) { return null; }
 
     return (
@@ -42,12 +40,8 @@ export default class Page extends React.Component<{
           open={true}
           click={markdownOpen.bind(this)}
         />
-        <Tasks
-          tasks={page.tasks}
-          page={page}
-          config={packageJson.config}
-          pagePosition={pagePosition}
-        />
+        <Tasks />
+        <TasksComplete page={page} />
       </section>
     );
   }

@@ -4,6 +4,7 @@ import {join} from 'path';
 import {editorOpen} from '../../../actions';
 import tutorialConfigOptions from '../../../config-options';
 import FlatButton from 'material-ui/FlatButton';
+import {configSelector} from '../../../selectors';
 
 const styles = {
   button: {
@@ -11,13 +12,15 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => ({
+@connect(state => ({
+  config: configSelector(state),
+}), dispatch => ({
   open: (file: string) => {
     dispatch(editorOpen(join('tutorial', file)));
   },
 }))
 export default class Tests extends React.Component<{
-  tests: string[], config: Tutorial.Config, style?: Object,
+  tests: string[], config?: Tutorial.Config, style?: Object,
   open?: (file: string) => any
 }, {}> {
   render() {
