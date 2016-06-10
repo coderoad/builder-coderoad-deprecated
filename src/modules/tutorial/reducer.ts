@@ -8,7 +8,6 @@ import {join} from 'path';
 import taskUpdate from './utils/taskUpdate';
 import pageGet from './utils/pageGet';
 import taskGet from './utils/taskGet';
-import * as merge from 'lodash.merge';
 
 const _tutorial: CR.Tutorial = {
   info: {
@@ -62,15 +61,10 @@ export default function tutorial(t = _tutorial, action: Action): CR.Tutorial {
       return Object.assign({}, t);
 
     case TUTORIAL_ACTION_ADD:
-      const {pagePosition, taskPosition, tutorialAction} = action.payload;
-      const tut = taskUpdate(t, pagePosition, taskPosition, 'actions', tutorialAction);
-      return tut;
+      return taskUpdate(t, action.payload.pagePosition, action.payload.taskPosition, 'actions', action.payload.tutorialAction);
 
     case TUTORIAL_HINT_ADD:
-      const {pagePosition, taskPosition, hint} = action.payload;
-      const tut = taskUpdate(t, pagePosition, taskPosition, 'hints', hint);
-      return tut;
-
+      return taskUpdate(t, action.payload.pagePosition, action.payload.taskPosition, 'hints', action.payload.hint);
 
     default:
       return t;
