@@ -1,6 +1,6 @@
 import {join} from 'path';
 import {editorOpen, editorScroll} from '../../actions';
-import tutorialConfigOptions from '../../config-options';
+import tutorialConfigOptions from 'core-coderoad/lib/options';
 import twoDigitify from '../../services/twoDigitify';
 
 export function editorMarkdownOpen(index?: number, content?: string) {
@@ -22,7 +22,7 @@ export function editorMarkdownOpen(index?: number, content?: string) {
 export function editorTestOpen(pageIndex: number, testIndex: number) {
   return (dispatch, getState) => {
     // get language suffix, ex: .js
-    const suffix = tutorialConfigOptions[getState().packageJson.config].suffix;
+    const suffix = tutorialConfigOptions[getState().packageJson.config].language.suffix;
     const filePath = join(
       'tutorial',
       twoDigitify(pageIndex || getState().pagePosition),
