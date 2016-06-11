@@ -53,6 +53,7 @@ export default class TutorialInfo extends React.Component<{
     this.props.save(this.state.pj);
   }
   render() {
+    const {pj} = this.state;
     return (
       <Card style={styles}>
         <CardHeader
@@ -60,26 +61,26 @@ export default class TutorialInfo extends React.Component<{
         />
         <TextField
           floatingLabelText='Title'
-          defaultValue={this.state.pj.name}
+          defaultValue={pj.name}
           onChange={this.handleText.bind(this, 'name')}
         />
         <br />
         <TextField
           floatingLabelText='Description'
-          defaultValue={this.state.pj.description}
+          defaultValue={pj.description}
           onChange={this.handleText.bind(this, 'description')}
         />
         <br />
         <TextField
           floatingLabelText='Version'
-          defaultValue={this.state.pj.version}
+          defaultValue={pj.version}
           disabled={true}
           onChange={this.handleText.bind(this, 'version')}
         />
         <br />
         <TextField
           floatingLabelText='Keywords'
-          defaultValue={this.state.pj.keywords.join(', ')}
+          defaultValue={pj.keywords.join(', ')}
           multiLine={true}
           onChange={this.handleText.bind(this, 'keywords')}
         />

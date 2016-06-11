@@ -48,7 +48,7 @@ export default class TopPanel extends React.Component<{
            return (
               <Tab
                 style={styles.tab}
-                key={index.toString()}
+                key={index}
                 label={page.title.substring(0, 10)}
                 onClick={pageSet.bind(this, index)}
               />

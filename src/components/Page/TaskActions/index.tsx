@@ -74,7 +74,7 @@ export default class TaskActions extends React.Component<{
         orientation='vertical'
         >
         {actionList.map((a, index) => (
-          <Step key={index.toString()}>
+          <Step key={index}>
             <StepButton onClick={() => this.setState({
               stepIndex: index, as: this.state.as}
             )}>

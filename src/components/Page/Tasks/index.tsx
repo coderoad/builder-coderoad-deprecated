@@ -56,7 +56,7 @@ export default class Tasks extends React.Component<{
       <div>
         {tasks.map((task: CR.Task, index: number) => (
           <Card
-            key={index.toString()}
+            key={index}
             style={styles.card}
             initiallyExpanded={index === 0}
             >
@@ -76,7 +76,7 @@ export default class Tasks extends React.Component<{
                 <Tab label='Description'>
                   <div onClick={markdownOpen.bind(this, task.description)}>
                     <Task
-                      key={index.toString()}
+                      key={index}
                       index={index}
                       task={task}
                     />

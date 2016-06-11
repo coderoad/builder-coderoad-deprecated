@@ -11,6 +11,7 @@ import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 import Top from '../TopPanel/Top';
 import {reduxForm} from 'redux-form';
+import {validateName} from 'coderoad-cli';
 
 const styles = {
   card: {
@@ -21,6 +22,30 @@ const styles = {
   button: {
     margin: '30px 10px 20px 10px',
   },
+};
+
+interface ConfigForm {
+  name?: string;
+  language?: string;
+  runner?: string;
+}
+
+const fields = ['name', 'language', 'runner'];
+
+const validate = values => {
+  const errors: ConfigForm = {};
+  if (!name) {
+    errors.name = 'Required';
+  } else if (!validateName(name)) {
+    errors.name = 'Invalid "coderoad-*" name';
+  }
+  if (!values.language) {
+    errors.language = 'Required';
+  }
+  if (!values.runner) {
+    errors.runner = 'Required';
+  }
+  return errors;
 };
 
 @connect(state => ({
@@ -37,85 +62,72 @@ class TutorialConfig extends React.Component <{
   save?: (pj: Tutorial.PJ) => any,
   routeToPage?: () => any
 }, {
-  pj: Tutorial.PJ
+  name: string, language: string, runner: string
 }> {
   constructor(props) {
     super(props);
+    const {name, config} = this.props.packageJson;
     this.state = {
-        pj: this.props.packageJson
+      name,
+      language: config.language,
+      runner: config.runner,
     };
   }
   componentDidMount() {
     Top.toggle(false);
   }
-  handleText(prop, event) {
-    this.handleChange(prop, event.target.value);
-  }
-  handleSelect(prop, event, index, value) {
-    this.handleChange(prop, value);
-  }
-  handleChange(prop: string, val: any) {
-    const obj = {};
-    obj[prop] = val;
-    let target = null;
-    switch (prop) {
-      // base
-      case 'name':
-        this.setState({pj: Object.assign({}, this.state.pj, obj)});
-        break;
-      // config
-      case 'language':
-      case 'runner':
-        const config = Object.assign({}, this.state.pj.config, obj);
-        const pj = Object.assign({}, this.state.pj, { config });
-        this.setState({pj});
-        return;
-      case 'repo':
-        const repo = {
-          repository: {
-            type: 'git',
-            url: prop
-          },
-          bugs: {
-            url: resolve(prop, 'issues')
-          }
-        };
-        this.setState({pj: Object.assign({}, this.state.pj, repo)});
-        return;
-    }
+  handleChange(field, e) {
+    console.log(e);
+    const nextState: ConfigForm = {};
+    nextState[field] = e.target.value;
+    this.setState(Object.assign({}, this.state, nextState));
   }
   save() {
-    this.props.save(this.state.pj);
+    // this.props.save(this.state);
+    console.log(this.state);
+  }
+  handleText(prop, e, v) {
+    console.log(e);
+    const next = {};
+    next[prop] = v;
+    this.setState(Object.assign({}, this.state, next));
   }
   render() {
-    const {pj} = this.state;
+    const {name, language, runner} = this.state;
     return (
       <Card style={styles.card}>
         <CardHeader
           title='Tutorial Configuration'
         />
-        <TextField
-          floatingLabelText='Tutorial Package Name'
-          defaultValue={pj.name}
+
+        <input
+          type='text'
+          value={name}
           onChange={this.handleText.bind(this, 'name')}
         />
+
         <br />
+
         <SelectField
           floatingLabelText='Language'
-          value={pj.config.language}
-          onChange={this.handleSelect.bind(this, 'language')}
+          value={language}
+          {...language}
+          onChange={this.handleChange.bind(this, 'language')}
         >
           {languageItems()}
         </SelectField>
         <br />
         <SelectField
           floatingLabelText='Test Runner'
-          value={pj.config.runner}
-          onChange={this.handleSelect.bind(this, 'runner')}
+          value={runner}
+          {...runner}
+          onChange={this.handleChange.bind(this, 'runner')}
         >
-          {runnerItems(pj.config.language)}
+          {runnerItems(language)}
         </SelectField>
+
         <br />
+
         <RaisedButton
           style={styles.button}
           label='Save'
@@ -135,5 +147,5 @@ class TutorialConfig extends React.Component <{
 
 export default reduxForm({
   form: 'config',
-  fields: ['name', 'language', 'runner'],
+  fields,
 })(TutorialConfig);

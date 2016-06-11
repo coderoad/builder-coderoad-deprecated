@@ -42,7 +42,7 @@ export default class Hints extends React.Component<{
           ? []
           : hints.map((hint, index) => (
             <ListItem
-              key={index.toString()}
+              key={index}
               secondaryText={
                 <p>{index + 1}. {hint}</p>
               }

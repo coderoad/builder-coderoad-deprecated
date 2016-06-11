@@ -1,5 +1,5 @@
 declare namespace Builder {
-  
+
   interface Checks {
     passed?: boolean;
     system: {

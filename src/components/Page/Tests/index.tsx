@@ -30,7 +30,7 @@ export default class Tests extends React.Component<{
       <div style={style}>
         {tests.map((test, index) => (
           <FlatButton
-            key={index.toString()}
+            key={index}
             style={styles.button}
             onClick={open.bind(this, test.concat('.' + suffix))}
             label={'Test'}

@@ -20,9 +20,7 @@ const _pj: Tutorial.PJ = {
   }
 };
 
-const defaultPJ = {};
-
-export default function tutorialConfig(
+export default function packageJson(
   p = _pj, action: Action
 ): Tutorial.PJ {
   switch (action.type) {

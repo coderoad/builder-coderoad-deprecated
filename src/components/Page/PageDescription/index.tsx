@@ -24,7 +24,7 @@ const PageDescription: React.StatelessComponent<{
       <CardText expandable={true}>
         {contentArray.map((c: string, index) => (
           <Markdown
-            key={index.toString()}
+            key={index}
             onClick={click.bind(this, c)}
           >
           {c}
