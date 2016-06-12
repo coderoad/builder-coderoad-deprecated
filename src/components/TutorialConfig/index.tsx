@@ -58,7 +58,7 @@ const validate = values => {
   }
 }))
 class TutorialConfig extends React.Component <{
-  packageJson?: any,
+  packageJson?: PackageJson,
   save?: (pj: Tutorial.PJ) => any,
   routeToPage?: () => any
 }, {

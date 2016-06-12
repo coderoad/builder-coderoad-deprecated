@@ -9,13 +9,14 @@ import {pjSave, routeSet} from '../../actions';
 import Top from '../TopPanel/Top';
 
 const styles = {
-  margin: '10px',
-  padding: '30px 20px',
-  textAlign: 'center',
-};
-
-const buttonStyles = {
-  margin: '30px 10px 20px 10px',
+  card: {
+    margin: '10px',
+    padding: '30px 20px',
+    textAlign: 'center',
+  },
+  button: {
+    margin: '30px 10px 20px 10px',
+  },
 };
 
 @connect(state => ({
@@ -27,72 +28,77 @@ const buttonStyles = {
 export default class TutorialInfo extends React.Component<{
   packageJson?: any, save?: any, routeToTutorial?: any
 }, {
-  pj: Tutorial.PJ
+  description: string, version: string, keywords: string[]
 }> {
   constructor(props) {
     super(props);
+    const {description, version, keywords} = this.props.packageJson;
     this.state = {
-      pj: this.props.packageJson
+      description: description || '',
+      version: version || '0.1.0',
+      keywords: keywords || [],
     };
   }
   componentDidMount() {
     Top.toggle(false);
   }
-  handleText(prop, event) {
-    this.handleChange(prop, event.target.value);
+  handleText(prop, event, value) {
+    const next = {};
+    next[prop] = value;
+    this.setState(Object.assign({}, this.state, next));
   }
-  handleSelect(prop, event, index, value) {
-    this.handleChange(prop, value);
-  }
-  handleChange(prop, val) {
-    const obj = {};
-    obj[prop] = val;
-    this.setState({pj: Object.assign({}, this.state, obj)});
-  }
-  save() {
-    this.props.save(this.state.pj);
+  submit() {
+    const {description, version, keywords} = this.state;
+
+    // verify
+    // TODO: Verify
+
+    // save
+    this.props.save(Object.assign(
+      {},
+      this.props.packageJson,
+      { description, version, keywords}
+    ));
   }
   render() {
-    const {pj} = this.state;
+    const {description, version, keywords} = this.state;
     return (
-      <Card style={styles}>
+      <Card style={styles.card}>
         <CardHeader
           title='Tutorial Info'
         />
         <TextField
-          floatingLabelText='Title'
-          defaultValue={pj.name}
-          onChange={this.handleText.bind(this, 'name')}
-        />
-        <br />
-        <TextField
+          className='native-key-bindings'
           floatingLabelText='Description'
-          defaultValue={pj.description}
+          defaultValue={description}
           onChange={this.handleText.bind(this, 'description')}
         />
         <br />
         <TextField
+          className='native-key-bindings'
           floatingLabelText='Version'
-          defaultValue={pj.version}
+          defaultValue={version}
           disabled={true}
           onChange={this.handleText.bind(this, 'version')}
         />
         <br />
-        <TextField
+        {/*}<TextField
+          className='native-key-bindings'
           floatingLabelText='Keywords'
-          defaultValue={pj.keywords.join(', ')}
+          defaultValue={keywords.join(', ')}
           multiLine={true}
           onChange={this.handleText.bind(this, 'keywords')}
-        />
+        />*/}
         <br />
         <RaisedButton
-          style={buttonStyles}
+          type='submit'
+          style={styles.button}
           label='Save'
           primary={true}
-          onTouchTap={this.save.bind(this)}
+          onTouchTap={this.submit.bind(this)}
         />
         <RaisedButton
-          style={buttonStyles}
+          style={styles.button}
           label='Continue'
           secondary={true}
           onTouchTap={this.props.routeToTutorial.bind(this)}
