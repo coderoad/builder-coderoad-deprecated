@@ -9,7 +9,7 @@ import taskUpdate from './utils/taskUpdate';
 import pageGet from './utils/pageGet';
 import taskGet from './utils/taskGet';
 
-const _tutorial: CR.Tutorial = {
+const _tutorial: Tutorial.Output = {
   info: {
     title: '',
     description: '',
@@ -17,7 +17,7 @@ const _tutorial: CR.Tutorial = {
   pages: [].concat(pageGet(0))
 };
 
-export default function tutorial(t = _tutorial, action: Action): CR.Tutorial {
+export default function tutorial(t = _tutorial, action: Action): Tutorial.Output {
   switch (action.type) {
 
     case TUTORIAL_INIT:

@@ -4,6 +4,7 @@ import {Card, CardText, CardHeader} from 'material-ui/Card';
 import {Markdown} from '../../index';
 import {cyan500, grey100} from 'material-ui/styles/colors';
 import {editorMarkdownOpen} from '../../../actions';
+import {pageSelector} from 'core-coderoad/lib/selectors';
 
 const styles = {
   card: {
@@ -16,11 +17,13 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => ({
+@connect(state => ({
+  page: pageSelector(state),
+}), dispatch => ({
   markdownOpen: () => dispatch(editorMarkdownOpen(null, '@onPageComplete')),
 }))
 export default class TasksComplete extends React.Component<{
-  page: CR.Page, markdownOpen?: any
+  page?: CR.Page, markdownOpen?: any
 }, {}> {
   render() {
     const {page, markdownOpen} = this.props;

@@ -4,7 +4,6 @@ import tutorialConfigOptions from 'core-coderoad/lib/options';
 import twoDigitify from '../../services/twoDigitify';
 
 export function editorMarkdownOpen(index?: number, content?: string) {
-  console.log(index, content);
   return (dispatch, getState) => {
     const filePath = join(
       'tutorial',

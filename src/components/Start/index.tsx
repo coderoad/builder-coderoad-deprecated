@@ -11,19 +11,17 @@ const headerStyles = {
 };
 
 @connect(state => ({
-  checks: state.checks,
+  passed: state.checks.passed,
 }))
 export default class Start extends React.Component<{
-  checks?: Builder.Checks
+  passed?: boolean
 }, {}> {
   render() {
-    const {checks} = this.props;
+    const {passed} = this.props;
     return (
       <section className='cr-start'>
         <div style={headerStyles}>
-        {checks.passed
-          ? <Welcome  />
-          : <Checks checks={checks}/>}
+        {passed ? <Welcome  /> : <Checks />}
         </div>
       </section>
     );

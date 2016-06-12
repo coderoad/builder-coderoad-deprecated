@@ -4,7 +4,7 @@ import {join} from 'path';
 import {editorOpen} from '../../../actions';
 import tutorialConfigOptions from 'core-coderoad/lib/options';
 import FlatButton from 'material-ui/FlatButton';
-import {configSelector} from '../../../selectors';
+import {configSelector} from 'core-coderoad/lib/selectors';
 
 const styles = {
   button: {

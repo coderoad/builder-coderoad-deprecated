@@ -11,4 +11,3 @@ export {default as DynamicStepper} from './common/DynamicStepper';
 export {default as Markdown} from './common/Markdown';
 export {default as ContentCard} from './common/ContentCard';
 export {default as RouteButton} from './common/RouteButton';
-export {default as Save} from './common/Save';
