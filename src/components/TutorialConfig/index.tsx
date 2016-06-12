@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {resolve} from 'path';
-import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
@@ -12,6 +11,7 @@ import runnerItems from './runnerItems';
 import Top from '../TopPanel/Top';
 import {reduxForm} from 'redux-form';
 import {validateName} from 'coderoad-cli';
+import TextField from 'material-ui/TextField';
 
 const styles = {
   card: {
@@ -76,21 +76,28 @@ class TutorialConfig extends React.Component <{
   componentDidMount() {
     Top.toggle(false);
   }
-  handleChange(field, e) {
-    console.log(e);
-    const nextState: ConfigForm = {};
-    nextState[field] = e.target.value;
-    this.setState(Object.assign({}, this.state, nextState));
-  }
-  save() {
-    // this.props.save(this.state);
-    console.log(this.state);
-  }
-  handleText(prop, e, v) {
-    console.log(e);
+  handleText(prop, event, value) {
     const next = {};
-    next[prop] = v;
+    next[prop] = value;
     this.setState(Object.assign({}, this.state, next));
+  }
+  handleSelect(prop, event, index, value) {
+    const next = {};
+    next[prop] = value;
+    this.setState(Object.assign({}, this.state, next));
+  }
+  submit() {
+    const {name, language, runner} = this.state;
+    this.props.save(Object.assign(
+      {},
+      this.props.packageJson,
+      {
+        name,
+        config: {
+          language, runner
+        }
+      })
+    );
   }
   render() {
     const {name, language, runner} = this.state;
@@ -100,8 +107,8 @@ class TutorialConfig extends React.Component <{
           title='Tutorial Configuration'
         />
 
-        <input
-          type='text'
+        <TextField
+          className='native-key-bindings'
           value={name}
           onChange={this.handleText.bind(this, 'name')}
         />
@@ -112,7 +119,7 @@ class TutorialConfig extends React.Component <{
           floatingLabelText='Language'
           value={language}
           {...language}
-          onChange={this.handleChange.bind(this, 'language')}
+          onChange={this.handleSelect.bind(this, 'language')}
         >
           {languageItems()}
         </SelectField>
@@ -121,7 +128,7 @@ class TutorialConfig extends React.Component <{
           floatingLabelText='Test Runner'
           value={runner}
           {...runner}
-          onChange={this.handleChange.bind(this, 'runner')}
+          onChange={this.handleSelect.bind(this, 'runner')}
         >
           {runnerItems(language)}
         </SelectField>
@@ -129,10 +136,11 @@ class TutorialConfig extends React.Component <{
         <br />
 
         <RaisedButton
+          type='submit'
           style={styles.button}
           label='Save'
           primary={true}
-          onTouchTap={this.save.bind(this)}
+          onTouchTap={this.submit.bind(this)}
         />
         <RaisedButton
           style={styles.button}
