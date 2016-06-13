@@ -34,7 +34,7 @@ interface ConfigForm {
 
 @connect(state => ({
   packageJson: state.packageJson,
-  values: formSelector(state, 'name', 'language', 'runner'),
+  language: formSelector(state, 'language'),
 }), dispatch => ({
   save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
   routeToPage: () => {
@@ -46,46 +46,39 @@ class TutorialConfig extends React.Component <{
   packageJson?: PackageJson,
   save?: (pj: Tutorial.PJ) => any,
   routeToPage?: () => any,
-  pristine?: boolean, submitting?: boolean,
-  values?: {name: string, language: string, runner: string}
+  pristine?: boolean, submitting?: boolean, handleSubmit?: any,
+  language?: string
 }, {}> {
   componentDidMount() {
     Top.toggle(false);
   }
-  handleSubmit(e) {
-    console.log(e);
-    console.log(this.props.values);
-    // const {name, language, runner} = this.state;
-    // this.props.save(Object.assign(
-    //   {},
-    //   this.props.packageJson,
-    //   {
-    //     name,
-    //     config: {
-    //       language, runner
-    //     }
-    //   })
-    // );
+  onSubmit(values: ConfigForm) {
+    const {name, language, runner} = values;
+    this.props.save(Object.assign(
+      {},
+      this.props.packageJson,
+      {
+        name,
+        config: {
+          language, runner
+        }
+      })
+    );
   }
   render() {
-    console.log(this.props.values);
-    const {name} = this.props.packageJson;
-    const {language, runner} = this.props.packageJson.config;
-    const {pristine, submitting} = this.props;
+    const {pristine, submitting, handleSubmit} = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
           title='Tutorial Configuration'
         />
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
            name='name'
            component={name => (
              <TextField
-               name='name'
                className='native-key-bindings'
                hintText='coderoad-tutorial-name'
-               floatingLabelText='Tutorial Name'
                errorText={
                  name.touched && name.error
                }
@@ -116,7 +109,7 @@ class TutorialConfig extends React.Component <{
                   {...props}
                   onChange = {(event, index, value) => props.onChange(value)}
                 >
-                  {runnerItems(this.props.values.language)}
+                  {runnerItems(this.props.language || 'JS')}
                 </SelectField>
               </div>
           }/>
@@ -127,7 +120,6 @@ class TutorialConfig extends React.Component <{
           label='Save'
           primary={true}
           disabled={pristine || submitting}
-          onTouchTap={this.submit.bind(this)}
         />
         <RaisedButton
           style={styles.button}
