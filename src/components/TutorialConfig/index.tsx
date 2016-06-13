@@ -47,7 +47,7 @@ class TutorialConfig extends React.Component <{
   save?: (pj: Tutorial.PJ) => any,
   routeToPage?: () => any,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
-  language?: string
+  language?: string, invalid?: boolean
 }, {}> {
   componentDidMount() {
     Top.toggle(false);
@@ -66,7 +66,7 @@ class TutorialConfig extends React.Component <{
     );
   }
   render() {
-    const {pristine, submitting, handleSubmit} = this.props;
+    const {pristine, submitting, handleSubmit, invalid} = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
@@ -119,12 +119,13 @@ class TutorialConfig extends React.Component <{
           style={styles.button}
           label='Save'
           primary={true}
-          disabled={pristine || submitting}
+          disabled={pristine || submitting || invalid}
         />
         <RaisedButton
           style={styles.button}
           label='Continue'
           secondary={true}
+          disabled={invalid}
           onTouchTap={this.props.routeToPage.bind(this)}
         />
         </form>

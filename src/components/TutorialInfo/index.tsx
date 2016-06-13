@@ -28,33 +28,29 @@ const styles = {
 }))
 class TutorialInfo extends React.Component<{
   packageJson?: any, save?: any, routeToTutorial?: any,
-  pristine?: boolean, submitting?: boolean
+  pristine?: boolean, submitting?: boolean, handleSubmit?: any,
+  invalid?: boolean
 }, {}> {
   componentDidMount() {
     Top.toggle(false);
   }
-  handleSubmit(e) {
-    console.log(e);
-
-    // verify
-    // TODO: Verify
-
+  onSubmit(values) {
+    const {description, version, keywords} = values;
     // save
-    // this.props.save(Object.assign(
-    //   {},
-    //   this.props.packageJson,
-    //   { description, version, keywords}
-    // ));
+    this.props.save(Object.assign(
+      {},
+      this.props.packageJson,
+      { description, version, keywords}
+    ));
   }
   render() {
-    const {description, version, keywords} = this.props.packageJson;
-    const { pristine, submitting } = this.props;
+    const {pristine, submitting, handleSubmit, invalid} = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
           title='Tutorial Info'
         />
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
            <Field
             name='description'
             component={description => (
@@ -88,20 +84,29 @@ class TutorialInfo extends React.Component<{
            }
            />
           <br />
-          {/*}<TextField
-            className='native-key-bindings'
-            floatingLabelText='Keywords'
-            defaultValue={keywords.join(', ')}
-            multiLine={true}
-            onChange={this.handleText.bind(this, 'keywords')}
-          />*/}
+          {/* <Field
+           name='keywords'
+           component={keywords => (
+             <TextField
+               name='keywords'
+               className='native-key-bindings'
+               hintText='coderoad, react, js, etc'
+               disabled={true}
+               floatingLabelText='Keywords'
+               errorText={
+                 keywords.touched && keywords.error
+               }
+               {...keywords}
+             />)
+           }
+           /> */}
           <br />
           <RaisedButton
             type='submit'
             style={styles.button}
             label='Save'
             primary={true}
-            disabled={pristine || submitting}
+            disabled={pristine || submitting || invalid}
           />
         </form>
       </Card>
