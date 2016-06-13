@@ -77,6 +77,8 @@
         "src/components/common/DynamicStepper.tsx",
         "src/components/common/Markdown.tsx",
         "src/components/common/RouteButton.tsx",
+        "src/components/Form/selectField.tsx",
+        "src/components/Form/textField.tsx",
         "src/components/Page/AddButton/index.tsx",
         "src/components/Page/EditPage/index.tsx",
         "src/components/Page/Hints/index.tsx",

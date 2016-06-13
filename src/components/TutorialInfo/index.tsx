@@ -1,14 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, routeSet} from '../../actions';
 import Top from '../TopPanel/Top';
 import * as debounce from 'lodash.debounce';
+import textField from '../Form/textField';
 
 const styles = {
   card: {
@@ -41,7 +40,10 @@ class TutorialInfo extends React.Component<{
     this.props.save(Object.assign(
       {},
       this.props.packageJson,
-      { description, version, keywords}
+      {
+        description, version,
+        keywords: keywords.split(',')
+      }
     ));
   }
   render() {
@@ -55,56 +57,31 @@ class TutorialInfo extends React.Component<{
           <div>
            <Field
             name='description'
-            component={description => (
-              <TextField
-                name='description'
-                className='native-key-bindings'
-                hintText='Tutorial Description'
-                floatingLabelText='Description'
-                errorText={
-                  description.touched && description.error
-                }
-                {...description}
-              />)
-            }
+            component={textField.bind(null, {
+              hintText: 'Tutorial description',
+              floatingLabelText: 'Description',
+            })}
             />
           </div>
           <br />
           <div>
           <Field
            name='version'
-           component={version => (
-             <TextField
-               name='version'
-               className='native-key-bindings'
-               hintText='0.1.0'
-               disabled={true}
-               floatingLabelText='Version'
-               errorText={
-                 version.touched && version.error
-               }
-               {...version}
-             />)
-           }
+            component={textField.bind(null, {
+              hintText: '0.1.0',
+              floatingLabelText: 'Version',
+              disabled: true,
+            })}
            />
            </div>
           <br />
-          {/* <Field
+          <Field
            name='keywords'
-           component={keywords => (
-             <TextField
-               name='keywords'
-               className='native-key-bindings'
-               hintText='coderoad, react, js, etc'
-               disabled={true}
-               floatingLabelText='Keywords'
-               errorText={
-                 keywords.touched && keywords.error
-               }
-               {...keywords}
-             />)
-           }
-           /> */}
+           component={textField.bind(null, {
+             hintText: 'coderoad, react, js, etc',
+             floatingLabelText: 'Keywords',
+           })}
+           />
           <br />
           <RaisedButton
             type='submit'
