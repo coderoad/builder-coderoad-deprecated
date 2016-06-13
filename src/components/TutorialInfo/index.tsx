@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+import {Field, reduxForm} from 'redux-form';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -25,85 +26,107 @@ const styles = {
   save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
   routeToTutorial: () => dispatch(routeSet('page'))
 }))
-export default class TutorialInfo extends React.Component<{
-  packageJson?: any, save?: any, routeToTutorial?: any
-}, {
-  description: string, version: string, keywords: string[]
-}> {
-  constructor(props) {
-    super(props);
-    const {description, version, keywords} = this.props.packageJson;
-    this.state = {
-      description: description || '',
-      version: version || '0.1.0',
-      keywords: keywords || [],
-    };
-  }
+class TutorialInfo extends React.Component<{
+  packageJson?: any, save?: any, routeToTutorial?: any,
+  pristine?: boolean, submitting?: boolean
+}, {}> {
   componentDidMount() {
     Top.toggle(false);
   }
-  handleText(prop, event, value) {
-    const next = {};
-    next[prop] = value;
-    this.setState(Object.assign({}, this.state, next));
-  }
-  submit() {
-    const {description, version, keywords} = this.state;
+  handleSubmit(e) {
+    console.log(e);
 
     // verify
     // TODO: Verify
 
     // save
-    this.props.save(Object.assign(
-      {},
-      this.props.packageJson,
-      { description, version, keywords}
-    ));
+    // this.props.save(Object.assign(
+    //   {},
+    //   this.props.packageJson,
+    //   { description, version, keywords}
+    // ));
   }
   render() {
-    const {description, version, keywords} = this.state;
+    const {description, version, keywords} = this.props.packageJson;
+    const { pristine, submitting } = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
           title='Tutorial Info'
         />
-        <TextField
-          className='native-key-bindings'
-          floatingLabelText='Description'
-          defaultValue={description}
-          onChange={this.handleText.bind(this, 'description')}
-        />
-        <br />
-        <TextField
-          className='native-key-bindings'
-          floatingLabelText='Version'
-          defaultValue={version}
-          disabled={true}
-          onChange={this.handleText.bind(this, 'version')}
-        />
-        <br />
-        {/*}<TextField
-          className='native-key-bindings'
-          floatingLabelText='Keywords'
-          defaultValue={keywords.join(', ')}
-          multiLine={true}
-          onChange={this.handleText.bind(this, 'keywords')}
-        />*/}
-        <br />
-        <RaisedButton
-          type='submit'
-          style={styles.button}
-          label='Save'
-          primary={true}
-          onTouchTap={this.submit.bind(this)}
-        />
-        <RaisedButton
-          style={styles.button}
-          label='Continue'
-          secondary={true}
-          onTouchTap={this.props.routeToTutorial.bind(this)}
-        />
+        <form onSubmit={this.handleSubmit}>
+           <Field
+            name='description'
+            component={description => (
+              <TextField
+                name='description'
+                className='native-key-bindings'
+                hintText='Tutorial Description'
+                floatingLabelText='Description'
+                errorText={
+                  description.touched && description.error
+                }
+                {...description}
+              />)
+            }
+            />
+          <br />
+          <Field
+           name='version'
+           component={version => (
+             <TextField
+               name='version'
+               className='native-key-bindings'
+               hintText='0.1.0'
+               disabled={true}
+               floatingLabelText='Version'
+               errorText={
+                 version.touched && version.error
+               }
+               {...version}
+             />)
+           }
+           />
+          <br />
+          {/*}<TextField
+            className='native-key-bindings'
+            floatingLabelText='Keywords'
+            defaultValue={keywords.join(', ')}
+            multiLine={true}
+            onChange={this.handleText.bind(this, 'keywords')}
+          />*/}
+          <br />
+          <RaisedButton
+            type='submit'
+            style={styles.button}
+            label='Save'
+            primary={true}
+            disabled={pristine || submitting}
+          />
+        </form>
       </Card>
     );
   }
 }
+
+const validate = values => {
+  const errors: { description?: string, version?: string} = {};
+  const requiredFields = ['description', 'version'];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = 'Required';
+    }
+  });
+  if (values.description && values.description.length < 3) {
+    errors.description = 'Incomplete tutorial description';
+  }
+  if (values.version && !values.version.match(/^(\d+\.)?(\d+\.)?(\*|\d+)$/)) {
+    errors.version = 'Invalid version number';
+  }
+  return errors;
+};
+
+export default reduxForm({
+  form: 'tutorialInfo',
+  validate,
+})(TutorialInfo);

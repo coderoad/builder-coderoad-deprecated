@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+import {Field, reduxForm, formValueSelector} from 'redux-form';
 import {resolve} from 'path';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -9,9 +10,10 @@ import {pjSave, tutorialInit, routeSet} from '../../actions';
 import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 import Top from '../TopPanel/Top';
-import {reduxForm} from 'redux-form';
 import {validateName} from 'coderoad-cli';
 import TextField from 'material-ui/TextField';
+
+const formSelector = formValueSelector('tutorialConfig');
 
 const styles = {
   card: {
@@ -30,26 +32,9 @@ interface ConfigForm {
   runner?: string;
 }
 
-const fields = ['name', 'language', 'runner'];
-
-const validate = values => {
-  const errors: ConfigForm = {};
-  if (!name) {
-    errors.name = 'Required';
-  } else if (!validateName(name)) {
-    errors.name = 'Invalid "coderoad-*" name';
-  }
-  if (!values.language) {
-    errors.language = 'Required';
-  }
-  if (!values.runner) {
-    errors.runner = 'Required';
-  }
-  return errors;
-};
-
 @connect(state => ({
   packageJson: state.packageJson,
+  values: formSelector(state, 'name', 'language', 'runner'),
 }), dispatch => ({
   save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
   routeToPage: () => {
@@ -60,86 +45,88 @@ const validate = values => {
 class TutorialConfig extends React.Component <{
   packageJson?: PackageJson,
   save?: (pj: Tutorial.PJ) => any,
-  routeToPage?: () => any
-}, {
-  name: string, language: string, runner: string
-}> {
-  constructor(props) {
-    super(props);
-    const {name, config} = this.props.packageJson;
-    this.state = {
-      name,
-      language: config.language,
-      runner: config.runner,
-    };
-  }
+  routeToPage?: () => any,
+  pristine?: boolean, submitting?: boolean,
+  values?: {name: string, language: string, runner: string}
+}, {}> {
   componentDidMount() {
     Top.toggle(false);
   }
-  handleText(prop, event, value) {
-    const next = {};
-    next[prop] = value;
-    this.setState(Object.assign({}, this.state, next));
-  }
-  handleSelect(prop, event, index, value) {
-    const next = {};
-    next[prop] = value;
-    this.setState(Object.assign({}, this.state, next));
-  }
-  submit() {
-    const {name, language, runner} = this.state;
-    this.props.save(Object.assign(
-      {},
-      this.props.packageJson,
-      {
-        name,
-        config: {
-          language, runner
-        }
-      })
-    );
+  handleSubmit(e) {
+    console.log(e);
+    console.log(this.props.values);
+    // const {name, language, runner} = this.state;
+    // this.props.save(Object.assign(
+    //   {},
+    //   this.props.packageJson,
+    //   {
+    //     name,
+    //     config: {
+    //       language, runner
+    //     }
+    //   })
+    // );
   }
   render() {
-    const {name, language, runner} = this.state;
+    console.log(this.props.values);
+    const {name} = this.props.packageJson;
+    const {language, runner} = this.props.packageJson.config;
+    const {pristine, submitting} = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
           title='Tutorial Configuration'
         />
-
-        <TextField
-          className='native-key-bindings'
-          value={name}
-          onChange={this.handleText.bind(this, 'name')}
-        />
-
+        <form onSubmit={this.handleSubmit}>
+          <Field
+           name='name'
+           component={name => (
+             <TextField
+               name='name'
+               className='native-key-bindings'
+               hintText='coderoad-tutorial-name'
+               floatingLabelText='Tutorial Name'
+               errorText={
+                 name.touched && name.error
+               }
+               {...name}
+             />)
+           }
+           />
+           <br />
+          <Field name='language' component={props =>
+              <div>
+                <SelectField
+                  value={props.value}
+                  floatingLabelText='Language'
+                  errorText = {props.touched && props.error}
+                  {...props}
+                  onChange = {(event, index, value) => props.onChange(value)}
+                >
+                  {languageItems()}
+                </SelectField>
+              </div>
+          }/>
+          <Field name='runner' component={props =>
+              <div>
+                <SelectField
+                  value={props.value}
+                  floatingLabelText='Test Runner'
+                  errorText = {props.touched && props.error}
+                  {...props}
+                  onChange = {(event, index, value) => props.onChange(value)}
+                >
+                  {runnerItems(this.props.values.language)}
+                </SelectField>
+              </div>
+          }/>
         <br />
-
-        <SelectField
-          floatingLabelText='Language'
-          value={language}
-          {...language}
-          onChange={this.handleSelect.bind(this, 'language')}
-        >
-          {languageItems()}
-        </SelectField>
-        <br />
-        <SelectField
-          floatingLabelText='Test Runner'
-          value={runner}
-          {...runner}
-          onChange={this.handleSelect.bind(this, 'runner')}
-        >
-          {runnerItems(language)}
-        </SelectField>
-
-        <br />
-
         <RaisedButton
           type='submit'
           style={styles.button}
           label='Save'
           primary={true}
+          disabled={pristine || submitting}
           onTouchTap={this.submit.bind(this)}
         />
         <RaisedButton
@@ -148,12 +135,27 @@ class TutorialConfig extends React.Component <{
           secondary={true}
           onTouchTap={this.props.routeToPage.bind(this)}
         />
+        </form>
       </Card>
     );
   }
 }
 
+const validate = values => {
+  const errors: ConfigForm = {};
+  const requiredFields = ['name', 'language', 'runner'];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = 'Required';
+    }
+  });
+  if (values.name && !values.name.match(/^coderoad-[A-Za-z0-9\-]+$/)) {
+    errors.name = 'Invalid "coderoad-*" name';
+  }
+  return errors;
+};
+
 export default reduxForm({
-  form: 'config',
-  fields,
+  form: 'tutorialConfig',
+  validate,
 })(TutorialConfig);
