@@ -8,6 +8,7 @@ import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, routeSet} from '../../actions';
 import Top from '../TopPanel/Top';
+import * as debounce from 'lodash.debounce';
 
 const styles = {
   card: {
@@ -51,6 +52,7 @@ class TutorialInfo extends React.Component<{
           title='Tutorial Info'
         />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <div>
            <Field
             name='description'
             component={description => (
@@ -66,7 +68,9 @@ class TutorialInfo extends React.Component<{
               />)
             }
             />
+          </div>
           <br />
+          <div>
           <Field
            name='version'
            component={version => (
@@ -83,6 +87,7 @@ class TutorialInfo extends React.Component<{
              />)
            }
            />
+           </div>
           <br />
           {/* <Field
            name='keywords'
@@ -114,7 +119,7 @@ class TutorialInfo extends React.Component<{
   }
 }
 
-const validate = values => {
+const validate = debounce(values => {
   const errors: { description?: string, version?: string} = {};
   const requiredFields = ['description', 'version'];
   requiredFields.forEach(field => {
@@ -129,7 +134,7 @@ const validate = values => {
     errors.version = 'Invalid version number';
   }
   return errors;
-};
+}, 200);
 
 export default reduxForm({
   form: 'tutorialInfo',

@@ -12,6 +12,7 @@ import runnerItems from './runnerItems';
 import Top from '../TopPanel/Top';
 import {validateName} from 'coderoad-cli';
 import TextField from 'material-ui/TextField';
+import * as debounce from 'lodash.debounce';
 
 const formSelector = formValueSelector('tutorialConfig');
 
@@ -73,6 +74,7 @@ class TutorialConfig extends React.Component <{
           title='Tutorial Configuration'
         />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <div>
           <Field
            name='name'
            component={name => (
@@ -86,7 +88,9 @@ class TutorialConfig extends React.Component <{
              />)
            }
            />
+           </div>
            <br />
+           <div>
           <Field name='language' component={props =>
               <div>
                 <SelectField
@@ -100,6 +104,9 @@ class TutorialConfig extends React.Component <{
                 </SelectField>
               </div>
           }/>
+          </div>
+          <br />
+          <div>
           <Field name='runner' component={props =>
               <div>
                 <SelectField
@@ -113,6 +120,7 @@ class TutorialConfig extends React.Component <{
                 </SelectField>
               </div>
           }/>
+          </div>
         <br />
         <RaisedButton
           type='submit'
@@ -134,7 +142,7 @@ class TutorialConfig extends React.Component <{
   }
 }
 
-const validate = values => {
+const validate = debounce(values => {
   const errors: ConfigForm = {};
   const requiredFields = ['name', 'language', 'runner'];
   requiredFields.forEach(field => {
@@ -146,7 +154,7 @@ const validate = values => {
     errors.name = 'Invalid "coderoad-*" name';
   }
   return errors;
-};
+}, 200);
 
 export default reduxForm({
   form: 'tutorialConfig',
