@@ -6,8 +6,8 @@ import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, routeSet} from '../../actions';
 import Top from '../TopPanel/Top';
-import * as debounce from 'lodash.debounce';
 import textField from '../Form/textField';
+import validate from './validate';
 
 const styles = {
   card: {
@@ -54,7 +54,7 @@ class TutorialInfo extends React.Component<{
           title='Tutorial Info'
         />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <div>
+
            <Field
             name='description'
             component={textField.bind(null, {
@@ -62,9 +62,7 @@ class TutorialInfo extends React.Component<{
               floatingLabelText: 'Description',
             })}
             />
-          </div>
-          <br />
-          <div>
+
           <Field
            name='version'
             component={textField.bind(null, {
@@ -73,8 +71,7 @@ class TutorialInfo extends React.Component<{
               disabled: true,
             })}
            />
-           </div>
-          <br />
+
           <Field
            name='keywords'
            component={textField.bind(null, {
@@ -82,7 +79,7 @@ class TutorialInfo extends React.Component<{
              floatingLabelText: 'Keywords',
            })}
            />
-          <br />
+
           <RaisedButton
             type='submit'
             style={styles.button}
@@ -95,23 +92,6 @@ class TutorialInfo extends React.Component<{
     );
   }
 }
-
-const validate = debounce(values => {
-  const errors: { description?: string, version?: string} = {};
-  const requiredFields = ['description', 'version'];
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Required';
-    }
-  });
-  if (values.description && values.description.length < 3) {
-    errors.description = 'Incomplete tutorial description';
-  }
-  if (values.version && !values.version.match(/^(\d+\.)?(\d+\.)?(\*|\d+)$/)) {
-    errors.version = 'Invalid version number';
-  }
-  return errors;
-}, 200);
 
 export default reduxForm({
   form: 'tutorialInfo',

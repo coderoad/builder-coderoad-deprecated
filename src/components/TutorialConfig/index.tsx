@@ -10,9 +10,9 @@ import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 import Top from '../TopPanel/Top';
 import {validateName} from 'coderoad-cli';
-import * as debounce from 'lodash.debounce';
 import textField from '../Form/textField';
 import selectField from '../Form/selectField';
+import validate from './validate';
 
 const formSelector = formValueSelector('tutorialConfig');
 
@@ -27,11 +27,6 @@ const styles = {
   },
 };
 
-interface ConfigForm {
-  name?: string;
-  language?: string;
-  runner?: string;
-}
 
 @connect(state => ({
   packageJson: state.packageJson,
@@ -75,13 +70,14 @@ class TutorialConfig extends React.Component <{
           title='Tutorial Configuration'
         />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+
           <Field
             name='name'
             component={textField.bind(null, {
               hintText: 'coderoad-tutorial-name',
             })}
            />
-          <br />
+
           <Field
             name='language'
             component={selectField.bind(null, {
@@ -89,7 +85,7 @@ class TutorialConfig extends React.Component <{
               floatingLabelText: 'language',
             })}
           />
-          <br />
+
           <Field
             name='runner'
             component={selectField.bind(null, {
@@ -97,7 +93,7 @@ class TutorialConfig extends React.Component <{
               floatingLabelText: 'Test Runner',
             })}
           />
-          <br />
+
           <RaisedButton
             type='submit'
             style={styles.button}
@@ -112,26 +108,12 @@ class TutorialConfig extends React.Component <{
             disabled={invalid}
             onTouchTap={this.props.routeToPage.bind(this)}
           />
+
         </form>
       </Card>
     );
   }
 }
-
-const validate = debounce(values => {
-  const errors: ConfigForm = {};
-  const requiredFields = ['name', 'language', 'runner'];
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Required';
-    }
-  });
-  if (values.name && !values.name.match(/^coderoad-[A-Za-z0-9\-]+$/)) {
-    errors.name = 'Invalid "coderoad-*" name';
-  }
-  console.log(errors);
-  return errors;
-}, 200);
 
 export default reduxForm({
   form: 'tutorialConfig',

@@ -30,6 +30,8 @@
         "src/components/Root.ts",
         "src/components/styles/theme.ts",
         "src/components/TopPanel/Top.ts",
+        "src/components/TutorialConfig/validate.ts",
+        "src/components/TutorialInfo/validate.ts",
         "src/index.ts",
         "src/modules/editor-paths/index.ts",
         "src/modules/package-json/actions.ts",
