@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MenuItem from 'material-ui/MenuItem';
-import tutorialConfigOptions from 'core-coderoad/lib/options';
+import {tutorialConfigOptions} from 'core-coderoad';
 
 export default function runnerItems() {
   return Object.keys(tutorialConfigOptions).map((language, index) => {

@@ -2,9 +2,8 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {join} from 'path';
 import {editorOpen} from '../../../actions';
-import tutorialConfigOptions from 'core-coderoad/lib/options';
 import FlatButton from 'material-ui/FlatButton';
-import {configSelector} from 'core-coderoad/lib/selectors';
+import {configSelector, tutorialConfigOptions} from 'core-coderoad';
 
 const styles = {
   button: {

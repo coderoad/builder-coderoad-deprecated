@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Markdown} from '../../index';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import {editorMarkdownOpen} from '../../../actions';
-import {pageSelector} from 'core-coderoad/lib/selectors';
+import {pageSelector} from 'core-coderoad';
 
 const styles = {
   card: {

@@ -27,9 +27,9 @@ const styles = {
 @connect(state => ({
     tutorial: state.tutorial,
 }), dispatch => ({
-    pageSet(index: number) {
+    pageSet(title: string, index: number) {
       dispatch(pageSet(index));
-      dispatch(editorMarkdownOpen(index));
+      dispatch(editorMarkdownOpen(title, index));
     },
     pageAdd() { dispatch(tutorialPageAdd()); },
 }))
@@ -50,7 +50,7 @@ export default class TopPanel extends React.Component<{
                 style={styles.tab}
                 key={index}
                 label={page.title.substring(0, 10)}
-                onClick={pageSet.bind(this, index)}
+                onClick={pageSet.bind(this, page.title, index)}
               />
            );
          })}

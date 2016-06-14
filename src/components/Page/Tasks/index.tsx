@@ -13,7 +13,7 @@ import AddButton from '../AddButton';
 import {tutorialTaskAdd, editorMarkdownOpen} from '../../../actions';
 import twoDigitify from '../../../services/twoDigitify';
 import {join} from 'path';
-import {tasksSelector} from 'core-coderoad/lib/selectors';
+import {tasksSelector} from 'core-coderoad';
 
 const styles = {
   card: {

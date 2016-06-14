@@ -3,7 +3,7 @@ import sidePanelElement from './components/SidePanel/element';
 import render from './components/render';
 import Top from './components/TopPanel/Top';
 import renderTop from './components/TopPanel/render';
-import loadPolyfills from 'core-coderoad/lib/polyfills';
+import {loadPolyfills} from 'core-coderoad';
 import {onActivate, onDeactivate} from './subscriptions';
 import store from './store';
 import {setupVerify} from './modules/setup';
