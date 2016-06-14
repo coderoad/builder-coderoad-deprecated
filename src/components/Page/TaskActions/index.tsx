@@ -21,16 +21,11 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => ({
-  addAction(actionString: string) {
-    dispatch(tutorialActionAdd(this.props.taskPosition, actionString));
-  },
-  markdownOpen(content: string) {
-      dispatch(editorMarkdownOpen(null, content));
-  },
-}))
+@connect(null, {tutorialActionAdd, editorMarkdownOpen})
 export default class TaskActions extends React.Component<{
-  actions: string[], taskPosition: number, addAction?: any, markdownOpen?: any
+  actions: string[], taskPosition: number,
+  tutorialActionAdd?: (taskPosition: number, actionString: string) => Redux.ActionCreator,
+  editorMarkdownOpen?: (content: string, index?: number) => Redux.ActionCreator
 }, {
   stepIndex: number, as: {action: string, content: string}
 }> {
@@ -54,7 +49,6 @@ export default class TaskActions extends React.Component<{
     });
   }
   handleText(event) {
-    console.log(event);
     this.setState({
       stepIndex: this.state.stepIndex,
       as: {
@@ -64,7 +58,7 @@ export default class TaskActions extends React.Component<{
     });
   }
   render() {
-    const {actions, addAction, markdownOpen} = this.props;
+    const {actions, tutorialActionAdd, editorMarkdownOpen} = this.props;
     const {stepIndex} = this.state;
     // TODO: sort actions with higher accuracy
     const actionList: Builder.ActionObject[] = actions.map(a => getTaskObject(a));
@@ -84,7 +78,7 @@ export default class TaskActions extends React.Component<{
             </StepButton>
             <StepContent>
               {a.singleLine ? ''
-                : <div onClick={markdownOpen.bind(this, a.content)}>
+                : <div onClick={editorMarkdownOpen.bind(this, a.content, null)}>
                   <Markdown>{'```js\n' + a.content + '\n```'}</Markdown>
                 </div>
               }

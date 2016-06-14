@@ -12,16 +12,9 @@ const styles = {
   },
 };
 
-@connect(null, dispatch => ({
-  // addHint() {
-  //   dispatch(tutorialHintAdd(this.props.taskPosition, this.state.text))
-  // },
-  markdownOpen(content: string) {
-    dispatch(editorMarkdownOpen(null, content))
-  },
-}))
+@connect(null, {editorMarkdownOpen})
 export default class Hints extends React.Component<{
-  hints: string[], taskPosition: number, addHint?: any, markdownOpen?: any
+  hints: string[], taskPosition: number, addHint?: any, editorMarkdownOpen?: (content: string, index?: number) => Redux.ActionCreator
 }, {
   text: string;
 }> {
@@ -32,13 +25,12 @@ export default class Hints extends React.Component<{
     };
   }
   handleChange(event) {
-    console.log(event);
     this.setState({
       text: event.target.value,
     });
   }
   render() {
-    const {hints, markdownOpen} = this.props;
+    const {hints, editorMarkdownOpen} = this.props;
     const {text} = this.state;
     return (
       <List>
@@ -50,7 +42,7 @@ export default class Hints extends React.Component<{
               secondaryText={
                 <p>{index + 1}. {hint}</p>
               }
-              onClick={markdownOpen.bind(this, hint)}/>
+              onClick={editorMarkdownOpen.bind(this, hint, null)}/>
           ))
         }
         <TextField

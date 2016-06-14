@@ -19,16 +19,13 @@ const styles = {
 
 @connect(state => ({
   page: pageSelector(state),
-}), dispatch => ({
-  markdownOpen() {
-    dispatch(editorMarkdownOpen(null, '@onPageComplete'));
-  },
-}))
+}), {editorMarkdownOpen})
 export default class TasksComplete extends React.Component<{
-  page?: CR.Page, markdownOpen?: any
+  page?: CR.Page,
+  editorMarkdownOpen?: (content: string, index?: number) => Redux.ActionCreator
 }, {}> {
   render() {
-    const {page, markdownOpen} = this.props;
+    const {page, editorMarkdownOpen} = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
@@ -36,7 +33,7 @@ export default class TasksComplete extends React.Component<{
           showExpandableButton={true}
         />
         <CardText expandable={true}>
-          <div onClick={markdownOpen}>
+          <div onClick={editorMarkdownOpen.bind(this, '@onPageComplete', null)}>
             <Markdown style={styles.text}>
               {page.onPageComplete || 'add on page complete message'}
             </Markdown>

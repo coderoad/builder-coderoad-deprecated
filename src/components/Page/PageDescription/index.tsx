@@ -13,16 +13,13 @@ const styles = {
 
 @connect(state => ({
     page: pageSelector(state),
-}), dispatch => ({
-    markdownOpen(content: string) {
-      dispatch(editorMarkdownOpen(null, content));
-    },
-}))
+}), { editorMarkdownOpen })
 export default class PageDescription extends React.Component<{
-  page?: CR.Page, markdownOpen?: (content: string) => any
+  page?: CR.Page,
+  editorMarkdownOpen?: (content: string, index?: number) => Redux.ActionCreator
 }, {}> {
   render() {
-    const {page, markdownOpen} = this.props;
+    const {page, editorMarkdownOpen} = this.props;
     const {title, description} = page;
     const contentArray = description.split('\n\n');
     return (
@@ -40,7 +37,7 @@ export default class PageDescription extends React.Component<{
           {contentArray.map((c: string, index) => (
             <Markdown
               key={index}
-              onClick={markdownOpen.bind(this, c)}
+              onClick={editorMarkdownOpen.bind(this, c, null)}
             >
             {c}
             </Markdown>

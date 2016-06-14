@@ -14,8 +14,10 @@ const styles = {
 
 @connect(state => ({
   config: configSelector(state),
-}), dispatch => ({
+}), (dispatch, props) => ({
   open(file: string) {
+    const suffix = tutorialConfigOptions[props.config.language].language.suffix;
+    file = file.concat('.' + suffix);
     dispatch(editorOpen(join('tutorial', file)));
   },
 }))
@@ -25,14 +27,14 @@ export default class Tests extends React.Component<{
 }, {}> {
   render() {
     const {tests, config, style, open} = this.props;
-    const suffix = tutorialConfigOptions[config.language].language.suffix;
+
     return (
       <div style={style}>
-        {tests.map((test, index) => (
+        {tests.map((file, index) => (
           <FlatButton
             key={index}
             style={styles.button}
-            onClick={open.bind(this, test.concat('.' + suffix))}
+            onClick={open.bind(this, file)}
             label={'Test'}
             secondary={true}
           />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Root from './components/Root';
+import sidePanelElement from './components/SidePanel/element';
 import render from './components/render';
 import Top from './components/TopPanel/Top';
 import renderTop from './components/TopPanel/render';
@@ -15,7 +15,7 @@ class Main {
     loadPolyfills();
     // run startup checks
     store.dispatch(setupVerify());
-    this.root = Root.init();
+    this.root = sidePanelElement.init();
     this.top = Top.init();
   }
   activate(): void {

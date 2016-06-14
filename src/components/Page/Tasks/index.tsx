@@ -41,17 +41,14 @@ const styles = {
 
 @connect(state => ({
   tasks: tasksSelector(state),
-}), dispatch => ({
-  taskAdd() { dispatch(tutorialTaskAdd()); },
-  markdownOpen(content: string) {
-    dispatch(editorMarkdownOpen(null, content));
-  },
-}))
+}), {tutorialTaskAdd, editorMarkdownOpen})
 export default class Tasks extends React.Component<{
-  tasks?: CR.Task[], taskAdd?: any, markdownOpen?: any
+  tasks?: CR.Task[],
+  tutorialTaskAdd?: () => Redux.ActionCreator,
+  editorMarkdownOpen?: (content: string, index?: number) => Redux.ActionCreator,
 }, {}> {
   render() {
-    const {tasks, taskAdd, markdownOpen} = this.props;
+    const {tasks, tutorialTaskAdd, editorMarkdownOpen} = this.props;
     return (
       <div>
         {tasks.map((task: CR.Task, index: number) => (
@@ -74,7 +71,7 @@ export default class Tasks extends React.Component<{
               <Tabs tabItemContainerStyle={styles.tabBar}>
 
                 <Tab label='Description'>
-                  <div onClick={markdownOpen.bind(this, task.description)}>
+                  <div onClick={editorMarkdownOpen.bind(this, task.description, null)}>
                     <Task
                       key={index}
                       index={index}
@@ -102,7 +99,7 @@ export default class Tasks extends React.Component<{
           </Card>)
         )}
 
-        <AddButton callback={taskAdd}/>
+        <AddButton callback={tutorialTaskAdd}/>
 
       </div>
     );
