@@ -3,6 +3,8 @@ import {configureStore} from 'core-coderoad';
 
 export default configureStore(
   reducer,
-  false, // devMode
-  { TUTORIAL_BUILD: 300 } // throttled actions
+  // devMode
+  false,
+  // throttled actions
+  { TUTORIAL_BUILD: 300 }
 );
