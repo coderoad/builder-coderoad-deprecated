@@ -14,7 +14,9 @@ const styles = {
 @connect(state => ({
     page: pageSelector(state),
 }), dispatch => ({
-    markdownOpen: (content: string) => dispatch(editorMarkdownOpen(null, content)),
+    markdownOpen(content: string) {
+      dispatch(editorMarkdownOpen(null, content));
+    },
 }))
 export default class PageDescription extends React.Component<{
   page?: CR.Page, markdownOpen?: (content: string) => any

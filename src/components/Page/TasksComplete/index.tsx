@@ -20,7 +20,9 @@ const styles = {
 @connect(state => ({
   page: pageSelector(state),
 }), dispatch => ({
-  markdownOpen: () => dispatch(editorMarkdownOpen(null, '@onPageComplete')),
+  markdownOpen() {
+    dispatch(editorMarkdownOpen(null, '@onPageComplete'));
+  },
 }))
 export default class TasksComplete extends React.Component<{
   page?: CR.Page, markdownOpen?: any

@@ -13,8 +13,12 @@ const styles = {
 };
 
 @connect(null, dispatch => ({
-  addHint: () => dispatch(tutorialHintAdd(this.props.taskPosition, this.state.text)),
-  markdownOpen: (content: string) => dispatch(editorMarkdownOpen(null, content)),
+  // addHint() {
+  //   dispatch(tutorialHintAdd(this.props.taskPosition, this.state.text))
+  // },
+  markdownOpen(content: string) {
+    dispatch(editorMarkdownOpen(null, content))
+  },
 }))
 export default class Hints extends React.Component<{
   hints: string[], taskPosition: number, addHint?: any, markdownOpen?: any

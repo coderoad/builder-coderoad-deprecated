@@ -2,12 +2,12 @@ import * as ReactDOM from 'react-dom';
 
 const Root = {
   root: null,
-  init: (): HTMLElement => {
+  init() {
     this.root = document.createElement('div');
     this.root.setAttribute('id', 'crb');
     return this.root;
   },
-  unmount: () => {
+  unmount() {
     ReactDOM.unmountComponentAtNode(this.root);
   }
 };

@@ -15,7 +15,7 @@ const styles = {
 @connect(state => ({
   config: configSelector(state),
 }), dispatch => ({
-  open: (file: string) => {
+  open(file: string) {
     dispatch(editorOpen(join('tutorial', file)));
   },
 }))

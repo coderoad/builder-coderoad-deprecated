@@ -3,16 +3,16 @@ import TextField from 'material-ui/TextField';
 
 const textField = ({
   hintText, floatingLabelText, disabled
-}, field) => (
+}, props) => (
   <TextField
     className='native-key-bindings'
     hintText={hintText}
     floatingLabelText={floatingLabelText}
     disabled={disabled}
     errorText={
-      field.touched && field.error
+      props.touched && props.error
     }
-    {...field}
+    {...props}
   />
 );
 export default textField;

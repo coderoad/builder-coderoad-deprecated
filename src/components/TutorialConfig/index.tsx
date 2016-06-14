@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm, formValueSelector} from 'redux-form';
-import {resolve} from 'path';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,12 +8,9 @@ import {pjSave, tutorialInit, routeSet} from '../../actions';
 import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 import Top from '../TopPanel/Top';
-import {validateName} from 'coderoad-cli';
 import textField from '../Form/textField';
 import selectField from '../Form/selectField';
 import validate from './validate';
-
-const formSelector = formValueSelector('tutorialConfig');
 
 const styles = {
   card: {
@@ -27,14 +23,13 @@ const styles = {
   },
 };
 
-
 @connect(state => ({
   packageJson: state.packageJson,
   // name: state.packageJson.name,
-  // language: formSelector(state, 'language') || state.packageJson.config.language,
+  // language: formValueSelector('tutorialConfig')(state, 'language') || state.packageJson.config.language,
 }), dispatch => ({
   save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
-  routeToPage: () => {
+  routeToPage() {
     dispatch(tutorialInit());
     dispatch(routeSet('page'));
   }
@@ -44,12 +39,19 @@ class TutorialConfig extends React.Component <{
   save?: (pj: Tutorial.PJ) => any,
   routeToPage?: () => any,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
-  language?: string, invalid?: boolean
+  language?: string, invalid?: boolean, initialize?: any
 }, {}> {
+  componentWillMount() {
+    this.props.initialize({
+      name: 'coderoad-',
+      language: 'JS',
+      runner: 'mocha-coderoad',
+    });
+  }
   componentDidMount() {
     Top.toggle(false);
   }
-  onSubmit(values: ConfigForm) {
+  onSubmit(values) {
     const {name, language, runner} = values;
     this.props.save(Object.assign(
       {},
@@ -105,7 +107,7 @@ class TutorialConfig extends React.Component <{
             style={styles.button}
             label='Continue'
             secondary={true}
-            disabled={invalid}
+            disabled={pristine || submitting || invalid}
             onTouchTap={this.props.routeToPage.bind(this)}
           />
 

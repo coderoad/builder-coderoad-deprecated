@@ -42,8 +42,8 @@ const styles = {
 @connect(state => ({
   tasks: tasksSelector(state),
 }), dispatch => ({
-  taskAdd: () => dispatch(tutorialTaskAdd()),
-  markdownOpen: (content: string) => {
+  taskAdd() { dispatch(tutorialTaskAdd()); },
+  markdownOpen(content: string) {
     dispatch(editorMarkdownOpen(null, content));
   },
 }))

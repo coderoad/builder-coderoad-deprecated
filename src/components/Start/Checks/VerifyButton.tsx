@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 @connect(null, (dispatch) => {
   return {
-    verify: () => dispatch(setupVerify())
+    verify() { dispatch(setupVerify()); }
   };
 })
 export default class VerifyButton extends React.Component<{

@@ -22,8 +22,10 @@ const styles = {
 };
 
 @connect(null, dispatch => ({
-  addAction: (actionString: string) => dispatch(tutorialActionAdd(this.props.taskPosition, actionString)),
-  markdownOpen: (content: string) => {
+  addAction(actionString: string) {
+    dispatch(tutorialActionAdd(this.props.taskPosition, actionString));
+  },
+  markdownOpen(content: string) {
       dispatch(editorMarkdownOpen(null, content));
   },
 }))

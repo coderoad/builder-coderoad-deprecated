@@ -27,11 +27,11 @@ const styles = {
 @connect(state => ({
     tutorial: state.tutorial,
 }), dispatch => ({
-    pageSet: (index: number) => {
+    pageSet(index: number) {
       dispatch(pageSet(index));
       dispatch(editorMarkdownOpen(index));
     },
-    pageAdd: () => dispatch(tutorialPageAdd()),
+    pageAdd() { dispatch(tutorialPageAdd()); },
 }))
 export default class TopPanel extends React.Component<{
   tutorial?: CR.Tutorial, pageSet?: (index: number) => any, pageAdd?: () => any

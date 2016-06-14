@@ -23,14 +23,21 @@ const styles = {
 @connect(state => ({
   packageJson: state.packageJson,
 }), dispatch => ({
-  save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
-  routeToTutorial: () => dispatch(routeSet('page'))
+  save(pj: Tutorial.PJ) { dispatch(pjSave(pj)); },
+  routeToTutorial() { dispatch(routeSet('page')); }
 }))
 class TutorialInfo extends React.Component<{
   packageJson?: any, save?: any, routeToTutorial?: any,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
-  invalid?: boolean
+  invalid?: boolean, initialize?: (values: Object) => any
 }, {}> {
+  componentWillMount() {
+    this.props.initialize({
+      description: '',
+      version: '0.1.0',
+      keywords: 'coderoad, tutorial'
+    });
+  }
   componentDidMount() {
     Top.toggle(false);
   }
