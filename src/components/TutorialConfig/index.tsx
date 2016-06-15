@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, tutorialInit, routeSet} from '../../actions';
 import languageItems from './languageItems';
 import runnerItems from './runnerItems';
-import Top from '../TopPanel/Top';
+import {topElement} from '../TopPanel';
 import textField from '../Form/textField';
 import selectField from '../Form/selectField';
 import validate from './validate';
@@ -49,7 +49,7 @@ class TutorialConfig extends React.Component <{
     });
   }
   componentDidMount() {
-    Top.toggle(false);
+    topElement.toggle(false);
   }
   onSubmit(values) {
     const {name, language, runner} = values;

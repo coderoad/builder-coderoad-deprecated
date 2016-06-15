@@ -5,7 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, routeSet} from '../../actions';
-import Top from '../TopPanel/Top';
+import {topElement} from '../TopPanel';
 import textField from '../Form/textField';
 import validate from './validate';
 
@@ -39,7 +39,7 @@ class TutorialInfo extends React.Component<{
     });
   }
   componentDidMount() {
-    Top.toggle(false);
+    topElement.toggle(false);
   }
   onSubmit(values) {
     const {description, version, keywords} = values;

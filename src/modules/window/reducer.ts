@@ -1,5 +1,5 @@
 import {WINDOW_TOGGLE} from './types';
-import Top from '../../components/TopPanel/Top';
+import {topElement} from '../../components/TopPanel';
 
 export default function windowToggle(
   open = false, action: Action
@@ -9,9 +9,9 @@ export default function windowToggle(
     case WINDOW_TOGGLE:
       // toggle top panel
       if (open) {
-        Top.toggle(false);
+        topElement.toggle(false);
       } else if (!open && action.payload.route === 'page') {
-        Top.toggle(true);
+        topElement.toggle(true);
       }
       return !open;
 

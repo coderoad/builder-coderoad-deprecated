@@ -1,6 +1,6 @@
 import * as ReactDOM from 'react-dom';
 
-const Root = {
+const Side = {
   root: null,
   init() {
     this.root = document.createElement('div');
@@ -11,4 +11,4 @@ const Root = {
     ReactDOM.unmountComponentAtNode(this.root);
   }
 };
-export default Root;
+export default Side;

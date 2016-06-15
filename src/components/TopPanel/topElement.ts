@@ -13,7 +13,7 @@ const Top = {
     this.top.hidden = !open;
   },
   unmount() {
-    ReactDOM.unmountComponentAtNode(this.root);
+    ReactDOM.unmountComponentAtNode(this.top);
   }
 };
 export default Top;

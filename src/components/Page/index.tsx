@@ -4,7 +4,7 @@ import {Card} from 'material-ui/Card';
 import PageDescription from './PageDescription';
 import Tasks from './Tasks';
 import TasksComplete from './TasksComplete';
-import Top from '../TopPanel/Top';
+import {topElement} from '../TopPanel';
 
 const styles = {
   width: '100%',
@@ -13,10 +13,10 @@ const styles = {
 
 export default class Page extends React.Component<{}, {}> {
   componentDidMount() {
-    Top.toggle(true);
+    topElement.toggle(true);
   }
   componentWillUnmount() {
-    Top.toggle(false);
+    topElement.toggle(false);
   }
   render() {
     return (
