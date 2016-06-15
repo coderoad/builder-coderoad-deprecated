@@ -5,7 +5,7 @@ export {
   tutorialInit, tutorialLoad, tutorialBuild, tutorialPageAdd,
   tutorialTaskAdd, tutorialHintAdd, tutorialActionAdd
 } from './modules/tutorial';
-export {windowToggle} from './modules/window';
+export {windowToggle, quit} from './modules/window';
 export {editorMarkdownOpen, editorTestOpen} from './modules/editor-paths';
 
 export {

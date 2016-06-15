@@ -18,11 +18,13 @@ class Main {
     loadPolyfills();
     // run startup checks
     store.dispatch(setupVerify());
+
+    // initialize element targets
     this.side = sideElement.init();
     this.top = topElement.init();
   }
   activate(): void {
-    // create atom panel
+    // create atom panels
     atom.workspace.addRightPanel({
       item: this.side,
       priority: 0,
@@ -44,4 +46,7 @@ class Main {
     onDeactivate(store);
   }
 };
-export = new Main();
+
+const app = new Main();
+// only one export available. Atom package limitation
+export = app;

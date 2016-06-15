@@ -22,7 +22,8 @@ export function onActivate(store: Redux.Store): AtomCore.Disposable {
           store.dispatch(tutorialBuild());
           store.dispatch(tutorialLoad());
         }
-      }));
+      })
+    );
   });
 
   return subscriptions;
