@@ -1,12 +1,11 @@
-const CompositeDisposable = require('atom').CompositeDisposable;
-import store from './store';
+import {CompositeDisposable} from 'atom';
 import {windowToggle, tutorialBuild, tutorialLoad} from './actions';
 import {sideElement} from './components/SidePanel';
 import {topElement} from './components/TopPanel';
 
 let subscriptions = null;
 
-export function onActivate(): AtomCore.Disposable {
+export function onActivate(store: Redux.Store): AtomCore.Disposable {
   // Atom Listeners
   subscriptions = new CompositeDisposable;
 
@@ -29,7 +28,7 @@ export function onActivate(): AtomCore.Disposable {
   return subscriptions;
 }
 
-export function onDeactivate(): void {
+export function onDeactivate(store: Redux.Store): void {
   // unmount React
   sideElement.unmount();
   topElement.unmount();

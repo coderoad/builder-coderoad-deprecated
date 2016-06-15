@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import {sideElement, SideRoot} from './components/SidePanel';
 import {topElement, TopRoot} from './components/TopPanel';
 import {loadPolyfills, render} from 'core-coderoad';
 import {onActivate, onDeactivate} from './subscriptions';
 import store from './store';
 import {setupVerify} from './modules/setup';
-import * as injectTapEventPlugin from 'react-tap-event-plugin';
 
 class Main {
   side: HTMLElement;
@@ -31,15 +31,17 @@ class Main {
       item: this.top,
       priority: 1100,
     });
-    onActivate();
+
+    // activate subscriptions
+    onActivate(store);
+
     // render React component
-    // render(this.side);
     ReactDOM.render(SideRoot(store), this.side);
     ReactDOM.render(TopRoot(store), this.top);
   }
   deactivate(): void {
     // remove subscriptions & unmount react app
-    onDeactivate();
+    onDeactivate(store);
   }
 };
 export = new Main();
