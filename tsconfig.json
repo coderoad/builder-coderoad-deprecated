@@ -26,7 +26,6 @@
         "src/actions.ts",
         "src/components/index.ts",
         "src/components/Page/TaskActions/task-object.ts",
-        "src/components/render.ts",
         "src/components/styles/theme.ts",
         "src/components/TutorialConfig/validate.ts",
         "src/components/TutorialInfo/validate.ts",
