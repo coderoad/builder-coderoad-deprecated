@@ -7,6 +7,7 @@ import TasksComplete from './TasksComplete';
 import {topElement} from '../TopPanel';
 
 const styles = {
+  height: '100%',
   width: '100%',
   overflowY: 'scroll',
 };
