@@ -4,13 +4,14 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import {sideElement, SideRoot} from './components/SidePanel';
 import {topElement, TopRoot} from './components/TopPanel';
 import {loadPolyfills, render} from 'core-coderoad';
-import {onActivate, onDeactivate} from './subscriptions';
+import Subscriptions from './subscriptions';
 import store from './store';
 import {setupVerify} from './modules/setup';
 
 class Main {
   side: HTMLElement;
   top: HTMLElement;
+  subscriptions: any;
   constructor() {
     // remove later
     injectTapEventPlugin();
@@ -22,6 +23,7 @@ class Main {
     // initialize element targets
     this.side = sideElement.init();
     this.top = topElement.init();
+    this.subscriptions = new Subscriptions;
   }
   activate(): void {
     // create atom panels
@@ -35,7 +37,7 @@ class Main {
     });
 
     // activate subscriptions
-    onActivate(store);
+    this.subscriptions.onActivate(store);
 
     // render React component
     ReactDOM.render(SideRoot(store), this.side);
@@ -43,7 +45,7 @@ class Main {
   }
   deactivate(): void {
     // remove subscriptions & unmount react app
-    onDeactivate(store);
+    this.subscriptions.onDeactivate(store);
   }
 };
 
