@@ -35,7 +35,7 @@ class TutorialInfo extends React.Component<{
     this.props.initialize({
       description: '',
       version: '0.1.0',
-      keywords: 'coderoad, tutorial'
+      keywords: ''
     });
   }
   componentDidMount() {
@@ -58,7 +58,9 @@ class TutorialInfo extends React.Component<{
       this.props.packageJson,
       {
         description, version,
-        keywords: keywords.split(',')
+        keywords: (`coderoad, tutorial${
+          keywords.length ? ', ' + keywords : ''
+        }`).split(', ')
       }
     ));
   }
@@ -104,7 +106,7 @@ class TutorialInfo extends React.Component<{
             style={styles.button}
             label='Save'
             primary={true}
-            disabled={pristine || submitting || invalid}
+            disabled={invalid}
           />
         </form>
       </Card>

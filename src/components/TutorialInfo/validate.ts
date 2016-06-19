@@ -8,10 +8,10 @@ const validate = debounce(values => {
       errors[field] = 'Required';
     }
   });
-  if (values.description && values.description.length < 3) {
-    errors.description = 'Incomplete tutorial description';
-  }
-  if (values.version && !values.version.match(/^(\d+\.)?(\d+\.)?(\*|\d+)$/)) {
+  // if (!values.description || values.description.length) {
+  //   errors.description = 'Incomplete tutorial description';
+  // }
+  if (!values.version || !values.version.match(/^(\d+\.)?(\d+\.)?(\*|\d+)$/)) {
     errors.version = 'Invalid version number';
   }
   return errors;
