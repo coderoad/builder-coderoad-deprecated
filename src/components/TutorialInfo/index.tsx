@@ -77,6 +77,7 @@ class TutorialInfo extends React.Component<{
               hintText: 'Tutorial description',
               floatingLabelText: 'Description',
             })}
+            tabIndex='1'
             />
 
           <Field
@@ -86,6 +87,7 @@ class TutorialInfo extends React.Component<{
               floatingLabelText: 'Version',
               disabled: true,
             })}
+            tabIndex='2'
            />
 
           <Field
@@ -94,6 +96,7 @@ class TutorialInfo extends React.Component<{
              hintText: 'coderoad, react, js, etc',
              floatingLabelText: 'Keywords',
            })}
+           tabIndex='3'
            />
 
           <RaisedButton

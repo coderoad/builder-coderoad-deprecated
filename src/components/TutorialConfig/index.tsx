@@ -90,6 +90,7 @@ class TutorialConfig extends React.Component <{
             component={textField.bind(null, {
               hintText: 'coderoad-tutorial-name',
             })}
+            tabIndex='1'
            />
 
           <Field
@@ -99,6 +100,7 @@ class TutorialConfig extends React.Component <{
               floatingLabelText: 'language',
               id: 'language',
             })}
+            tabIndex='2'
           />
 
           <Field
@@ -108,6 +110,7 @@ class TutorialConfig extends React.Component <{
               floatingLabelText: 'Test Runner',
               id: 'runner',
             })}
+            tabIndex='3'
           />
 
           <RaisedButton
