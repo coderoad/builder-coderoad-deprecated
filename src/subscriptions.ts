@@ -3,38 +3,43 @@ import {windowToggle, tutorialBuild, tutorialLoad} from './actions';
 import {sideElement} from './components/SidePanel';
 import {topElement} from './components/TopPanel';
 
-let subscriptions = null;
+export default class Subscriptions {
+  public subscriptions = new CompositeDisposable;
+  public store: Redux.Store;
 
-export function onActivate(store: Redux.Store): AtomCore.Disposable {
-  // Atom Listeners
-  subscriptions = new CompositeDisposable;
-
-  subscriptions.add(
-    atom.commands.add('atom-workspace', {
-      'cb-viewer:toggle': () => store.dispatch(windowToggle())
-    })
-  );
-
-  atom.workspace.observeTextEditors((editor: AtomCore.IEditor) => {
-    subscriptions.add(
-      editor.onDidSave(() => {
-        if (store.getState().window) {
-          store.dispatch(tutorialBuild());
-          store.dispatch(tutorialLoad());
-        }
+  onActivate(store: Redux.Store): AtomCore.Disposable {
+    this.store = store;
+    this.subscriptions.add(
+      atom.commands.add('atom-workspace', {
+        'cb-viewer:toggle': () => store.dispatch(windowToggle())
       })
     );
-  });
+    atom.workspace.observeTextEditors((editor: AtomCore.IEditor) => {
+      this.subscriptions.add(
+        editor.onDidSave(() => {
+          if (store.getState().window) {
+            store.dispatch(tutorialBuild());
+            store.dispatch(tutorialLoad());
+          }
+        })
+      );
+    });
 
-  return subscriptions;
-}
+    return this.subscriptions;
+  }
 
-export function onDeactivate(store: Redux.Store): void {
-  // unmount React
-  sideElement.unmount();
-  topElement.unmount();
-  // unsubscribe from Redux store
-  store.subscribe(() => null);
-  // cleanup subscriptions
-  subscriptions.dispose();
+  onDeactivate(store: Redux.Store): void {
+    // unmount React
+    sideElement.unmount();
+    topElement.unmount();
+    // unsubscribe from Redux store
+    store.subscribe(() => null);
+    // cleanup subscriptions
+    this.subscriptions.dispose();
+  }
+
+  addSubscription(fn: () => any) {
+    const store = this.store; // used for dispatches
+    this.subscriptions.add(fn);
+  }
 }

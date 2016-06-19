@@ -23,7 +23,7 @@ export default function tutorial(t = _tutorial, action: Action): Tutorial.Output
     case TUTORIAL_INIT:
       const {dir, name} = action.payload;
       create(dir, name);
-      if (_tutorial.info.title.length < 1) {
+      if (t.info.title.length < 1) {
         // no title? save packageJson name as title
         const info = Object.assign({}, t.info, { title: name });
         t = Object.assign({}, t, {info});

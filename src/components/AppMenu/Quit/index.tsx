@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {onDeactivate} from '../../../subscriptions';
 import MenuItem from 'material-ui/MenuItem';
 import {quit} from '../../../actions';
 

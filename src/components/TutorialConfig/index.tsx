@@ -25,8 +25,6 @@ const styles = {
 
 @connect(state => ({
   packageJson: state.packageJson,
-  // name: state.packageJson.name,
-  // language: formValueSelector('tutorialConfig')(state, 'language') || state.packageJson.config.language,
 }), dispatch => ({
   save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
   routeToPage() {
@@ -41,15 +39,21 @@ class TutorialConfig extends React.Component <{
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
   language?: string, invalid?: boolean, initialize?: any
 }, {}> {
+  refs: {
+    [key: string]: (Element);
+    name: HTMLInputElement;
+  };
   componentWillMount() {
     this.props.initialize({
-      name: 'coderoad-',
+      name: 'coderoad-tutorial-name',
       language: 'JS',
       runner: 'mocha-coderoad',
     });
   }
   componentDidMount() {
     topElement.toggle(false);
+    // focus first element
+    document.getElementsByTagName('input')[0].focus();
   }
   onSubmit(values) {
     const {name, language, runner} = values;
@@ -101,13 +105,13 @@ class TutorialConfig extends React.Component <{
             style={styles.button}
             label='Save'
             primary={true}
-            disabled={pristine || submitting || invalid}
+            disabled={invalid}
           />
           <RaisedButton
             style={styles.button}
             label='Continue'
             secondary={true}
-            disabled={pristine || submitting || invalid}
+            disabled={invalid}
             onTouchTap={this.props.routeToPage.bind(this)}
           />
 

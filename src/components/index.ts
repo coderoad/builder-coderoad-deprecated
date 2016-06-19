@@ -1,5 +1,5 @@
 export {default as AppMenu} from './AppMenu';
-export {default as Alert} from './Alert';
+export {Alert, Markdown, TextEditor} from 'core-coderoad';
 export {default as Page} from './Page';
 export {default as Routes} from './Routes';
 export {default as Start} from './Start';
@@ -8,6 +8,5 @@ export {default as TutorialConfig} from './TutorialConfig';
 export {default as TutorialInfo} from './TutorialInfo';
 
 export {default as DynamicStepper} from './common/DynamicStepper';
-export {default as Markdown} from './common/Markdown';
 export {default as ContentCard} from './common/ContentCard';
 export {default as RouteButton} from './common/RouteButton';
