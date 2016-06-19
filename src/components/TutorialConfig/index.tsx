@@ -55,6 +55,13 @@ class TutorialConfig extends React.Component <{
     // focus first element
     document.getElementsByTagName('input')[0].focus();
   }
+  shouldComponentUpdate() {
+    // hack to prevent lost focus on component update
+    if (document.activeElement &&
+      typeof document.activeElement.value === 'string') {
+      return false;
+    }
+  }
   onSubmit(values) {
     const {name, language, runner} = values;
     this.props.save(Object.assign(
@@ -78,6 +85,7 @@ class TutorialConfig extends React.Component <{
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
           <Field
+            id='name'
             name='name'
             component={textField.bind(null, {
               hintText: 'coderoad-tutorial-name',
@@ -89,6 +97,7 @@ class TutorialConfig extends React.Component <{
             component={selectField.bind(null, {
               children: languageItems(),
               floatingLabelText: 'language',
+              id: 'language',
             })}
           />
 
@@ -97,6 +106,7 @@ class TutorialConfig extends React.Component <{
             component={selectField.bind(null, {
               children: runnerItems('JS'),
               floatingLabelText: 'Test Runner',
+              id: 'runner',
             })}
           />
 
@@ -123,5 +133,5 @@ class TutorialConfig extends React.Component <{
 
 export default reduxForm({
   form: 'tutorialConfig',
-  validate,
+   validate,
 })(TutorialConfig);

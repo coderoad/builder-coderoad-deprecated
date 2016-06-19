@@ -76,7 +76,6 @@
         "src/components/AppMenu/Quit/index.tsx",
         "src/components/common/ContentCard.tsx",
         "src/components/common/DynamicStepper.tsx",
-        "src/components/common/Markdown.tsx",
         "src/components/common/RouteButton.tsx",
         "src/components/Form/selectField.tsx",
         "src/components/Form/textField.tsx",

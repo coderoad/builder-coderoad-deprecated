@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SelectField from 'material-ui/SelectField';
 
-const selectField = ({children, floatingLabelText}, props) => (
+const selectField = ({children, floatingLabelText, id}, props) => (
     <SelectField
       value={props.value}
       floatingLabelText={floatingLabelText}

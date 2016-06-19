@@ -40,6 +40,15 @@ class TutorialInfo extends React.Component<{
   }
   componentDidMount() {
     topElement.toggle(false);
+    // focus first element
+    document.getElementsByTagName('input')[0].focus();
+  }
+  shouldComponentUpdate() {
+    // hack to prevent lost focus on component update
+    if (document.activeElement &&
+      typeof document.activeElement.value === 'string') {
+      return false;
+    }
   }
   onSubmit(values) {
     const {description, version, keywords} = values;
