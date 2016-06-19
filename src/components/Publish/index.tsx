@@ -4,7 +4,7 @@ import {Field, reduxForm} from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {pjSave, routeSet} from '../../actions';
+import {pjSave, pjLoad, routeSet} from '../../actions';
 import {topElement} from '../TopPanel';
 import textField from '../Form/textField';
 import validate from './validate';
@@ -23,23 +23,29 @@ const styles = {
 @connect(state => ({
   packageJson: state.packageJson,
 }), dispatch => ({
+  pjLoad() { dispatch(pjLoad()); },
   save(pj: Tutorial.PJ) { dispatch(pjSave(pj)); },
   routeToTutorial() { dispatch(routeSet('page')); }
 }))
 class TutorialPublish extends React.Component<{
   packageJson?: any, save?: any, routeToTutorial?: any,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
-  invalid?: boolean, initialize?: (values: Object) => any
+  invalid?: boolean, initialize?: (values: Object) => any,
+  pjLoad?: () => any
 }, {}> {
   componentWillMount() {
-    this.props.initialize({
-      description: '',
-      version: '0.1.0',
-      keywords: ''
-    });
+    this.props.pjLoad();
   }
   componentDidMount() {
     topElement.toggle(false);
+    setTimeout(() => {
+      const {description, version, keywords} = this.props.packageJson;
+      this.props.initialize({
+        description,
+        version,
+        keywords,
+      });
+    });
     // focus first element
     document.getElementsByTagName('input')[0].focus();
   }
@@ -58,9 +64,7 @@ class TutorialPublish extends React.Component<{
       this.props.packageJson,
       {
         description, version,
-        keywords: (`coderoad, tutorial${
-          keywords.length ? ', ' + keywords : ''
-        }`).split(', ')
+        keywords: (keywords.length ? ', ' + keywords : '').split(', ')
       }
     ));
   }

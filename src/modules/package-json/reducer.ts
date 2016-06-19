@@ -1,4 +1,4 @@
-import {PJ_SAVE} from './types';
+import {PJ_SAVE, PJ_LOAD} from './types';
 import {readPackageJson, writePackageJson} from './utils/packageJson';
 import {sortPackageJson} from 'sort-package-json';
 
@@ -24,6 +24,10 @@ export default function packageJson(
   p = _pj, action: Action
 ): Tutorial.PJ {
   switch (action.type) {
+
+    case PJ_LOAD:
+      const loadedPj = readPackageJson(action.payload.dir);
+      return !!loadedPj ? loadedPj : p;
 
     case PJ_SAVE:
       const {pj, dir} = action.payload;

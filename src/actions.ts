@@ -1,5 +1,5 @@
 export {pageSet} from './modules/page-position';
-export {pjSave} from './modules/package-json';
+export {pjSave, pjLoad} from './modules/package-json';
 export {setupVerify, setupPackage} from './modules/setup';
 export {
   tutorialInit, tutorialLoad, tutorialBuild, tutorialPageAdd,

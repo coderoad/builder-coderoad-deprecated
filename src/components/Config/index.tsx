@@ -4,7 +4,7 @@ import {Field, reduxForm, formValueSelector} from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {pjSave, tutorialInit, routeSet} from '../../actions';
+import {pjSave, pjLoad, tutorialInit, routeSet} from '../../actions';
 import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 import {topElement} from '../TopPanel';
@@ -26,7 +26,8 @@ const styles = {
 @connect(state => ({
   packageJson: state.packageJson,
 }), dispatch => ({
-  save: (pj: Tutorial.PJ) => dispatch(pjSave(pj)),
+  pjSave(pj) { dispatch(pjSave(pj)); },
+  pjLoad() { dispatch(pjLoad()); },
   routeToPage() {
     dispatch(tutorialInit());
     dispatch(routeSet('page'));
@@ -34,7 +35,8 @@ const styles = {
 }))
 class TutorialConfig extends React.Component <{
   packageJson?: PackageJson,
-  save?: (pj: Tutorial.PJ) => any,
+  pjSave?: (pj: Tutorial.PJ) => any,
+  pjLoad?: () => any
   routeToPage?: () => any,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
   language?: string, invalid?: boolean, initialize?: any
@@ -44,14 +46,19 @@ class TutorialConfig extends React.Component <{
     name: HTMLInputElement;
   };
   componentWillMount() {
-    this.props.initialize({
-      name: 'coderoad-tutorial-name',
-      language: 'JS',
-      runner: 'mocha-coderoad',
-    });
+    this.props.pjLoad();
   }
   componentDidMount() {
     topElement.toggle(false);
+    // get props after pjLoad completes
+    setTimeout(() => {
+      const {name, config} = this.props.packageJson;
+      this.props.initialize({
+        name,
+        language: config.language,
+        runner: config.runner,
+      });
+    });
     // focus first element
     document.getElementsByTagName('input')[0].focus();
   }
@@ -64,7 +71,7 @@ class TutorialConfig extends React.Component <{
   }
   onSubmit(values) {
     const {name, language, runner} = values;
-    this.props.save(Object.assign(
+    this.props.pjSave(Object.assign(
       {},
       this.props.packageJson,
       {
