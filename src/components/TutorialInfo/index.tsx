@@ -108,6 +108,13 @@ class TutorialInfo extends React.Component<{
             primary={true}
             disabled={invalid}
           />
+          <RaisedButton
+            style={styles.button}
+            label='Publish'
+            secondary={true}
+            disabled={invalid}
+            onTouchTap={() => alert('Publish not yet implemented')}
+          />
         </form>
       </Card>
     );
