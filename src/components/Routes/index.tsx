@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Page, Start, TutorialConfig, TutorialInfo} from '../index';
+import {Page, Start, TutorialConfig, TutorialPublish} from '../index';
 
 @connect(state => ({
   route: state.route,
@@ -14,10 +14,10 @@ export default class Routes extends React.Component<{
         return <Page />;
       case 'start':
         return <Start />;
-      case 'tutorialConfig':
+      case 'config':
         return <TutorialConfig />;
-      case 'tutorialInfo':
-        return <TutorialInfo />;
+      case 'publish':
+        return <TutorialPublish />;
 
       // TODO
       // case 'tutorialPublish':

@@ -2,11 +2,11 @@ import * as React from 'react';
 import MenuLink from './MenuLink';
 
 const routes = [{
-    route: 'tutorialConfig',
+    route: 'config',
     name: 'config'
   }, {
-    route: 'tutorialInfo',
-    name: 'info'
+    route: 'publish',
+    name: 'publish'
   }, {
     route: 'page',
     name: 'edit'

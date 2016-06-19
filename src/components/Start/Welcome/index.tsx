@@ -39,7 +39,7 @@ const Welcome: React.StatelessComponent<{}> = () => (
       <br /><br />
       <RouteButton
         label='Start'
-        route='tutorialConfig'
+        route='config'
         style={styles.button}
       />
   </div>

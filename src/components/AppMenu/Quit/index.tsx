@@ -12,7 +12,7 @@ const styles = {
 
 @connect(null, {quit})
 export default class Quit extends React.Component<{
-  quit: () => Redux.ActionCreator
+  quit?: () => Redux.ActionCreator
 }, {}> {
   render() {
     return (
