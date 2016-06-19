@@ -22,19 +22,16 @@ const styles = {
 
 @connect(state => ({
   packageJson: state.packageJson,
-}), dispatch => ({
-  pjLoad() { dispatch(pjLoad()); },
-  save(pj: Tutorial.PJ) { dispatch(pjSave(pj)); },
-  routeToTutorial() { dispatch(routeSet('page')); }
-}))
+}), {pjLoad, pjSave})
 class TutorialPublish extends React.Component<{
-  packageJson?: any, save?: any, routeToTutorial?: any,
+  packageJson?: any, pjSave?: (pj: PackageJson) => any,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
   invalid?: boolean, initialize?: (values: Object) => any,
   pjLoad?: () => any
 }, {}> {
   componentWillMount() {
     this.props.pjLoad();
+    this.props.open
   }
   componentDidMount() {
     topElement.toggle(false);
@@ -57,14 +54,13 @@ class TutorialPublish extends React.Component<{
     }
   }
   onSubmit(values) {
-    const {description, version, keywords} = values;
+    const {description, version, author, keywords} = values;
     // save
-    this.props.save(Object.assign(
+    this.props.pjSave(Object.assign(
       {},
       this.props.packageJson,
       {
-        description, version,
-        keywords: (keywords.length ? ', ' + keywords : '').split(', ')
+        description, version, author,
       }
     ));
   }
@@ -76,15 +72,23 @@ class TutorialPublish extends React.Component<{
           title='Tutorial Info'
         />
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <Field
+            name='author'
+            component={textField.bind(null, {
+              hintText: 'Shawn McKay <my@email.com>',
+              floatingLabelText: 'Author <email>',
+            })}
+            tabIndex='1'
+          />
 
-           <Field
+          <Field
             name='description'
             component={textField.bind(null, {
               hintText: 'Tutorial description',
               floatingLabelText: 'Description',
             })}
             tabIndex='1'
-            />
+          />
 
           <Field
            name='version'
@@ -94,16 +98,16 @@ class TutorialPublish extends React.Component<{
               disabled: true,
             })}
             tabIndex='2'
-           />
+          />
 
-          <Field
+          {/*}<Field
            name='keywords'
            component={textField.bind(null, {
-             hintText: 'coderoad, react, js, etc',
+             hintText: 'react, js, etc',
              floatingLabelText: 'Keywords',
            })}
            tabIndex='3'
-           />
+           />*/}
 
           <RaisedButton
             type='submit'

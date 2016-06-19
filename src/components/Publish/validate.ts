@@ -2,7 +2,7 @@ import * as debounce from 'lodash.debounce';
 
 const validate = debounce(values => {
   const errors: { description?: string, version?: string} = {};
-  const requiredFields = ['description', 'version'];
+  const requiredFields = ['description', 'version', 'author'];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Required';

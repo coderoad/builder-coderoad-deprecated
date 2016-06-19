@@ -26,38 +26,37 @@ const styles = {
 
 @connect(state => ({
     tutorial: state.tutorial,
-}), dispatch => ({
-    pageSet(title: string, index: number) {
-      dispatch(pageSet(index));
-      dispatch(editorMarkdownOpen(title, index));
-    },
-    pageAdd() { dispatch(tutorialPageAdd()); },
-}))
+}), {pageSet, editorMarkdownOpen, tutorialPageAdd})
 export default class TopPanel extends React.Component<{
-  tutorial?: CR.Tutorial, pageSet?: (index: number) => any, pageAdd?: () => any
+  tutorial?: CR.Tutorial,
+  pageSet?: (index: number) => Redux.ActionCreator,
+  editorMarkdownOpen?: (title: string, index: number) => Redux.ActionCreator,
+  tutorialPageAdd?: () => Redux.ActionCreator,
 }, {}> {
+  selectPage(title: string, index: number) {
+    this.props.pageSet(index);
+    this.props.editorMarkdownOpen(title, index);
+  }
   render() {
-    const {tutorial, pageSet, pageAdd} = this.props;
+    const {tutorial, tutorialPageAdd} = this.props;
 
     // no tutorial or pages? no need for a tab bar
     if (!tutorial || !tutorial.pages) { return null; }
 
     return (
       <Tabs tabItemContainerStyle={styles.tabs} style={styles.all}>
-         {tutorial.pages.map((page: CR.Page, index) => {
-           return (
-              <Tab
-                style={styles.tab}
-                key={index}
-                label={page.title.substring(0, 10)}
-                onClick={pageSet.bind(this, page.title, index)}
-              />
-           );
-         })}
+         {tutorial.pages.map((page: CR.Page, index) => (
+           <Tab
+            style={styles.tab}
+            key={index}
+            label={page.title.substring(0, 10)}
+            onClick={this.selectPage.bind(this, page.title, index)}
+          />
+         ))}
        <Tab
         style={Object.assign({}, styles.tab, styles.add)}
         label='+'
-        onActive={pageAdd}
+        onActive={tutorialPageAdd}
       />
      </Tabs>
    );

@@ -25,19 +25,13 @@ const styles = {
 
 @connect(state => ({
   packageJson: state.packageJson,
-}), dispatch => ({
-  pjSave(pj) { dispatch(pjSave(pj)); },
-  pjLoad() { dispatch(pjLoad()); },
-  routeToPage() {
-    dispatch(tutorialInit());
-    dispatch(routeSet('page'));
-  }
-}))
+}), {pjSave, pjLoad, tutorialInit, routeSet })
 class TutorialConfig extends React.Component <{
   packageJson?: PackageJson,
-  pjSave?: (pj: Tutorial.PJ) => any,
-  pjLoad?: () => any
-  routeToPage?: () => any,
+  pjSave?: (pj: Tutorial.PJ) => Redux.ActionCreator,
+  pjLoad?: () => Redux.ActionCreator,
+  tutorialInit?: () => Redux.ActionCreator,
+  routeSet?: (route: string) => Redux.ActionCreator,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
   language?: string, invalid?: boolean, initialize?: any
 }, {}> {
@@ -81,6 +75,10 @@ class TutorialConfig extends React.Component <{
         }
       })
     );
+  }
+  routeToPage() {
+    this.props.tutorialInit();
+    this.props.routeSet('page');
   }
   render() {
     const {pristine, submitting, handleSubmit, invalid} = this.props;
@@ -132,7 +130,7 @@ class TutorialConfig extends React.Component <{
             label='Continue'
             secondary={true}
             disabled={invalid}
-            onTouchTap={this.props.routeToPage.bind(this)}
+            onTouchTap={this.routeToPage.bind(this)}
           />
 
         </form>
