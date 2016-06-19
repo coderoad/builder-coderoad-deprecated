@@ -6,7 +6,7 @@ export {
   tutorialTaskAdd, tutorialHintAdd, tutorialActionAdd
 } from './modules/tutorial';
 export {windowToggle, quit} from './modules/window';
-export {editorMarkdownOpen, editorTestOpen} from './modules/editor-paths';
+export {editorMarkdownOpen, editorTestOpen, editorPjOpen} from './modules/editor-paths';
 
 export {
   alertOpen, alertClose, alertReplay,

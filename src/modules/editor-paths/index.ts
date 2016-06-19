@@ -30,3 +30,10 @@ export function editorTestOpen(pageIndex: number, testIndex: number) {
     dispatch(editorOpen(filePath));
   };
 }
+
+export function editorPjOpen() {
+  return (dispatch, getState) => {
+    const {dir} = getState();
+    dispatch(editorOpen('package.json'));
+  };
+}

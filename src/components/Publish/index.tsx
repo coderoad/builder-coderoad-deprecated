@@ -4,7 +4,7 @@ import {Field, reduxForm} from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {pjSave, pjLoad, routeSet} from '../../actions';
+import {pjSave, pjLoad, routeSet, editorPjOpen} from '../../actions';
 import {topElement} from '../TopPanel';
 import textField from '../Form/textField';
 import validate from './validate';
@@ -22,16 +22,17 @@ const styles = {
 
 @connect(state => ({
   packageJson: state.packageJson,
-}), {pjLoad, pjSave})
+}), {pjLoad, pjSave, editorPjOpen})
 class TutorialPublish extends React.Component<{
   packageJson?: any, pjSave?: (pj: PackageJson) => any,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
   invalid?: boolean, initialize?: (values: Object) => any,
-  pjLoad?: () => any
+  pjLoad?: () => Redux.ActionCreator,
+  editorPjOpen?: () => Redux.ActionCreator,
 }, {}> {
   componentWillMount() {
     this.props.pjLoad();
-    this.props.open
+    this.props.editorPjOpen();
   }
   componentDidMount() {
     topElement.toggle(false);

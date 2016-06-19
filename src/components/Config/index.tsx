@@ -4,7 +4,7 @@ import {Field, reduxForm, formValueSelector} from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {pjSave, pjLoad, tutorialInit, routeSet} from '../../actions';
+import {pjSave, pjLoad, tutorialInit, routeSet, editorPjOpen} from '../../actions';
 import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 import {topElement} from '../TopPanel';
@@ -25,7 +25,7 @@ const styles = {
 
 @connect(state => ({
   packageJson: state.packageJson,
-}), {pjSave, pjLoad, tutorialInit, routeSet })
+}), {pjSave, pjLoad, tutorialInit, routeSet, editorPjOpen })
 class TutorialConfig extends React.Component <{
   packageJson?: PackageJson,
   pjSave?: (pj: Tutorial.PJ) => Redux.ActionCreator,
@@ -33,7 +33,8 @@ class TutorialConfig extends React.Component <{
   tutorialInit?: () => Redux.ActionCreator,
   routeSet?: (route: string) => Redux.ActionCreator,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
-  language?: string, invalid?: boolean, initialize?: any
+  language?: string, invalid?: boolean, initialize?: any,
+  editorPjOpen?: () => Redux.ActionCreator,
 }, {}> {
   refs: {
     [key: string]: (Element);
@@ -41,6 +42,7 @@ class TutorialConfig extends React.Component <{
   };
   componentWillMount() {
     this.props.pjLoad();
+    this.props.editorPjOpen();
   }
   componentDidMount() {
     topElement.toggle(false);
