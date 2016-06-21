@@ -86,7 +86,7 @@ export default class TaskActions extends React.Component<{
           </Step>
         ))}
       </Stepper>
-      <span style={styles.form}>
+      {/*<span style={styles.form}>
         <SelectField
           value={this.state.as.action}
           onChange={this.handleSelect.bind(this)}
@@ -101,7 +101,7 @@ export default class TaskActions extends React.Component<{
           value={this.state.as.content}
           onChange={this.handleText.bind(this)}
         />
-      </span>
+      </span>*/}
       </section>
     );
   }

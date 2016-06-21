@@ -45,14 +45,13 @@ export default class Hints extends React.Component<{
               onClick={editorMarkdownOpen.bind(this, hint, null)}/>
           ))
         }
-        <TextField
+        {/*<TextField
           style={styles.text}
           hintText='Hint text'
           multiLine={true}
           value={text}
           onChange={this.handleChange.bind(this)}
-        />
-
+        />*/}
       </List>
     );
   }

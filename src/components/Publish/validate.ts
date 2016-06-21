@@ -1,19 +1,29 @@
-import * as debounce from 'lodash.debounce';
+const fields = {
+  name: 'coderoad-tutorial-name',
+  version: '0.1.0',
+  description: 'Describe your tutorial',
+  keywords: '',
 
-const validate = debounce(values => {
-  const errors: { description?: string, version?: string} = {};
-  const requiredFields = ['description', 'version', 'author'];
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Required';
-    }
-  });
-  // if (!values.description || values.description.length) {
-  //   errors.description = 'Incomplete tutorial description';
-  // }
-  if (!values.version || !values.version.match(/^(\d+\.)?(\d+\.)?(\*|\d+)$/)) {
-    errors.version = 'Invalid version number';
-  }
-  return errors;
-}, 200);
-export default validate;
+};
+
+// {
+//   "name": "coderoad-example",
+//   "version": "0.1.0",
+//   "description": "Some descript",
+//   "keywords": [
+//     "coderoad,tutorial"
+//   ],
+//   "author": "",
+//   "files": [
+//     "coderoad.json",
+//     "tutorial"
+//   ],
+//   "main": "coderoad.json",
+//   "config": {
+//     "language": "JS",
+//     "runner": "mocha-coderoad"
+//   },
+//   "engines": {
+//     "node": ">=0.10.3"
+//   }
+// }

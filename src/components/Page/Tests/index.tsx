@@ -2,11 +2,13 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {join} from 'path';
 import {editorOpen} from '../../../actions';
-import FlatButton from 'material-ui/FlatButton';
+// import Chip from 'material-ui/Chip';
+// import Avatar from 'material-ui/Avatar';
+// import CodeIcon from 'material-ui/svg-icons/action/code';
 import {configSelector, tutorialConfigOptions} from 'core-coderoad';
 
 const styles = {
-  button: {
+  test: {
     bottom: '8px',
   },
 };
@@ -25,20 +27,25 @@ export default class Tests extends React.Component<{
   open?: (file: string) => any
 }, {}> {
   render() {
-    const {tests, config, style, open} = this.props;
+    const {tests, style, open} = this.props;
 
     return (
       <div style={style}>
         {tests.map((file, index) => (
-          <FlatButton
-            key={index}
-            style={styles.button}
-            onClick={open.bind(this, file)}
-            label={'Test'}
-            secondary={true}
-          />
+          <button>{file}</button>
         ))}
       </div>
     );
   }
 }
+
+/*
+  <Chip
+   key={index}
+   style={styles.test}
+   onClick={open.bind(this, file)}
+   >
+    <Avatar icon={<CodeIcon />} />
+    {file}
+  </Chip>
+  */
