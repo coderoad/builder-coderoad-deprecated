@@ -7,6 +7,7 @@ export {
 } from './modules/tutorial';
 export {windowToggle, quit} from './modules/window';
 export {editorMarkdownOpen, editorTestOpen, editorPjOpen} from './modules/editor-paths';
+export {validatePj} from './modules/validation';
 
 export {
   alertOpen, alertClose, alertReplay,

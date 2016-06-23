@@ -4,7 +4,7 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {pjSave, pjLoad, routeSet, editorPjOpen} from '../../actions';
+import {validatePj, pjSave, pjLoad, routeSet, editorPjOpen} from '../../actions';
 import {topElement} from '../TopPanel';
 import textField from '../Form/textField';
 
@@ -19,22 +19,14 @@ const styles = {
   },
 };
 
-const fields = [{
-  name: 'author(s)',
-  example: 'Shawn McKay <my@email.com>',
-  status: true,
-}, {
-  name: 'keywords',
-  example: '["CodeRoad", "JS", "React"]',
-  status: false,
-}];
-
 @connect(state => ({
-  packageJson: state.packageJson,
-}), {pjLoad, pjSave, editorPjOpen})
+  validation: state.validation,
+}), {pjLoad, pjSave, editorPjOpen, validatePj})
 export default class TutorialPublish extends React.Component<{
-  packageJson?: any, pjSave?: (pj: PackageJson) => any,
+  validation?: Validation.Object,
+  pjSave?: (pj: PackageJson) => any,
   pjLoad?: () => Redux.ActionCreator,
+  validatePj?: () => Redux.ActionCreator,
   editorPjOpen?: () => Redux.ActionCreator,
 }, {}> {
   componentWillMount() {
@@ -45,6 +37,7 @@ export default class TutorialPublish extends React.Component<{
     topElement.toggle(false);
   }
   render() {
+    const {validation, validatePj} = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
@@ -59,6 +52,7 @@ export default class TutorialPublish extends React.Component<{
             adjustForCheckbox={false}
           >
             <TableRow>
+              <TableHeaderColumn>Status</TableHeaderColumn>
               <TableHeaderColumn>Field</TableHeaderColumn>
               <TableHeaderColumn>Description</TableHeaderColumn>
             </TableRow>
@@ -66,8 +60,16 @@ export default class TutorialPublish extends React.Component<{
           <TableBody
              displayRowCheckbox={false}
           >
-            {fields.map((field, index) => (
+            {validation.errors.map((field, index) => (
               <TableRow key={index}>
+                <TableRowColumn>Error</TableRowColumn>
+                <TableRowColumn>{field.name}</TableRowColumn>
+                <TableRowColumn>{field.example}</TableRowColumn>
+              </TableRow>
+            ))}
+            {validation.warnings.map((field, index) => (
+              <TableRow key={index}>
+                <TableRowColumn>Warning</TableRowColumn>
                 <TableRowColumn>{field.name}</TableRowColumn>
                 <TableRowColumn>{field.example}</TableRowColumn>
               </TableRow>
@@ -76,9 +78,15 @@ export default class TutorialPublish extends React.Component<{
         </Table>
         <RaisedButton
           style={styles.button}
+          label='Validate'
+          primary={true}
+          onTouchTap={validatePj}
+        />
+        <RaisedButton
+          style={styles.button}
           label='Publish'
           secondary={true}
-          disabled={true}
+          disabled={validation.errors.length === 0}
           onTouchTap={() => alert('Publish not yet implemented')}
         />
       </Card>
