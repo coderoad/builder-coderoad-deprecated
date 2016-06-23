@@ -85,6 +85,7 @@ class TutorialConfig extends React.Component <{
   render() {
     const {pristine, submitting, handleSubmit, invalid} = this.props;
     return (
+    <section className='cr-page'>
       <Card style={styles.card}>
         <CardHeader
           title='Tutorial Configuration'
@@ -137,6 +138,7 @@ class TutorialConfig extends React.Component <{
 
         </form>
       </Card>
+    </section>
     );
   }
 }

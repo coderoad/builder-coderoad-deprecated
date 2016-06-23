@@ -96,6 +96,7 @@
   "src/components/Page/TasksComplete/index.tsx",
   "src/components/Page/Tests/index.tsx",
   "src/components/Publish/index.tsx",
+  "src/components/Publish/publishStep.tsx",
   "src/components/Routes/index.tsx",
   "src/components/SidePanel/SidePanel.tsx",
   "src/components/SidePanel/SideRoot.tsx",

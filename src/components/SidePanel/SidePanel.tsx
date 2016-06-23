@@ -5,6 +5,14 @@ import Routes from '../Routes';
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 
+const styles = {
+  drawer: {
+    height: '100%',
+    width: '100%',
+    overflowY: 'scroll',
+  },
+};
+
 @connect(state => ({
   windowToggle: state.windowToggle,
 }))
@@ -19,6 +27,7 @@ export default class SidePanel extends React.Component<{
           width={400}
           openSecondary={true}
           open={windowToggle}
+          style={styles.drawer}
         >
           <div className='cr-bg'>
             <AppMenu />

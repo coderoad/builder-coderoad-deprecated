@@ -1,17 +1,11 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import MenuItem from 'material-ui/MenuItem';
 import {Card, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {validatePj, pjSave, pjLoad, routeSet, editorPjOpen} from '../../actions';
 import {topElement} from '../TopPanel';
-import textField from '../Form/textField';
-import ErrorIcon from 'material-ui/svg-icons/alert/error';
-import WarningIcon from 'material-ui/svg-icons/alert/warning';
-import {pink500, amber500} from 'material-ui/styles/colors';
-import {Stepper, Step, StepButton, StepContent} from 'material-ui/Stepper';
-import {Markdown} from '../index';
+import {Stepper} from 'material-ui/Stepper';
+import publishStep from './publishStep';
 
 const styles = {
   card: {
@@ -53,58 +47,35 @@ export default class TutorialPublish extends React.Component<{
     this.props.pjLoad();
     this.props.validatePj();
   }
+  selectStep(index) {
+    this.setState({
+      stepIndex: index
+    });
+  }
   render() {
     const {validation} = this.props;
     return (
+    <section className='cr-page'>
       <Card style={styles.card}>
         <CardHeader
-          title='Tutorial Info'
+          title='Tutorial Errors & Warnings'
         />
         <Stepper
           activeStep={this.state.stepIndex}
           linear={false}
           orientation='vertical'
         >
-          {validation.errors.map((field, index) => (
-            <Step
-              key={index}
-              completed={false}
-            >
-              <StepButton
-                icon={<ErrorIcon color={pink500} />}
-                onClick={() => this.setState({
-                stepIndex: index
-              })}>
-                {field.name}
-              </StepButton>
-              <StepContent>
-              <p>Example:</p>
-                <pre><code>
-                  "{field.name}": "{field.example}"
-                </code></pre>
-              </StepContent>
-            </Step>
-          ))}
-          {validation.warnings.map((field, index) => (
-            <Step
-              key={index}
-              completed={false}
-            >
-              <StepButton
-                icon={<WarningIcon color={amber500}/>}
-                onClick={() => this.setState({
-                  stepIndex: index + validation.errors.length
-                })}>
-                {field.name}
-              </StepButton>
-              <StepContent>
-                <p>Example:</p>
-                  <pre><code>
-                    "{field.name}": "{field.example}"
-                  </code></pre>
-              </StepContent>
-            </Step>
-          ))}
+          {/* Errors */}
+          {validation.errors.map((field, index) => publishStep(
+            index, 'error', field, this.selectStep.bind(this, index))
+          )}
+
+          {/* Warnings */}
+          {validation.warnings.map((field, index) => publishStep(
+            index + validation.errors.length, 'warning', field,
+            this.selectStep.bind(this, index + validation.errors.length))
+          )}
+
         </Stepper>
         <RaisedButton
           style={styles.button}
@@ -120,6 +91,7 @@ export default class TutorialPublish extends React.Component<{
           onTouchTap={() => alert('Publish not yet implemented')}
         />
       </Card>
+    </section>
     );
   }
 }

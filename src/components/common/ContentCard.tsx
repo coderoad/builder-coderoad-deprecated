@@ -3,7 +3,7 @@ import {Markdown} from '../index';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 const styles = {
-  margin: '5px'
+  margin: '5px',
 };
 
 const ContentCard: React.StatelessComponent<{
