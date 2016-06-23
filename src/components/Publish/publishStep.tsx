@@ -3,6 +3,7 @@ import {Step, StepButton, StepContent} from 'material-ui/Stepper';
 import ErrorIcon from 'material-ui/svg-icons/alert/error';
 import WarningIcon from 'material-ui/svg-icons/alert/warning';
 import {pink500, amber500} from 'material-ui/styles/colors';
+import {CodeBlock} from 'core-coderoad';
 
 const styles = {
   stepContent: {
@@ -35,9 +36,11 @@ export default function publishStep(
     <StepContent>
       <p style={styles.stepContent}>"{field.name}" {field.msg}</p>
       <p>Example:</p>
-      <pre><code>
-        "{field.name}": "{field.example}"
-      </code></pre>
+      <CodeBlock lang='js' style={styles.stepContent}>
+{`{
+  "${field.name}": "${field.example}"
+}`}
+      </CodeBlock>
     </StepContent>
   </Step>
   );
