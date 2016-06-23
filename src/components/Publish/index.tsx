@@ -11,7 +11,9 @@ const styles = {
   card: {
     margin: '10px',
     padding: '30px 20px',
-    textAlign: 'center',
+  },
+  header: {
+
   },
   button: {
     margin: '30px 10px 20px 10px',
