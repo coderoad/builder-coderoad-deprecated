@@ -10,6 +10,8 @@ import textField from '../Form/textField';
 import ErrorIcon from 'material-ui/svg-icons/alert/error';
 import WarningIcon from 'material-ui/svg-icons/alert/warning';
 import {pink500, amber500} from 'material-ui/styles/colors';
+import {Stepper, Step, StepButton, StepContent} from 'material-ui/Stepper';
+import {Markdown} from '../index';
 
 const styles = {
   card: {
@@ -30,7 +32,15 @@ export default class TutorialPublish extends React.Component<{
   pjLoad?: () => Redux.ActionCreator,
   validatePj?: () => Redux.ActionCreator,
   editorPjOpen?: () => Redux.ActionCreator,
-}, {}> {
+}, {
+  stepIndex: number
+}> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stepIndex: 0,
+    };
+  }
   componentWillMount() {
     this.props.pjLoad();
     this.props.editorPjOpen();
@@ -50,43 +60,52 @@ export default class TutorialPublish extends React.Component<{
         <CardHeader
           title='Tutorial Info'
         />
-         <Table
-            fixedHeader={true}
-            selectable={false}
-          >
-          <TableHeader
-            displaySelectAll={false}
-            adjustForCheckbox={false}
-          >
-            <TableRow>
-              <TableHeaderColumn>Status</TableHeaderColumn>
-              <TableHeaderColumn>Field</TableHeaderColumn>
-              <TableHeaderColumn>Description</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody
-             displayRowCheckbox={false}
-          >
-            {validation.errors.map((field, index) => (
-              <TableRow key={index}>
-                <TableRowColumn>
-                  <ErrorIcon color={pink500}/>
-                </TableRowColumn>
-                <TableRowColumn>{field.name}</TableRowColumn>
-                <TableRowColumn>{field.example}</TableRowColumn>
-              </TableRow>
-            ))}
-            {validation.warnings.map((field, index) => (
-              <TableRow key={index}>
-                <TableRowColumn>
-                  <WarningIcon color={amber500}/>
-                </TableRowColumn>
-                <TableRowColumn>{field.name}</TableRowColumn>
-                <TableRowColumn>{field.example}</TableRowColumn>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <Stepper
+          activeStep={this.state.stepIndex}
+          linear={false}
+          orientation='vertical'
+        >
+          {validation.errors.map((field, index) => (
+            <Step
+              key={index}
+              completed={false}
+            >
+              <StepButton
+                icon={<ErrorIcon color={pink500} />}
+                onClick={() => this.setState({
+                stepIndex: index
+              })}>
+                {field.name}
+              </StepButton>
+              <StepContent>
+              <p>Example:</p>
+                <pre><code>
+                  "{field.name}": "{field.example}"
+                </code></pre>
+              </StepContent>
+            </Step>
+          ))}
+          {validation.warnings.map((field, index) => (
+            <Step
+              key={index}
+              completed={false}
+            >
+              <StepButton
+                icon={<WarningIcon color={amber500}/>}
+                onClick={() => this.setState({
+                  stepIndex: index + validation.errors.length
+                })}>
+                {field.name}
+              </StepButton>
+              <StepContent>
+                <p>Example:</p>
+                  <pre><code>
+                    "{field.name}": "{field.example}"
+                  </code></pre>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
         <RaisedButton
           style={styles.button}
           label='Validate'
@@ -97,7 +116,7 @@ export default class TutorialPublish extends React.Component<{
           style={styles.button}
           label='Publish'
           secondary={true}
-          disabled={validation.errors.length === 0}
+          disabled={validation.errors.length > 0}
           onTouchTap={() => alert('Publish not yet implemented')}
         />
       </Card>

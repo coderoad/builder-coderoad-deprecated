@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Step, StepLabel, StepContent} from 'material-ui/Stepper';
 import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import VerifyButton from './VerifyButton';
