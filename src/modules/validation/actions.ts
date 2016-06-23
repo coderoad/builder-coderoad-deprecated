@@ -1,5 +1,8 @@
 import {VALIDATE_PJ} from './types';
 
 export function validatePj() {
-  return { type: VALIDATE_PJ };
+  return (dispatch, getState) => {
+    const {packageJson} = getState();
+    dispatch({ type: VALIDATE_PJ, payload: {packageJson} });
+  };
 }

@@ -7,6 +7,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {validatePj, pjSave, pjLoad, routeSet, editorPjOpen} from '../../actions';
 import {topElement} from '../TopPanel';
 import textField from '../Form/textField';
+import ErrorIcon from 'material-ui/svg-icons/alert/error';
+import WarningIcon from 'material-ui/svg-icons/alert/warning';
+import {pink500, amber500} from 'material-ui/styles/colors';
 
 const styles = {
   card: {
@@ -21,10 +24,9 @@ const styles = {
 
 @connect(state => ({
   validation: state.validation,
-}), {pjLoad, pjSave, editorPjOpen, validatePj})
+}), {pjLoad, editorPjOpen, validatePj})
 export default class TutorialPublish extends React.Component<{
   validation?: Validation.Object,
-  pjSave?: (pj: PackageJson) => any,
   pjLoad?: () => Redux.ActionCreator,
   validatePj?: () => Redux.ActionCreator,
   editorPjOpen?: () => Redux.ActionCreator,
@@ -35,9 +37,14 @@ export default class TutorialPublish extends React.Component<{
   }
   componentDidMount() {
     topElement.toggle(false);
+    this.validate();
+  }
+  validate() {
+    this.props.pjLoad();
+    this.props.validatePj();
   }
   render() {
-    const {validation, validatePj} = this.props;
+    const {validation} = this.props;
     return (
       <Card style={styles.card}>
         <CardHeader
@@ -62,14 +69,18 @@ export default class TutorialPublish extends React.Component<{
           >
             {validation.errors.map((field, index) => (
               <TableRow key={index}>
-                <TableRowColumn>Error</TableRowColumn>
+                <TableRowColumn>
+                  <ErrorIcon color={pink500}/>
+                </TableRowColumn>
                 <TableRowColumn>{field.name}</TableRowColumn>
                 <TableRowColumn>{field.example}</TableRowColumn>
               </TableRow>
             ))}
             {validation.warnings.map((field, index) => (
               <TableRow key={index}>
-                <TableRowColumn>Warning</TableRowColumn>
+                <TableRowColumn>
+                  <WarningIcon color={amber500}/>
+                </TableRowColumn>
                 <TableRowColumn>{field.name}</TableRowColumn>
                 <TableRowColumn>{field.example}</TableRowColumn>
               </TableRow>
@@ -80,7 +91,7 @@ export default class TutorialPublish extends React.Component<{
           style={styles.button}
           label='Validate'
           primary={true}
-          onTouchTap={validatePj}
+          onTouchTap={this.validate.bind(this)}
         />
         <RaisedButton
           style={styles.button}

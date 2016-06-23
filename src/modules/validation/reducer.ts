@@ -9,7 +9,7 @@ const _v: Validation.Object = {
 export default function validation(v = _v, action: Action): Validation.Object {
   switch (action.type) {
     case VALIDATE_PJ:
-      return validatePackageJson();
+      return validatePackageJson(action.payload.packageJson);
     default:
       return v;
   }
