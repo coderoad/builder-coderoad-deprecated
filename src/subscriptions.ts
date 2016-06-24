@@ -17,7 +17,7 @@ export default class Subscriptions {
     atom.workspace.observeTextEditors((editor: AtomCore.IEditor) => {
       this.subscriptions.add(
         editor.onDidSave(() => {
-          if (store.getState().window) {
+          if (store.getState().windowToggle) {
             store.dispatch(tutorialBuild());
             store.dispatch(tutorialLoad());
           }
