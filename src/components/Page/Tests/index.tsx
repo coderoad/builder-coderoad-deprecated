@@ -5,7 +5,7 @@ import {editorTestOpen} from '../../../actions';
 // import Chip from 'material-ui/Chip';
 // import Avatar from 'material-ui/Avatar';
 // import CodeIcon from 'material-ui/svg-icons/action/code';
-import {configSelector, tutorialConfigOptions} from 'core-coderoad';
+import {configSelector, tutorialConfigOptions, routeSet} from 'core-coderoad';
 
 const styles = {
   test: {
@@ -15,19 +15,24 @@ const styles = {
 
 @connect(state => ({
   config: configSelector(state),
-}), {editorTestOpen})
+}), {editorTestOpen, routeSet})
 export default class Tests extends React.Component<{
   tests: string[], config?: Tutorial.Config, style?: Object,
-  editorTestOpen?: (file: string) => any
+  editorTestOpen?: (file: string) => Redux.ActionCreator,
+  routeSet?: (path: string) => Redux.ActionCreator,
 }, {}> {
+  selectTest(file: string) {
+    this.props.editorTestOpen(file);
+    this.props.routeSet('test');
+  }
   render() {
-    const {tests, style, editorTestOpen} = this.props;
+    const {tests, style} = this.props;
 
     return (
       <div style={style}>
         {tests.map((file, index) => (
           <button
-            onClick={editorTestOpen.bind(this, file)}>{file}</button>
+            onClick={this.selectTest.bind(this, file)}>{file}</button>
         ))}
       </div>
     );

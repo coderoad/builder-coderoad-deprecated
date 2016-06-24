@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Page, Start, TutorialConfig, TutorialPublish} from '../index';
+import {Page, Start, TutorialConfig, TutorialPublish, Test} from '../index';
 
 @connect(state => ({
   route: state.route,
@@ -18,7 +18,8 @@ export default class Routes extends React.Component<{
         return <TutorialConfig />;
       case 'publish':
         return <TutorialPublish />;
-
+      case 'test':
+        return <Test />;
       // TODO
       // case 'tutorialPublish':
       //   return <TutorialPublish {...props} />;

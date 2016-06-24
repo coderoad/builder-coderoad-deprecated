@@ -6,6 +6,7 @@ export {default as Start} from './Start';
 export {default as Checks} from './Start/Checks';
 export {default as TutorialConfig} from './Config';
 export {default as TutorialPublish} from './Publish';
+export {default as Test} from './Test';
 
 export {default as DynamicStepper} from './common/DynamicStepper';
 export {default as ContentCard} from './common/ContentCard';

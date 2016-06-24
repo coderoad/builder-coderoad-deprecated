@@ -111,6 +111,7 @@
   "src/components/Start/Checks/VerifyButton.tsx",
   "src/components/Start/index.tsx",
   "src/components/Start/Welcome/index.tsx",
+  "src/components/Test/index.tsx",
   "src/components/TopPanel/TopPanel.tsx",
   "src/components/TopPanel/TopRoot.tsx"
  ],

@@ -16,7 +16,7 @@ const styles = {
 
 @connect(null, {editorMarkdownOpen})
 export default class Page extends React.Component<{
-  editorMarkdownOpen: (content?: string, index?: number) => Redux.ActionCreator
+  editorMarkdownOpen?: (content?: string, index?: number) => Redux.ActionCreator
 }, {}> {
   componentDidMount() {
     this.props.editorMarkdownOpen(null, null);
