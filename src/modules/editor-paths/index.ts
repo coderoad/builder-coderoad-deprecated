@@ -5,16 +5,23 @@ import twoDigitify from '../../services/twoDigitify';
 
 export function editorMarkdownOpen(content: string, index?: number) {
   return (dispatch, getState) => {
+
+    // open file
+    const {pagePosition} = getState();
     const filePath = join(
       'tutorial',
-      twoDigitify(index ? index + 1 : getState().pagePosition + 1),
+      twoDigitify(index ? index + 1 : pagePosition + 1),
       'index.md'
     );
     dispatch(editorOpen(filePath));
-    if (content) {
-      content = content.replace(/↵/mg, '\n');
-      dispatch(editorScroll(content));
-    }
+
+    // scroll to content
+    setTimeout(() => {
+      if (content) {
+        content = content.replace(/↵/mg, '\n');
+        dispatch(editorScroll(content));
+      }
+    });
   };
 }
 

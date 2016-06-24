@@ -35,12 +35,12 @@ export default class PageDescription extends React.Component<{
           /> : null}
         <CardText expandable={true}>
           {contentArray.map((c: string, index) => (
-            <Markdown
+            <div
               key={index}
               onClick={editorMarkdownOpen.bind(this, c, null)}
             >
-            {c}
-            </Markdown>
+              <Markdown>{c}</Markdown>
+            </div>
           ))}
         </CardText>
       </Card>

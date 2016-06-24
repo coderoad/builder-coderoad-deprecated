@@ -11,7 +11,6 @@ import TaskActions from '../TaskActions';
 import Hints from '../Hints';
 import AddButton from '../AddButton';
 import {tutorialTaskAdd, editorMarkdownOpen} from '../../../actions';
-import twoDigitify from '../../../services/twoDigitify';
 import {join} from 'path';
 import {tasksSelector} from 'core-coderoad';
 
