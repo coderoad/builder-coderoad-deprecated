@@ -25,7 +25,7 @@ const styles = {
 };
 
 @connect(state => ({
-    tutorial: state.tutorial,
+  tutorial: state.tutorial,
 }), {pageSet, editorMarkdownOpen, tutorialPageAdd})
 export default class TopPanel extends React.Component<{
   tutorial?: CR.Tutorial,
@@ -38,7 +38,7 @@ export default class TopPanel extends React.Component<{
     this.props.editorMarkdownOpen(title, index);
   }
   render() {
-    const {tutorial, tutorialPageAdd} = this.props;
+    const {tutorial} = this.props;
 
     // no tutorial or pages? no need for a tab bar
     if (!tutorial || !tutorial.pages) { return null; }

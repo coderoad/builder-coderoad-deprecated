@@ -9,9 +9,11 @@ import {topElement} from '../TopPanel';
 import {editorMarkdownOpen} from '../../actions';
 
 const styles = {
-  height: '100%',
-  width: '100%',
-  overflowY: 'scroll',
+  page: {
+    height: '100%',
+    width: '100%',
+    overflowY: 'scroll',
+  },
 };
 
 @connect(null, {editorMarkdownOpen})
@@ -27,7 +29,7 @@ export default class Page extends React.Component<{
   }
   render() {
     return (
-      <section style={styles} className='cr-page'>
+      <section style={styles.page} className='cr-page'>
         <PageDescription />
         <Tasks />
         <TasksComplete />
