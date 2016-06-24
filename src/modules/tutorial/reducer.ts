@@ -8,6 +8,8 @@ import {join} from 'path';
 import taskUpdate from './utils/taskUpdate';
 import pageGet from './utils/pageGet';
 import taskGet from './utils/taskGet';
+import readFile from '../utils/readFile';
+import writeFile from '../utils/writeFile';
 
 const _tutorial: Tutorial.Output = {
   info: {
@@ -36,12 +38,9 @@ export default function tutorial(t = _tutorial, action: Action): Tutorial.Output
       return t;
 
     case TUTORIAL_LOAD:
-      // load data from coderoad.json
-      const data = JSON.parse(readFileSync(
-        join(action.payload.dir, 'coderoad.json'), 'utf8')
-      );
+      const loadedCj = readFile(action.payload.dir, 'coderoad.json');
+      return !!loadedCj ? loadedCj : t;
       // TODO: validate coderoad.json data
-      return data;
 
     case TUTORIAL_PAGE_ADD:
       // add a new page template

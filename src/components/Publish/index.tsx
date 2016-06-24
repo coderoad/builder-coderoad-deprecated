@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {validateTutorial, pjSave, pjLoad, cjLoad, routeSet, editorPjOpen} from '../../actions';
+import {validateTutorial, pjSave, pjLoad, tutorialLoad, routeSet, editorPjOpen} from '../../actions';
 import {topElement} from '../TopPanel';
 import {Stepper} from 'material-ui/Stepper';
 import publishStep from './publishStep';
@@ -25,11 +25,11 @@ const styles = {
 
 @connect(state => ({
   validation: state.validation,
-}), {pjLoad, cjLoad, editorPjOpen, validateTutorial})
+}), {pjLoad, tutorialLoad, editorPjOpen, validateTutorial})
 export default class TutorialPublish extends React.Component<{
   validation?: Validation.Object,
   pjLoad?: () => Redux.ActionCreator,
-  cjLoad?: () => Redux.ActionCreator,
+  tutorialLoad?: () => Redux.ActionCreator,
   validateTutorial?: () => Redux.ActionCreator,
   editorPjOpen?: () => Redux.ActionCreator,
 }, {
@@ -51,7 +51,7 @@ export default class TutorialPublish extends React.Component<{
   }
   validate() {
     this.props.pjLoad();
-    this.props.cjLoad();
+    this.props.tutorialLoad();
     this.props.validateTutorial();
   }
   selectStep(index) {
