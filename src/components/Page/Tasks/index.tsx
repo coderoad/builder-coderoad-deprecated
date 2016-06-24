@@ -98,7 +98,7 @@ export default class Tasks extends React.Component<{
           </Card>)
         )}
 
-        <AddButton callback={tutorialTaskAdd}/>
+        {/*<AddButton callback={tutorialTaskAdd}/>*/}
 
       </div>
     );
