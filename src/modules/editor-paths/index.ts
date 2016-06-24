@@ -25,14 +25,20 @@ export function editorMarkdownOpen(content: string, index?: number) {
   };
 }
 
-export function editorTestOpen(pageIndex: number, testIndex: number) {
+export function editorTestOpen(file: string) {
   return (dispatch, getState) => {
     // get language suffix, ex: .js
-    const suffix = tutorialConfigOptions[getState().packageJson.config].language.suffix;
+    const configLanguage = getState().packageJson.config.language;
+    if (!configLanguage) {
+      return;
+    }
+    const suffix = tutorialConfigOptions[configLanguage].language.suffix;
+    if (!suffix) {
+      return;
+    }
     const filePath = join(
       'tutorial',
-      twoDigitify(pageIndex || getState().pagePosition),
-      twoDigitify(testIndex) + '.' + suffix
+      file + '.' + suffix
     );
     dispatch(editorOpen(filePath));
   };
