@@ -33,7 +33,7 @@ class TutorialConfig extends React.Component <{
   tutorialInit?: () => Redux.ActionCreator,
   routeSet?: (route: string) => Redux.ActionCreator,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
-  language?: string, valid?: boolean, initialize?: any,
+  language?: string, invalid?: boolean, initialize?: any,
   editorPjOpen?: () => Redux.ActionCreator,
 }, {}> {
   refs: {
@@ -66,12 +66,16 @@ class TutorialConfig extends React.Component <{
     }
   }
   onSubmit(values) {
-    const {name, language, runner} = values;
+    const {name, language, runner, repo} = values;
     this.props.pjSave(Object.assign(
       {},
       this.props.packageJson,
       {
         name,
+        repositiory: repo || '',
+        bugs: {
+          url: repo || '',
+        },
         config: {
           language, runner
         }
@@ -83,7 +87,7 @@ class TutorialConfig extends React.Component <{
     this.props.routeSet('page');
   }
   render() {
-    const {pristine, submitting, handleSubmit, valid} = this.props;
+    const {pristine, submitting, handleSubmit, invalid} = this.props;
     return (
     <section className='cr-page'>
       <Card style={styles.card}>
@@ -97,6 +101,7 @@ class TutorialConfig extends React.Component <{
               id='name'
               name='name'
               component={textField.bind(null, {
+                floatingLabelText: 'Tutorial Name',
                 hintText: 'coderoad-tutorial-name',
               })}
               tabIndex='1'
@@ -122,18 +127,28 @@ class TutorialConfig extends React.Component <{
               tabIndex='3'
             />
 
+            <Field
+              id='repo'
+              name='repo'
+              component={textField.bind(null, {
+                floatingLabelText: 'Path to Repo (optional)',
+                hintText: 'http://github.com/path/to/repo',
+              })}
+              tabIndex='4'
+            />
+
             <RaisedButton
               type='submit'
               style={styles.button}
               label='Save'
               primary={true}
-              disabled={!submitting}
+              disabled={submitting}
             />
             <RaisedButton
               style={styles.button}
               label='Continue'
               secondary={true}
-              disabled={valid}
+              disabled={invalid}
               onTouchTap={this.routeToPage.bind(this)}
             />
 

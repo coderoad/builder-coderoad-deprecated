@@ -5,6 +5,7 @@ interface ConfigForm {
   name?: string;
   language?: string;
   runner?: string;
+  repo?: string;
 }
 
 const validate = values => {
@@ -21,6 +22,11 @@ const validate = values => {
   if (values.language &&
     !values.runner && !tutorialConfigOptions[values.language].runners.includes(values.runner)) {
     errors.runner = `${values.runner} runner does not match language ${values.language}`;
+  }
+  if (values.repo) {
+    if (!values.repo.match(/^https?:\/\/[a-zA-Z\.\/]+$/)) {
+      errors.repo = 'Invalid http(s)://github.com/user/repo';
+    }
   }
   return errors;
 };
