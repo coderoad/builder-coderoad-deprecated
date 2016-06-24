@@ -2,6 +2,7 @@ import {
   TUTORIAL_INIT, TUTORIAL_LOAD, TUTORIAL_BUILD, TUTORIAL_PUBLISH,
   TUTORIAL_PAGE_ADD, TUTORIAL_TASK_ADD, TUTORIAL_HINT_ADD, TUTORIAL_ACTION_ADD
 } from './types';
+import {tutorialUpdated} from '../../actions';
 
 export function tutorialInit() {
   return function(dispatch, getState) {
@@ -23,6 +24,9 @@ export function tutorialBuild() {
   return (dispatch, getState) => {
     const {dir} = getState();
     dispatch({ type: TUTORIAL_BUILD, payload: { dir } });
+    if (!getState().updated) {
+      dispatch(tutorialUpdated(true));
+    }
   };
 }
 
@@ -48,12 +52,13 @@ export function tutorialActionAdd(taskPosition: number, tutorialAction: Object) 
 export function tutorialHintAdd(taskPosition: number, hint: string) {
   return (dispatch, getState) => {
     const {pagePosition} = getState();
-    dispatch({ type: TUTORIAL_HINT_ADD, payload: { pagePosition, taskPosition, hint }});
+    dispatch({ type: TUTORIAL_HINT_ADD, payload: { pagePosition, taskPosition, hint } });
   };
 }
 
 export function tutorialPublish(type: string) {
   return (dispatch, getState) => {
     dispatch({ type: TUTORIAL_PUBLISH, payload: { type } });
+    dispatch(tutorialUpdated(false));
   };
 }

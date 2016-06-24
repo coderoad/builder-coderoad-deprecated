@@ -8,6 +8,7 @@ import {reducer as packageJson} from './modules/package-json';
 import {reducer as tutorial} from './modules/tutorial';
 import {reducer as windowToggle} from './modules/window';
 import {reducer as validation} from './modules/validate-tutorial';
+import {reducer as updated} from './modules/updated';
 
 // core reducers
 import {
@@ -18,7 +19,7 @@ import {
 } from 'core-coderoad';
 
 export default combineReducers({
-  alert, checks, editor, dir,
+  alert, checks, editor, dir, form,
   packageJson, pagePosition, route,
-  tutorial, windowToggle, form, validation,
+  tutorial, updated, validation, windowToggle,
 });

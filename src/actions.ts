@@ -6,6 +6,7 @@ export {
   tutorialInit, tutorialLoad, tutorialBuild, tutorialPageAdd,
   tutorialTaskAdd, tutorialHintAdd, tutorialActionAdd, tutorialPublish
 } from './modules/tutorial';
+export {tutorialUpdated} from './modules/updated';
 export {windowToggle, quit} from './modules/window';
 export {validateTutorial} from './modules/validate-tutorial';
 

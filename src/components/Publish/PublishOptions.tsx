@@ -11,38 +11,47 @@ const styles = {
   },
 };
 
-@connect(null, {tutorialPublish})
+@connect(state => ({
+  version: state.packageJson.version || 'ERROR',
+  updated: state.updated,
+}), {tutorialPublish})
 export default class PublishOptionsModal extends React.Component<{
-  open: boolean, handleClose: () => any,
-  tutorialPublish: (type: string) => Redux.ActionCreator,
+  open: boolean, handleClose: () => any, version?: string,
+  tutorialPublish?: (type: string) => Redux.ActionCreator,
+  updated?: boolean,
 }, {}> {
   publish(type: string) {
     this.props.tutorialPublish(type);
+    this.props.handleClose();
   }
   render() {
+    const {open, handleClose, version, updated} = this.props;
     return (
       <div>
         <Dialog
-          title='Dialog With Actions'
+          title={`Current Version: ${version}`}
           modal={true}
-          open={this.props.open}
-          onRequestClose={this.props.handleClose}
+          open={open}
+          onRequestClose={handleClose}
         >
-          Select version change:
+          {/* Note if tutorial has not changed */}
+          {!updated ? <p>Tutorial has not changed.</p> : null}
+
+          Select next version change:
           <FlatButton
             label='Patch'
             primary={true}
-            disabled={false}
+            disabled={!updated}
             onTouchTap={this.publish.bind(this, 'patch')}
           />
           <FlatButton
             label='Minor'
-            disabled={false}
+            disabled={!updated}
             onTouchTap={this.publish.bind(this, 'minor')}
           />
           <FlatButton
             label='Major'
-            disabled={false}
+            disabled={!updated}
             onTouchTap={this.publish.bind(this, 'major')}
           />
           <br/>
@@ -50,7 +59,7 @@ export default class PublishOptionsModal extends React.Component<{
             style={styles.cancel}
             label='Cancel'
             secondary={true}
-            onTouchTap={this.props.handleClose}
+            onTouchTap={handleClose}
           />
         </Dialog>
       </div>

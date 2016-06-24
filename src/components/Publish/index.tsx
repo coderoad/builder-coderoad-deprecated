@@ -64,7 +64,6 @@ export default class TutorialPublish extends React.Component<{
     });
   }
   handleDialog(open: boolean) {
-    console.log('onClose', open);
     this.setState({
       stepIndex: this.state.stepIndex,
       modalOpen: open,

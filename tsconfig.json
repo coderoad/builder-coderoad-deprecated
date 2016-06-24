@@ -57,6 +57,7 @@
   "src/modules/tutorial/utils/pageGet.ts",
   "src/modules/tutorial/utils/taskGet.ts",
   "src/modules/tutorial/utils/taskUpdate.ts",
+  "src/modules/updated/index.ts",
   "src/modules/utils/readFile.ts",
   "src/modules/utils/writeFile.ts",
   "src/modules/validate-tutorial/actions.ts",
