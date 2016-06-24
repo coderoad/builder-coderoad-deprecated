@@ -4,7 +4,7 @@ export {pjSave, pjLoad} from './modules/package-json';
 export {setupVerify, setupPackage} from './modules/setup';
 export {
   tutorialInit, tutorialLoad, tutorialBuild, tutorialPageAdd,
-  tutorialTaskAdd, tutorialHintAdd, tutorialActionAdd
+  tutorialTaskAdd, tutorialHintAdd, tutorialActionAdd, tutorialPublish
 } from './modules/tutorial';
 export {windowToggle, quit} from './modules/window';
 export {validateTutorial} from './modules/validate-tutorial';

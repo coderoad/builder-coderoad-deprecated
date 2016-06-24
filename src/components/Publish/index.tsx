@@ -6,6 +6,7 @@ import {validateTutorial, pjSave, pjLoad, tutorialLoad, routeSet, editorPjOpen} 
 import {topElement} from '../TopPanel';
 import {Stepper} from 'material-ui/Stepper';
 import publishStep from './publishStep';
+import PublishOptionsModal from './PublishOptions';
 
 const styles = {
   card: {
@@ -33,12 +34,14 @@ export default class TutorialPublish extends React.Component<{
   validateTutorial?: () => Redux.ActionCreator,
   editorPjOpen?: () => Redux.ActionCreator,
 }, {
-  stepIndex: number
+  stepIndex: number,
+  modalOpen: boolean,
 }> {
   constructor(props) {
     super(props);
     this.state = {
       stepIndex: 0,
+      modalOpen: false,
     };
   }
   componentWillMount() {
@@ -56,7 +59,15 @@ export default class TutorialPublish extends React.Component<{
   }
   selectStep(index) {
     this.setState({
-      stepIndex: index
+      stepIndex: index,
+      modalOpen: false,
+    });
+  }
+  handleDialog(open: boolean) {
+    console.log('onClose', open);
+    this.setState({
+      stepIndex: this.state.stepIndex,
+      modalOpen: open,
     });
   }
   render() {
@@ -112,9 +123,14 @@ export default class TutorialPublish extends React.Component<{
               label='Publish'
               secondary={true}
               disabled={validation.errors.length > 0}
-              onTouchTap={() => alert('Publish not yet implemented')}
+              onTouchTap={this.handleDialog.bind(this, true)}
             />
           </div>
+
+          <PublishOptionsModal
+            open={this.state.modalOpen}
+            handleClose={this.handleDialog.bind(this, false)}
+          />
 
         </CardText>
       </Card>

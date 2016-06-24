@@ -1,5 +1,5 @@
 import {
-  TUTORIAL_INIT, TUTORIAL_BUILD, TUTORIAL_LOAD,
+  TUTORIAL_INIT, TUTORIAL_BUILD, TUTORIAL_LOAD, TUTORIAL_PUBLISH,
   TUTORIAL_PAGE_ADD, TUTORIAL_TASK_ADD, TUTORIAL_HINT_ADD, TUTORIAL_ACTION_ADD
 } from './types';
 import {create, build} from 'coderoad-cli';
@@ -64,6 +64,11 @@ export default function tutorial(t = _tutorial, action: Action): Tutorial.Output
 
     case TUTORIAL_HINT_ADD:
       return taskUpdate(t, action.payload.pagePosition, action.payload.taskPosition, 'hints', action.payload.hint);
+
+    case TUTORIAL_PUBLISH:
+      const {type} = action.payload;
+      console.log('publish: ', type);
+      return t;
 
     default:
       return t;
