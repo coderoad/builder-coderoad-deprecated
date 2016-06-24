@@ -53,11 +53,11 @@ export default class TopPanel extends React.Component<{
             onClick={this.selectPage.bind(this, page.title, index)}
           />
          ))}
-       <Tab
+       {/*}<Tab
         style={Object.assign({}, styles.tab, styles.add)}
         label='+'
         onActive={tutorialPageAdd}
-      />
+      />*/}
      </Tabs>
    );
   }
