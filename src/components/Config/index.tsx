@@ -2,7 +2,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm, formValueSelector} from 'redux-form';
 import MenuItem from 'material-ui/MenuItem';
-import {Card, CardHeader} from 'material-ui/Card';
+import {Card, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, pjLoad, tutorialInit, routeSet, editorPjOpen} from '../../actions';
 import languageItems from './languageItems';
@@ -33,7 +33,7 @@ class TutorialConfig extends React.Component <{
   tutorialInit?: () => Redux.ActionCreator,
   routeSet?: (route: string) => Redux.ActionCreator,
   pristine?: boolean, submitting?: boolean, handleSubmit?: any,
-  language?: string, invalid?: boolean, initialize?: any,
+  language?: string, valid?: boolean, initialize?: any,
   editorPjOpen?: () => Redux.ActionCreator,
 }, {}> {
   refs: {
@@ -83,60 +83,62 @@ class TutorialConfig extends React.Component <{
     this.props.routeSet('page');
   }
   render() {
-    const {pristine, submitting, handleSubmit, invalid} = this.props;
+    const {pristine, submitting, handleSubmit, valid} = this.props;
     return (
     <section className='cr-page'>
       <Card style={styles.card}>
-        <CardHeader
+        <CardTitle
           title='Tutorial Configuration'
         />
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <CardText>
+          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
 
-          <Field
-            id='name'
-            name='name'
-            component={textField.bind(null, {
-              hintText: 'coderoad-tutorial-name',
-            })}
-            tabIndex='1'
-           />
+            <Field
+              id='name'
+              name='name'
+              component={textField.bind(null, {
+                hintText: 'coderoad-tutorial-name',
+              })}
+              tabIndex='1'
+             />
 
-          <Field
-            name='language'
-            component={selectField.bind(null, {
-              children: languageItems(),
-              floatingLabelText: 'language',
-              id: 'language',
-            })}
-            tabIndex='2'
-          />
+            <Field
+              name='language'
+              component={selectField.bind(null, {
+                children: languageItems(),
+                floatingLabelText: 'language',
+                id: 'language',
+              })}
+              tabIndex='2'
+            />
 
-          <Field
-            name='runner'
-            component={selectField.bind(null, {
-              children: runnerItems('JS'),
-              floatingLabelText: 'Test Runner',
-              id: 'runner',
-            })}
-            tabIndex='3'
-          />
+            <Field
+              name='runner'
+              component={selectField.bind(null, {
+                children: runnerItems('JS'),
+                floatingLabelText: 'Test Runner',
+                id: 'runner',
+              })}
+              tabIndex='3'
+            />
 
-          <RaisedButton
-            type='submit'
-            style={styles.button}
-            label='Save'
-            primary={true}
-            disabled={invalid}
-          />
-          <RaisedButton
-            style={styles.button}
-            label='Continue'
-            secondary={true}
-            disabled={invalid}
-            onTouchTap={this.routeToPage.bind(this)}
-          />
+            <RaisedButton
+              type='submit'
+              style={styles.button}
+              label='Save'
+              primary={true}
+              disabled={!submitting}
+            />
+            <RaisedButton
+              style={styles.button}
+              label='Continue'
+              secondary={true}
+              disabled={valid}
+              onTouchTap={this.routeToPage.bind(this)}
+            />
 
-        </form>
+          </form>
+        </CardText>
       </Card>
     </section>
     );

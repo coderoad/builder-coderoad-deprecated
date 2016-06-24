@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Card, CardHeader} from 'material-ui/Card';
+import {Card, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {validatePj, pjSave, pjLoad, routeSet, editorPjOpen} from '../../actions';
+import {validateTutorial, pjSave, pjLoad, cjLoad, routeSet, editorPjOpen} from '../../actions';
 import {topElement} from '../TopPanel';
 import {Stepper} from 'material-ui/Stepper';
 import publishStep from './publishStep';
@@ -12,21 +12,25 @@ const styles = {
     margin: '10px',
     padding: '30px 20px',
   },
-  header: {
-
+  buttons: {
+    textAlign: 'center',
   },
   button: {
     margin: '30px 10px 20px 10px',
+  },
+  comment: {
+    marginTop: '30px',
   },
 };
 
 @connect(state => ({
   validation: state.validation,
-}), {pjLoad, editorPjOpen, validatePj})
+}), {pjLoad, cjLoad, editorPjOpen, validateTutorial})
 export default class TutorialPublish extends React.Component<{
   validation?: Validation.Object,
   pjLoad?: () => Redux.ActionCreator,
-  validatePj?: () => Redux.ActionCreator,
+  cjLoad?: () => Redux.ActionCreator,
+  validateTutorial?: () => Redux.ActionCreator,
   editorPjOpen?: () => Redux.ActionCreator,
 }, {
   stepIndex: number
@@ -47,7 +51,8 @@ export default class TutorialPublish extends React.Component<{
   }
   validate() {
     this.props.pjLoad();
-    this.props.validatePj();
+    this.props.cjLoad();
+    this.props.validateTutorial();
   }
   selectStep(index) {
     this.setState({
@@ -59,39 +64,59 @@ export default class TutorialPublish extends React.Component<{
     return (
     <section className='cr-page'>
       <Card style={styles.card}>
-        <CardHeader
-          title='Tutorial Errors & Warnings'
+        <CardTitle
+          title='Publish'
         />
-        <Stepper
-          activeStep={this.state.stepIndex}
-          linear={false}
-          orientation='vertical'
-        >
-          {/* Errors */}
-          {validation.errors.map((field, index) => publishStep(
-            index, 'error', field, this.selectStep.bind(this, index))
-          )}
+        <CardText>
+          <p>Ensure your tutorial is in order before publishing.</p>
+          <Stepper
+            activeStep={this.state.stepIndex}
+            linear={false}
+            orientation='vertical'
+          >
+            {/* Errors */}
+            {validation.errors.map((field, index) => publishStep(
+              index, 'error', field, this.selectStep.bind(this, index))
+            )}
 
-          {/* Warnings */}
-          {validation.warnings.map((field, index) => publishStep(
-            index + validation.errors.length, 'warning', field,
-            this.selectStep.bind(this, index + validation.errors.length))
-          )}
+            {/* Warnings */}
+            {validation.warnings.map((field, index) => publishStep(
+              index + validation.errors.length, 'warning', field,
+              this.selectStep.bind(this, index + validation.errors.length))
+            )}
+          </Stepper>
 
-        </Stepper>
-        <RaisedButton
-          style={styles.button}
-          label='Validate'
-          primary={true}
-          onTouchTap={this.validate.bind(this)}
-        />
-        <RaisedButton
-          style={styles.button}
-          label='Publish'
-          secondary={true}
-          disabled={validation.errors.length > 0}
-          onTouchTap={() => alert('Publish not yet implemented')}
-        />
+          {/* no errors, some warnings */}
+          {validation.errors.length === 0 && validation.warnings.length > 0
+            ? <div style={styles.comment}>
+                <p>Your tutorial is ready, but you might still want to clean up a few warnings first.</p>
+              </div>
+            : null}
+
+          {/* no errors, no warnings */}
+          {validation.errors.length === 0 && validation.warnings.length === 0
+            ? <div style={styles.comment}>
+                <p>No issues.</p>
+              </div>
+            : null}
+
+          <div style={styles.buttons}>
+            <RaisedButton
+              style={styles.button}
+              label='Validate'
+              primary={true}
+              onTouchTap={this.validate.bind(this)}
+            />
+            <RaisedButton
+              style={styles.button}
+              label='Publish'
+              secondary={true}
+              disabled={validation.errors.length > 0}
+              onTouchTap={() => alert('Publish not yet implemented')}
+            />
+          </div>
+
+        </CardText>
       </Card>
     </section>
     );

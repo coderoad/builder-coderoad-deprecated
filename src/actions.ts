@@ -1,3 +1,5 @@
+export {cjSave, cjLoad} from './modules/coderoad-json';
+export {editorMarkdownOpen, editorTestOpen, editorPjOpen} from './modules/editor-paths';
 export {pageSet} from './modules/page-position';
 export {pjSave, pjLoad} from './modules/package-json';
 export {setupVerify, setupPackage} from './modules/setup';
@@ -6,8 +8,7 @@ export {
   tutorialTaskAdd, tutorialHintAdd, tutorialActionAdd
 } from './modules/tutorial';
 export {windowToggle, quit} from './modules/window';
-export {editorMarkdownOpen, editorTestOpen, editorPjOpen} from './modules/editor-paths';
-export {validatePj} from './modules/validation';
+export {validateTutorial} from './modules/validate-tutorial';
 
 export {
   alertOpen, alertClose, alertReplay,

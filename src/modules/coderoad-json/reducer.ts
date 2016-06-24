@@ -1,7 +1,6 @@
-import {PJ_SAVE, PJ_LOAD} from './types';
+import {CJ_SAVE, CJ_LOAD} from './types';
 import readFile from '../utils/readFile';
 import writeFile from '../utils/writeFile';
-import {sortPackageJson} from 'sort-package-json';
 
 const _pj: Tutorial.PJ = {
   name: 'coderoad-',
@@ -21,26 +20,26 @@ const _pj: Tutorial.PJ = {
   }
 };
 
-export default function packageJson(
+export default function coderoadJson(
   p = _pj, action: Action
 ): Tutorial.PJ {
   switch (action.type) {
 
-    case PJ_LOAD:
-      const loadedPj = readFile(action.payload.dir, 'package.json');
-      return !!loadedPj ? loadedPj : p;
+    case CJ_LOAD:
+      const loadedCj = readFile(action.payload.dir, 'coderoad.json');
+      return !!loadedCj ? loadedCj : p;
 
-    case PJ_SAVE:
+    case CJ_SAVE:
       const {pj, dir} = action.payload;
       // if package.json exists, augment it
-      const pjExists = readFile(dir, 'package.json');
-      const nextPj: Tutorial.PJ = !!pjExists
-        ? Object.assign({}, pjExists, pj)
+      const cjExists = readFile(dir, 'coderoad.json');
+      const nextCj: Tutorial.PJ = !!cjExists
+        ? Object.assign({}, cjExists, pj)
         : pj;
       // sort package.json fields
-      const content = sortPackageJson(JSON.stringify(nextPj, null, 2));
-      writeFile(dir, 'package.json', content);
-      return nextPj;
+      const content = JSON.stringify(nextCj, null, 2);
+      writeFile(dir, 'coderoad.json', content);
+      return nextCj;
 
     default:
       return p;

@@ -5,7 +5,6 @@ import WarningIcon from 'material-ui/svg-icons/alert/warning';
 import {pink500, amber500} from 'material-ui/styles/colors';
 import {CodeBlock} from 'core-coderoad';
 
-
 export default function publishStep(
   index: number, type: string, field: Validation.Error, click: () => any
 ) {
@@ -33,7 +32,7 @@ export default function publishStep(
       <p>Example:</p>
       <CodeBlock lang='js'>
 {`{
-  "${field.name}": "${field.example}"
+  "${field.name}": ${field.example}
 }`}
       </CodeBlock>
     </StepContent>
