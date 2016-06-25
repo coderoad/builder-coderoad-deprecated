@@ -6,8 +6,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {tutorialPublish} from '../../actions';
 
 const styles = {
+  dialog: {
+    textAlign: 'center',
+  },
   cancel: {
     float: 'right',
+  },
+  note: {
+    float: 'left',
   },
 };
 
@@ -29,15 +35,20 @@ export default class PublishOptionsModal extends React.Component<{
     return (
       <div>
         <Dialog
-          title={`Current Version: ${version}`}
+          style={styles.dialog}
+          title='Publish Next Version'
           modal={true}
           open={open}
           onRequestClose={handleClose}
         >
+          <h2>Current: v{version}</h2>
           {/* Note if tutorial has not changed */}
-          {!updated ? <p>Tutorial has not changed.</p> : null}
+          {!updated
+            ? <p>Cannot publish. Tutorial has not changed.</p>
+            : <p>Describe the semver change:</p>
+          }
 
-          Select next version change:
+          <br />
           <FlatButton
             label='Patch'
             primary={true}
@@ -54,7 +65,10 @@ export default class PublishOptionsModal extends React.Component<{
             disabled={!updated}
             onTouchTap={this.publish.bind(this, 'major')}
           />
-          <br/>
+          <br/><br />
+          <p style={styles.note}>
+            What is <a href='http://semver.org/'>semver</a>?
+          </p>
           <RaisedButton
             style={styles.cancel}
             label='Cancel'
