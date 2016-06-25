@@ -67,7 +67,8 @@ export default function tutorial(t = _tutorial, action: Action): Tutorial.Output
 
     case TUTORIAL_PUBLISH:
       const {type} = action.payload;
-      alert(`Currently not implemented. Run '>apm publish ${type}' from terminal`);
+      alert(`Currently not implemented.
+In a terminal, run '>apm publish ${type}'.`);
       return t;
 
     default:

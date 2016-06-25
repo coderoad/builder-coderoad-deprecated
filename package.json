@@ -25,7 +25,7 @@
     "coderoad-cli": "0.7.1",
     "core-coderoad": "0.4.0",
     "lodash.debounce": "4.0.6",
-    "material-ui": "0.15.0",
+    "material-ui": "0.15.1",
     "node-file-exists": "1.1.0",
     "react": "15.1.0",
     "react-dom": "15.1.0",

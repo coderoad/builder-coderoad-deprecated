@@ -16,7 +16,13 @@ const styles = {
   card: {
     margin: '10px',
     padding: '30px 20px',
+  },
+  title: {
     textAlign: 'center',
+  },
+  form: {
+    margin: '0 auto',
+    width: '80%',
   },
   button: {
     margin: '30px 10px 20px 10px',
@@ -92,10 +98,14 @@ class TutorialConfig extends React.Component <{
     <section className='cr-page'>
       <Card style={styles.card}>
         <CardTitle
+          style={styles.title}
           title='Tutorial Configuration'
         />
         <CardText>
-          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <form
+            style={styles.form}
+            onSubmit={handleSubmit(this.onSubmit.bind(this))}
+          >
 
             <Field
               id='name'

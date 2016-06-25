@@ -2,9 +2,9 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {join} from 'path';
 import {editorTestOpen} from '../../../actions';
-// import Chip from 'material-ui/Chip';
-// import Avatar from 'material-ui/Avatar';
-// import CodeIcon from 'material-ui/svg-icons/action/code';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+import CodeIcon from 'material-ui/svg-icons/action/code';
 import {configSelector, tutorialConfigOptions, routeSet} from 'core-coderoad';
 
 const styles = {
@@ -31,21 +31,16 @@ export default class Tests extends React.Component<{
     return (
       <div style={style}>
         {tests.map((file, index) => (
-          <button
-            onClick={this.selectTest.bind(this, file)}>{file}</button>
+          <Chip
+           key={index}
+           style={styles.test}
+           onTouchTap={this.selectTest.bind(this, file)}
+           >
+            <Avatar icon={<CodeIcon />} />
+            {file}
+          </Chip>
         ))}
       </div>
     );
   }
 }
-
-/*
-  <Chip
-   key={index}
-   style={styles.test}
-   onClick={open.bind(this, file)}
-   >
-    <Avatar icon={<CodeIcon />} />
-    {file}
-  </Chip>
-  */
