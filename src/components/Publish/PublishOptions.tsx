@@ -42,7 +42,7 @@ export default class PublishOptionsModal extends React.Component<{
           onRequestClose={handleClose}
         >
           <h2>Current: v{version}</h2>
-          {/* Note if tutorial has not changed */}
+
           {!updated
             ? <p>Cannot publish. Tutorial has not changed.</p>
             : <p>Describe the semver change:</p>

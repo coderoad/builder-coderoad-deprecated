@@ -70,17 +70,28 @@ class TutorialConfig extends React.Component <{
       typeof document.activeElement.value === 'string');
   }
   onSubmit(values) {
+    const {packageJson} = this.props;
     const {name, runnerItem, repo} = values;
     const [language, runner] = runnerItem.split(': ');
+
+    if (!packageJson.dependencies || !packageJson.dependencies.hasOwnProperty(runner)) {
+      alert(`run "npm install" to load your test runner`);
+      // add dependency
+      const dep = {};
+      dep[runner] = 'latest';
+      const dependencies = Object.assign({}, packageJson.dependencies, dep);
+    }
+
     this.props.pjSave(Object.assign(
       {},
-      this.props.packageJson,
+      packageJson,
       {
         name,
         repository: repo || '',
         bugs: {
           url: repo || '',
         },
+        dependencies,
         config: {
           language, runner,
         }
