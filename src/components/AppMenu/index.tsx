@@ -18,7 +18,7 @@ export default class AppMenu extends React.Component<{
     const {route} = this.props;
     return (
       <AppBar
-        title='CodeRoad'
+        title='CodeRoad Builder'
         className='cr-menu-bar'
         style={{styles}}
         iconElementLeft={<CloseWindow />}
