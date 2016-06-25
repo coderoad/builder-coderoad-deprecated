@@ -5,12 +5,12 @@ import MenuItem from 'material-ui/MenuItem';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {pjSave, pjLoad, tutorialInit, routeSet, editorPjOpen} from '../../actions';
-import languageItems from './languageItems';
 import runnerItems from './runnerItems';
 import {topElement} from '../TopPanel';
 import textField from '../Form/textField';
 import selectField from '../Form/selectField';
 import validate from './validate';
+import handleDeps from './handleDeps';
 
 const styles = {
   card: {
@@ -66,21 +66,16 @@ class TutorialConfig extends React.Component <{
   }
   shouldComponentUpdate() {
     // hack to prevent lost focus on component update
-    return !(document.activeElement &&
-      typeof document.activeElement.value === 'string');
+    return !(
+      document.activeElement &&
+      typeof document.activeElement.value === 'string'
+    );
   }
   onSubmit(values) {
     const {packageJson} = this.props;
     const {name, runnerItem, repo} = values;
     const [language, runner] = runnerItem.split(': ');
-
-    if (!packageJson.dependencies || !packageJson.dependencies.hasOwnProperty(runner)) {
-      alert(`run "npm install" to load your test runner`);
-      // add dependency
-      const dep = {};
-      dep[runner] = 'latest';
-      const dependencies = Object.assign({}, packageJson.dependencies, dep);
-    }
+    const dependencies = handleDeps(packageJson, runner);
 
     this.props.pjSave(Object.assign(
       {},
