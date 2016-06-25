@@ -7,8 +7,8 @@ export function validateTutorial() {
   };
 }
 
-export function runTestOnSolution() {
+export function runTestOnSolution(text: string) {
   return (dispatch, getState) => {
-    dispatch({ type: RUN_TEST_ON_SOLUTION });
+    dispatch({ type: RUN_TEST_ON_SOLUTION, payload: {text} });
   };
 }

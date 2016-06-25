@@ -10,6 +10,9 @@ const styles = {
   card: {
     margin: '5px',
   },
+  buttons: {
+    textAlign: 'center',
+  },
 };
 
 @connect(state => ({
@@ -17,13 +20,18 @@ const styles = {
 }), {runTestOnSolution})
 export default class Solution extends React.Component <{
   language?: string,
+  runTestOnSolution?: (text: string) => Redux.ActionCreator,
 }, {}> {
   refs: {
     [key: string]: Element;
     solution: any;
   };
   runTest() {
-    console.log(this.refs.solution.get());
+    const text = `
+${this.refs.solution.get()}
+${atom.workspace.getActiveTextEditor().getText()}
+`;
+    this.props.runTestOnSolution(text);
   }
   render() {
     return (
@@ -34,18 +42,21 @@ export default class Solution extends React.Component <{
         <CardTitle title='Solution' />
 
         <CardText expandable={true}>
+          <p>Test a solution against your tests</p>
           <TextEditor
             name='solution'
             ref='solution'
-            placeholder='test your solution against tests'
+            placeholder='var a = "example code";'
             lang={this.props.language}
           />
           <br />
-          <RaisedButton
-            label='Run Test'
-            primary={true}
-            onTouchTap={this.runTest.bind(this)}
-          />
+          <div style={styles.buttons}>
+            <RaisedButton
+              label='Run Test'
+              primary={true}
+              onTouchTap={this.runTest.bind(this)}
+            />
+          </div>
         </CardText>
       </Card>
     );
