@@ -57,8 +57,7 @@ class TutorialConfig extends React.Component <{
       const {name, config} = this.props.packageJson;
       this.props.initialize({
         name,
-        language: config.language,
-        runner: config.runner,
+        runnerItem: config.language && config.runner ? `${config.language}: ${config.runner}` : null,
         repo: '',
       });
     });
