@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {topElement} from '../TopPanel';
 import Solution from './Solution';
+import TestMenu from './TestMenu';
 
 const styles = {
   page: {
@@ -20,6 +21,7 @@ export default class Test extends React.Component<{}, {}> {
         style={styles.page}
         className='cr-page'
       >
+        <TestMenu />
         <Solution />
       </section>
     );

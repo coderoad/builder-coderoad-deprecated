@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {AppMenu, Alert} from '../index';
+import {AppMenu} from '../index';
 import Routes from '../Routes';
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/svg-icons/navigation/menu';
@@ -34,7 +34,6 @@ export default class SidePanel extends React.Component<{
             <Routes />
           </div>
         </Drawer>
-      <Alert />
     </section>
     );
   }

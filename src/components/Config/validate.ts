@@ -10,7 +10,7 @@ interface ConfigForm {
 
 const validate = values => {
   const errors: ConfigForm = {};
-  const requiredFields = ['name', 'language', 'runner'];
+  const requiredFields = ['name', 'language', 'runnerItem'];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Required';
@@ -18,10 +18,6 @@ const validate = values => {
   });
   if (values.name && !values.name.match(/^coderoad-[A-Za-z0-9\-]+$/)) {
     errors.name = 'Invalid "coderoad-*" name';
-  }
-  if (values.language &&
-    !values.runner && !tutorialConfigOptions[values.language].runners.includes(values.runner)) {
-    errors.runner = `${values.runner} runner does not match language ${values.language}`;
   }
   if (values.repo) {
     if (!values.repo.match(/^https?:\/\/[a-zA-Z\.\/]+$/)) {

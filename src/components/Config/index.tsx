@@ -59,6 +59,7 @@ class TutorialConfig extends React.Component <{
         name,
         language: config.language,
         runner: config.runner,
+        repo: '',
       });
     });
     // focus first element
@@ -66,13 +67,12 @@ class TutorialConfig extends React.Component <{
   }
   shouldComponentUpdate() {
     // hack to prevent lost focus on component update
-    if (document.activeElement &&
-      typeof document.activeElement.value === 'string') {
-      return false;
-    }
+    return !(document.activeElement &&
+      typeof document.activeElement.value === 'string');
   }
   onSubmit(values) {
-    const {name, language, runner, repo} = values;
+    const {name, runnerItem, repo} = values;
+    const [language, runner] = runnerItem.split(': ');
     this.props.pjSave(Object.assign(
       {},
       this.props.packageJson,
@@ -83,7 +83,7 @@ class TutorialConfig extends React.Component <{
           url: repo || '',
         },
         config: {
-          language, runner
+          language, runner,
         }
       })
     );
@@ -93,7 +93,8 @@ class TutorialConfig extends React.Component <{
     this.props.routeSet('page');
   }
   render() {
-    const {pristine, submitting, handleSubmit, invalid} = this.props;
+    const {submitting, handleSubmit, invalid, packageJson} = this.props;
+    // select runner items
     return (
     <section className='cr-page'>
       <Card style={styles.card}>
@@ -118,23 +119,13 @@ class TutorialConfig extends React.Component <{
              />
 
             <Field
-              name='language'
+              name='runnerItem'
               component={selectField.bind(null, {
-                children: languageItems(),
-                floatingLabelText: 'language',
-                id: 'language',
-              })}
-              tabIndex='2'
-            />
-
-            <Field
-              name='runner'
-              component={selectField.bind(null, {
-                children: runnerItems('JS'),
-                floatingLabelText: 'Test Runner',
+                children: runnerItems(),
+                floatingLabelText: 'runner',
                 id: 'runner',
               })}
-              tabIndex='3'
+              tabIndex='2'
             />
 
             <Field
@@ -144,7 +135,7 @@ class TutorialConfig extends React.Component <{
                 floatingLabelText: 'Path to Repo (optional)',
                 hintText: 'http://github.com/path/to/repo',
               })}
-              tabIndex='4'
+              tabIndex='3'
             />
 
             <RaisedButton

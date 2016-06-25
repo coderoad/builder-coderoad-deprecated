@@ -83,7 +83,6 @@
   "src/components/common/DynamicStepper.tsx",
   "src/components/common/RouteButton.tsx",
   "src/components/Config/index.tsx",
-  "src/components/Config/languageItems.tsx",
   "src/components/Config/runnerItems.tsx",
   "src/components/Form/selectField.tsx",
   "src/components/Form/textField.tsx",
@@ -113,6 +112,7 @@
   "src/components/Start/Welcome/index.tsx",
   "src/components/Test/index.tsx",
   "src/components/Test/Solution.tsx",
+  "src/components/Test/TestMenu.tsx",
   "src/components/TopPanel/TopPanel.tsx",
   "src/components/TopPanel/TopRoot.tsx"
  ],

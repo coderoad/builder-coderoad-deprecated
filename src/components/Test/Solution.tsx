@@ -10,6 +10,9 @@ const styles = {
   card: {
     margin: '5px',
   },
+  title: {
+    textAlign: 'center',
+  },
   buttons: {
     textAlign: 'center',
   },
@@ -39,10 +42,13 @@ ${atom.workspace.getActiveTextEditor().getText()}
         style={styles.card}
         initiallyExpanded={true}
       >
-        <CardTitle title='Solution' />
+        <CardTitle
+          title='Solution'
+          style={styles.title}
+        />
 
         <CardText expandable={true}>
-          <p>Test a solution against your tests</p>
+          <p>Try out a solution against your tests</p>
           <TextEditor
             name='solution'
             ref='solution'
