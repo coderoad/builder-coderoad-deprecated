@@ -8,7 +8,7 @@ export {
 } from './modules/tutorial';
 export {tutorialUpdated} from './modules/updated';
 export {windowToggle, quit} from './modules/window';
-export {validateTutorial} from './modules/validate-tutorial';
+export {validateTutorial, runTestOnSolution} from './modules/validate-tutorial';
 
 export {
   alertOpen, alertClose, alertReplay,
