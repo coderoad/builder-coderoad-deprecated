@@ -54,11 +54,11 @@ class TutorialConfig extends React.Component <{
     topElement.toggle(false);
     // get props after pjLoad completes
     setTimeout(() => {
-      const {name, config} = this.props.packageJson;
+      const {name, config, repository} = this.props.packageJson;
       this.props.initialize({
         name,
         runnerItem: config.language && config.runner ? `${config.language}: ${config.runner}` : null,
-        repo: '',
+        repo: repository ? repository : '',
       });
     });
     // focus first element
@@ -77,7 +77,7 @@ class TutorialConfig extends React.Component <{
       this.props.packageJson,
       {
         name,
-        repositiory: repo || '',
+        repository: repo || '',
         bugs: {
           url: repo || '',
         },
