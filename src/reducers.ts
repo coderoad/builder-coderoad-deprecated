@@ -5,6 +5,7 @@ import {reducer as form} from 'redux-form';
 import {reducer as pagePosition} from './modules/page-position';
 import {reducer as checks} from './modules/setup';
 import {reducer as packageJson} from './modules/package-json';
+import {reducer as runner} from './modules/runner';
 import {reducer as tutorial} from './modules/tutorial';
 import {reducer as windowToggle} from './modules/window';
 import {reducer as validation} from './modules/validate-tutorial';
@@ -22,4 +23,5 @@ export default combineReducers({
   alert, checks, editor, dir, form,
   packageJson, pagePosition, route,
   tutorial, updated, validation, windowToggle,
+  runner,
 });
