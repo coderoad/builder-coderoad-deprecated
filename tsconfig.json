@@ -24,6 +24,7 @@
   "src/typings/builder.d.ts",
   "src/typings/typings.d.ts",
   "src/actions.ts",
+  "src/components/Config/handleDeps.ts",
   "src/components/Config/validate.ts",
   "src/components/index.ts",
   "src/components/Page/TaskActions/task-object.ts",
