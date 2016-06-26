@@ -64,33 +64,41 @@ class TutorialConfig extends React.Component <{
     // focus first element
     document.getElementsByTagName('input')[0].focus();
   }
-  shouldComponentUpdate() {
+  shouldComponentUpdate(t) {
     // hack to prevent lost focus on component update
-    return !(
+    const textInputIsActive = (
       document.activeElement &&
       typeof document.activeElement.value === 'string'
     );
+    return this.props.submitting || !textInputIsActive;
   }
   onSubmit(values) {
     const {packageJson} = this.props;
     const {name, runnerItem, repo} = values;
     const [language, runner] = runnerItem.split(': ');
     const dependencies = handleDeps(packageJson, runner);
+    const repoObj = repo ? {
+      repository: repo || '',
+      bugs: {
+        url: repo || '',
+      },
+    } : {};
+
+    // trigger submitted updates
+    this.props.submitting = true;
+    setTimeout(() => this.props.submitting = false, 300);
 
     this.props.pjSave(Object.assign(
       {},
       packageJson,
       {
         name,
-        repository: repo || '',
-        bugs: {
-          url: repo || '',
-        },
         dependencies,
         config: {
           language, runner,
         }
-      })
+      },
+      repoObj)
     );
   }
   routeToPage() {
@@ -99,6 +107,7 @@ class TutorialConfig extends React.Component <{
   }
   render() {
     const {submitting, handleSubmit, invalid, packageJson} = this.props;
+
     // select runner items
     return (
     <section className='cr-page'>
@@ -112,7 +121,6 @@ class TutorialConfig extends React.Component <{
             style={styles.form}
             onSubmit={handleSubmit(this.onSubmit.bind(this))}
           >
-
             <Field
               id='name'
               name='name'
