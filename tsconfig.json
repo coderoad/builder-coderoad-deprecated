@@ -1,26 +1,26 @@
 {
- "compileOnSave": false,
- "buildOnSave": false,
- "compilerOptions": {
-  "target": "ES5",
-  "module": "commonjs",
-  "declaration": false,
-  "noImplicitAny": false,
-  "removeComments": true,
-  "noLib": false,
-  "jsx": "react",
-  "experimentalDecorators": true,
-  "emitDecoratorMetadata": true,
-  "outDir": "lib"
- },
- "filesGlob": [
+	"compileOnSave": false,
+	"buildOnSave": false,
+	"compilerOptions": {
+		"target": "ES5",
+		"module": "commonjs",
+		"declaration": false,
+		"noImplicitAny": false,
+		"removeComments": true,
+		"noLib": false,
+		"jsx": "react",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"outDir": "lib"
+	},
+	"filesGlob": [
   "src/typings/**/*.d.ts",
   "src/**/*.ts",
   "src/**/*.tsx",
   "!src/**/*.spec.ts",
   "!src/**/*.spec.tsx"
  ],
- "files": [
+	"files": [
   "src/typings/builder.d.ts",
   "src/typings/typings.d.ts",
   "src/actions.ts",
@@ -53,9 +53,6 @@
   "src/modules/setup/utils/action-system.ts",
   "src/modules/setup/utils/check-system.ts",
   "src/modules/setup/utils/verify.ts",
-  "src/modules/test-run/index.ts",
-  "src/modules/test-run/parse-loaders.ts",
-  "src/modules/test-run/run.ts",
   "src/modules/tutorial/actions.ts",
   "src/modules/tutorial/index.ts",
   "src/modules/tutorial/reducer.ts",
@@ -122,10 +119,10 @@
   "src/components/TopPanel/TopPanel.tsx",
   "src/components/TopPanel/TopRoot.tsx"
  ],
- "exclude": [
+	"exclude": [
   "node_modules"
  ],
- "atom": {
-  "rewriteTsconfig": true
- }
+	"atom": {
+		"rewriteTsconfig": true
+	}
 }

@@ -1,14 +1,8 @@
-import {VALIDATE_TUTORIAL, RUN_TEST_ON_SOLUTION} from './types';
+import {VALIDATE_TUTORIAL} from './types';
 
 export function validateTutorial() {
   return (dispatch, getState) => {
     const {packageJson} = getState();
     dispatch({ type: VALIDATE_TUTORIAL, payload: {packageJson} });
-  };
-}
-
-export function runTestOnSolution(text: string) {
-  return (dispatch, getState) => {
-    dispatch({ type: RUN_TEST_ON_SOLUTION, payload: {text} });
   };
 }

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Card, CardText, CardTitle} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import {TextEditor} from '../index';
-import {runTestOnSolution} from '../../actions';
+import {runnerRun} from '../../actions';
 import {languageSuffixSelector} from 'core-coderoad';
 
 const styles = {
@@ -20,21 +20,22 @@ const styles = {
 
 @connect(state => ({
   language: languageSuffixSelector(state),
-}), {runTestOnSolution})
+}), {runnerRun})
 export default class Solution extends React.Component <{
   language?: string,
-  runTestOnSolution?: (text: string) => Redux.ActionCreator,
+  runnerRun?: (content: string) => Redux.ActionCreator,
 }, {}> {
   refs: {
     [key: string]: Element;
     solution: any;
   };
   runTest() {
-    const text = `
+    // content = solution + tests
+    const content = `
 ${this.refs.solution.get()}
 ${atom.workspace.getActiveTextEditor().getText()}
 `;
-    this.props.runTestOnSolution(text);
+    this.props.runnerRun(content);
   }
   render() {
     return (
