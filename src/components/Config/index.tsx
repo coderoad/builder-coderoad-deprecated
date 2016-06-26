@@ -64,7 +64,7 @@ class TutorialConfig extends React.Component <{
     // focus first element
     document.getElementsByTagName('input')[0].focus();
   }
-  shouldComponentUpdate(t) {
+  shouldComponentUpdate() {
     // hack to prevent lost focus on component update
     const textInputIsActive = (
       document.activeElement &&
