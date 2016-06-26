@@ -1,5 +1,8 @@
 export default function handleDependencies(pj, runner): Object {
-  let deps = pj.dependencies || {};
+  if (!pj || !pj.dependencies) {
+    pj.dependencies = {};
+  }
+  let deps = pj.dependencies;
   // remove all runners
   Object.keys(deps)
     .filter(key => key.match(/-coderoad$/))

@@ -49,9 +49,6 @@ class TutorialConfig extends React.Component <{
   componentWillMount() {
     this.props.pjLoad();
     this.props.editorPjOpen();
-  }
-  componentDidMount() {
-    topElement.toggle(false);
     // get props after pjLoad completes
     setTimeout(() => {
       const {name, config, repository} = this.props.packageJson;
@@ -61,6 +58,9 @@ class TutorialConfig extends React.Component <{
         repo: repository ? repository : '',
       });
     });
+  }
+  componentDidMount() {
+    topElement.toggle(false);
     // focus first element
     document.getElementsByTagName('input')[0].focus();
   }
@@ -139,6 +139,7 @@ class TutorialConfig extends React.Component <{
               component={textField.bind(null, {
                 floatingLabelText: 'Path to Repo (optional)',
                 hintText: 'http://github.com/path/to/repo',
+                type: 'url',
               })}
               tabIndex='3'
             />
@@ -168,5 +169,5 @@ class TutorialConfig extends React.Component <{
 
 export default reduxForm({
   form: 'tutorialConfig',
-   validate,
+  validate,
 })(TutorialConfig);

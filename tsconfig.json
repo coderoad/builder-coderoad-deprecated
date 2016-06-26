@@ -44,6 +44,7 @@
   "src/modules/page-position/reducer.ts",
   "src/modules/page-position/types.ts",
   "src/modules/runner/index.ts",
+  "src/modules/runner/loadRunner.ts",
   "src/modules/setup/actions.ts",
   "src/modules/setup/index.ts",
   "src/modules/setup/reducer.ts",

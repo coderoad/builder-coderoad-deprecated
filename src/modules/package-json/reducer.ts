@@ -28,7 +28,13 @@ export default function packageJson(
 
     case PJ_LOAD:
       const loadedPj = readFile(action.payload.dir, 'package.json');
-      return !!loadedPj ? loadedPj : p;
+      if (!loadedPj) {
+        // alert('create package.json');
+        const content = sortPackageJson(JSON.stringify(p, null, 2));
+        writeFile(action.payload.dir, 'package.json', content);
+        return p;
+      }
+      return loadedPj;
 
     case PJ_SAVE:
       const {pj, dir} = action.payload;

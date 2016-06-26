@@ -1,7 +1,12 @@
+import loadRunner from './loadRunner';
+
 const RUNNER_SET = 'RUNNER_SET';
 
 export function runnerSet(name: string) {
-  return { type: RUNNER_SET, payload: { name } };
+  return (dispatch, getState) => {
+    const {dir} = getState();
+    dispatch({ type: RUNNER_SET, payload: { dir, name } });
+  };
 }
 
 const r = function() {
@@ -11,9 +16,8 @@ const r = function() {
 export function reducer(runner = r, action: Action) {
   switch (action.type) {
     case RUNNER_SET:
-      const {name} = action.payload;
-      console.log(name);
-      return runner;
+      const {dir, name} = action.payload;
+      return loadRunner(dir, name);
     default:
       return runner;
   }
