@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {TextEditor} from '../index';
 import {runnerRun, runnerSet} from '../../actions';
 import {languageSuffixSelector} from 'core-coderoad';
+import Result from './Result';
 
 const styles = {
   card: {
@@ -68,6 +69,8 @@ ${atom.workspace.getActiveTextEditor().getText()}
               onTouchTap={this.runTest.bind(this)}
             />
           </div>
+
+          <Result />
         </CardText>
       </Card>
     );

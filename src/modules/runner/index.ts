@@ -1,4 +1,7 @@
 import loadRunner from './loadRunner';
+// import handleResult from './handleResult';
+import store from '../../store';
+import {testResult} from '../../actions';
 
 const RUNNER_SET = 'RUNNER_SET';
 const RUNNER_RUN = 'RUNNER_RUN';
@@ -16,7 +19,7 @@ export function runnerSet() {
 export function runnerRun(content: string) {
   return (dispatch, getState) => {
     const {dir, tutorial} = getState();
-    let config = Object.assign({}, dir, tutorial.config);
+    let config = Object.assign({}, dir, {taskPosition: 0}, tutorial.config);
     dispatch({ type: RUNNER_RUN, payload: { content, config } });
   };
 }
@@ -27,6 +30,10 @@ const r = (content: string) => {
   alert('Runner not yet implemented.');
 };
 
+function handleResult(result) {
+  console.log('handleResult', result);
+  // return store.dispatch(testResult(result));
+}
 
 export function reducer(runner = r, action: Action) {
   switch (action.type) {
@@ -38,8 +45,7 @@ export function reducer(runner = r, action: Action) {
     case RUNNER_RUN:
       let {content, config} = action.payload;
       // call runner
-      r(content);
-      // runner(content, config, function() {});
+      runner(content, config, handleResult);
       return runner;
 
     default:

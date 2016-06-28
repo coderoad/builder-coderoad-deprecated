@@ -12,6 +12,9 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
+  stepper: {
+    paddingBottom: '20px',
+  },
   form: {
     margin: '10px 15px',
     display: 'inline-block',
@@ -68,6 +71,7 @@ export default class TaskActions extends React.Component<{
         activeStep={stepIndex}
         linear={false}
         orientation='vertical'
+        style={styles.stepper}
         >
         {actionList.map((a, index) => (
           <Step key={index}>

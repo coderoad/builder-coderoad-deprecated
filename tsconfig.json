@@ -1,26 +1,26 @@
 {
-	"compileOnSave": false,
-	"buildOnSave": false,
-	"compilerOptions": {
-		"target": "ES5",
-		"module": "commonjs",
-		"declaration": false,
-		"noImplicitAny": false,
-		"removeComments": true,
-		"noLib": false,
-		"jsx": "react",
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"outDir": "lib"
-	},
-	"filesGlob": [
+ "compileOnSave": false,
+ "buildOnSave": false,
+ "compilerOptions": {
+  "target": "ES5",
+  "module": "commonjs",
+  "declaration": false,
+  "noImplicitAny": false,
+  "removeComments": true,
+  "noLib": false,
+  "jsx": "react",
+  "experimentalDecorators": true,
+  "emitDecoratorMetadata": true,
+  "outDir": "lib"
+ },
+ "filesGlob": [
   "src/typings/**/*.d.ts",
   "src/**/*.ts",
   "src/**/*.tsx",
   "!src/**/*.spec.ts",
   "!src/**/*.spec.tsx"
  ],
-	"files": [
+ "files": [
   "src/typings/builder.d.ts",
   "src/typings/typings.d.ts",
   "src/actions.ts",
@@ -43,6 +43,8 @@
   "src/modules/page-position/index.ts",
   "src/modules/page-position/reducer.ts",
   "src/modules/page-position/types.ts",
+  "src/modules/result/index.ts",
+  "src/modules/runner/handleResult.ts",
   "src/modules/runner/index.ts",
   "src/modules/runner/loadRunner.ts",
   "src/modules/setup/actions.ts",
@@ -114,15 +116,16 @@
   "src/components/Start/index.tsx",
   "src/components/Start/Welcome/index.tsx",
   "src/components/Test/index.tsx",
+  "src/components/Test/Result.tsx",
   "src/components/Test/Solution.tsx",
   "src/components/Test/TestMenu.tsx",
   "src/components/TopPanel/TopPanel.tsx",
   "src/components/TopPanel/TopRoot.tsx"
  ],
-	"exclude": [
+ "exclude": [
   "node_modules"
  ],
-	"atom": {
-		"rewriteTsconfig": true
-	}
+ "atom": {
+  "rewriteTsconfig": true
+ }
 }
