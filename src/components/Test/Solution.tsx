@@ -69,8 +69,10 @@ ${atom.workspace.getActiveTextEditor().getText()}
               onTouchTap={this.runTest.bind(this)}
             />
           </div>
-
-          <Result />
+          <br />
+          <br />
+          <p>Check the console for test results.</p>
+          {/*}<Result />*/}
         </CardText>
       </Card>
     );

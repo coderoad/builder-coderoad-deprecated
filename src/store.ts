@@ -1,10 +1,9 @@
 import reducer from './reducers';
 import {configureStore} from 'core-coderoad';
 
-export default configureStore(
+const store = configureStore({
   reducer,
-  // devMode
-  false,
-  // throttled actions
-  { TUTORIAL_BUILD: 300 }
-);
+  devMode: false,
+  throttle: { TUTORIAL_BUILD: 300 },
+});
+export default store;

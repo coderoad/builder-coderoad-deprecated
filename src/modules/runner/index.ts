@@ -1,6 +1,5 @@
 import loadRunner from './loadRunner';
-// import handleResult from './handleResult';
-import store from '../../store';
+import handleResult from './handleResult';
 import {testResult} from '../../actions';
 
 const RUNNER_SET = 'RUNNER_SET';
@@ -29,11 +28,6 @@ const r = (content: string) => {
   // alert('Runner not installed. Try running "npm install"');
   alert('Runner not yet implemented.');
 };
-
-function handleResult(result) {
-  console.log('handleResult', result);
-  // return store.dispatch(testResult(result));
-}
 
 export function reducer(runner = r, action: Action) {
   switch (action.type) {

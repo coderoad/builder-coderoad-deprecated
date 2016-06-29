@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 import {Card, CardText, CardTitle} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -9,9 +9,9 @@ const styles = {
   },
 };
 
-@connect(state => ({
-  result: state.result,
-}))
+// @connect(state => ({
+//   result: state.result,
+// }))
 export default class Result extends React.Component <{
   result?: Object
 }, {}> {
@@ -23,7 +23,7 @@ export default class Result extends React.Component <{
         initiallyExpanded={true}
       >
         <CardText expandable={true}>
-          <p>{result.msg}</p>
+          <p>Check the console.</p>
         </CardText>
       </Card>
     );
