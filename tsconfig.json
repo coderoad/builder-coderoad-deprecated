@@ -11,18 +11,19 @@
   "jsx": "react",
   "experimentalDecorators": true,
   "emitDecoratorMetadata": true,
-  "outDir": "lib"
+  "outDir": "lib",
+  "rootDirs": [
+   "src"
+  ]
  },
  "filesGlob": [
-  "src/typings/**/*.d.ts",
-  "src/**/*.ts",
-  "src/**/*.tsx",
-  "!src/**/*.spec.ts",
-  "!src/**/*.spec.tsx"
+  "typings/**/*.d.ts",
+  "**/*.ts",
+  "**/*.tsx",
+  "!**/*.spec.ts",
+  "!**/*.spec.tsx"
  ],
  "files": [
-  "src/typings/builder.d.ts",
-  "src/typings/typings.d.ts",
   "src/actions.ts",
   "src/components/Config/handleDeps.ts",
   "src/components/Config/validate.ts",
@@ -77,6 +78,8 @@
   "src/services/twoDigitify.ts",
   "src/store.ts",
   "src/subscriptions.ts",
+  "src/typings/builder.d.ts",
+  "src/typings/typings.d.ts",
   "src/components/AppMenu/CloseWindow.tsx",
   "src/components/AppMenu/index.tsx",
   "src/components/AppMenu/menuIconRight.tsx",
