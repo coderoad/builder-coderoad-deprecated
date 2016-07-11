@@ -1,4 +1,4 @@
-import {PJ_SAVE, PJ_LOAD} from './types';
+import {PJ_LOAD, PJ_SAVE} from './types';
 
 export function pjLoad() {
   return (dispatch, getState) => {

@@ -1,13 +1,14 @@
 import {CompositeDisposable} from 'atom';
-import {windowToggle, tutorialBuild, tutorialLoad} from './actions';
+
+import {tutorialBuild, tutorialLoad, windowToggle} from './actions';
 import {sideElement} from './components/SidePanel';
 import {topElement} from './components/TopPanel';
 
 export default class Subscriptions {
-  public subscriptions = new CompositeDisposable;
+  public subscriptions = new CompositeDisposable();
   public store: Redux.Store;
 
-  onActivate(store: Redux.Store): AtomCore.Disposable {
+  public onActivate(store: Redux.Store): AtomCore.Disposable {
     this.store = store;
     this.subscriptions.add(
       atom.commands.add('atom-workspace', {
@@ -28,7 +29,7 @@ export default class Subscriptions {
     return this.subscriptions;
   }
 
-  onDeactivate(store: Redux.Store): void {
+  public onDeactivate(store: Redux.Store): void {
     // unmount React
     sideElement.unmount();
     topElement.unmount();
@@ -38,7 +39,7 @@ export default class Subscriptions {
     this.subscriptions.dispose();
   }
 
-  addSubscription(fn: () => any) {
+  private addSubscription(fn: () => any) {
     const store = this.store; // used for dispatches
     this.subscriptions.add(fn);
   }

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {List, ListItem} from 'material-ui/List';
-import FontIcon from 'material-ui/FontIcon';
+
+import {editorMarkdownOpen, tutorialHintAdd} from '../../../actions';
 import AddButton from '../AddButton';
-import {tutorialHintAdd, editorMarkdownOpen} from '../../../actions';
+import FontIcon from 'material-ui/FontIcon';
+import {List, ListItem} from 'material-ui/List';
 import TextField from 'material-ui/TextField';
 
 const styles = {
@@ -24,12 +25,7 @@ export default class Hints extends React.Component<{
       text: '',
     };
   }
-  handleChange(event) {
-    this.setState({
-      text: event.target.value,
-    });
-  }
-  render() {
+  public render() {
     const {hints, editorMarkdownOpen} = this.props;
     const {text} = this.state;
     return (
@@ -42,7 +38,8 @@ export default class Hints extends React.Component<{
               secondaryText={
                 <p>{index + 1}. {hint}</p>
               }
-              onClick={editorMarkdownOpen.bind(this, hint, null)}/>
+              onClick={editorMarkdownOpen.bind(this, hint, null)}
+            />
           ))
         }
         {/*<TextField
@@ -54,5 +51,10 @@ export default class Hints extends React.Component<{
         />*/}
       </List>
     );
+  }
+  private handleChange(event) {
+    this.setState({
+      text: event.target.value,
+    });
   }
 }

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import IconMenu from 'material-ui/IconMenu';
-import Divider from 'material-ui/Divider';
+
 import Quit from './Quit';
 import menuIconRight from './menuIconRight';
 import menuRightRouteOptions from './menuRightRouteOptions';
+import Divider from 'material-ui/Divider';
+import IconMenu from 'material-ui/IconMenu';
 
 const origin: __MaterialUI.propTypes.origin = {
   horizontal: 'right',

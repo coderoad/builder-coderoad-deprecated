@@ -1,16 +1,17 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Field, reduxForm, formValueSelector} from 'redux-form';
-import MenuItem from 'material-ui/MenuItem';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import {pjSave, pjLoad, tutorialInit, routeSet, editorPjOpen} from '../../actions';
-import runnerItems from './runnerItems';
-import {topElement} from '../TopPanel';
-import textField from '../Form/textField';
+import {Field, formValueSelector, reduxForm} from 'redux-form';
+
+import {editorPjOpen, pjLoad, pjSave, routeSet, tutorialInit} from '../../actions';
 import selectField from '../Form/selectField';
-import validate from './validate';
+import textField from '../Form/textField';
+import {topElement} from '../TopPanel';
 import handleDeps from './handleDeps';
+import runnerItems from './runnerItems';
+import validate from './validate';
+import {Card, CardText, CardTitle} from 'material-ui/Card';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
   card: {
@@ -42,11 +43,11 @@ class TutorialConfig extends React.Component <{
   language?: string, invalid?: boolean, initialize?: any,
   editorPjOpen?: () => Redux.ActionCreator,
 }, {}> {
-  refs: {
+  private refs: {
     [key: string]: (Element);
     name: HTMLInputElement;
   };
-  componentWillMount() {
+  private componentWillMount() {
     this.props.pjLoad();
     this.props.editorPjOpen();
     // get props after pjLoad completes
@@ -59,12 +60,12 @@ class TutorialConfig extends React.Component <{
       });
     });
   }
-  componentDidMount() {
+  private componentDidMount() {
     topElement.toggle(false);
     // focus first element
     document.getElementsByTagName('input')[0].focus();
   }
-  shouldComponentUpdate() {
+  private shouldComponentUpdate() {
     // hack to prevent lost focus on component update
     const textInputIsActive = (
       document.activeElement &&
@@ -72,7 +73,7 @@ class TutorialConfig extends React.Component <{
     );
     return this.props.submitting || !textInputIsActive;
   }
-  onSubmit(values) {
+  private onSubmit(values) {
     const {packageJson} = this.props;
     const {name, runnerItem, repo} = values;
     const [language, runner] = runnerItem.split(': ');
@@ -101,11 +102,11 @@ class TutorialConfig extends React.Component <{
       repoObj)
     );
   }
-  routeToPage() {
+  private routeToPage() {
     this.props.tutorialInit();
     this.props.routeSet('page');
   }
-  render() {
+  public render() {
     const {submitting, handleSubmit, invalid, packageJson} = this.props;
 
     // select runner items
@@ -129,7 +130,7 @@ class TutorialConfig extends React.Component <{
                 hintText: 'coderoad-tutorial-name',
               })}
               tabIndex='1'
-             />
+            />
 
             <Field
               name='runnerItem'

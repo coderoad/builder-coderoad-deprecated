@@ -1,9 +1,10 @@
+import {join} from 'path';
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {join} from 'path';
-import {Tabs, Tab} from 'material-ui/Tabs';
+
+import {editorMarkdownOpen, pageSet, tutorialPageAdd} from '../../actions';
+import {Tab, Tabs} from 'material-ui/Tabs';
 import Add from 'material-ui/svg-icons/content/add';
-import {pageSet, tutorialPageAdd, editorMarkdownOpen} from '../../actions';
 
 const styles = {
   all: {
@@ -33,11 +34,7 @@ export default class TopPanel extends React.Component<{
   editorMarkdownOpen?: (title: string, index: number) => Redux.ActionCreator,
   tutorialPageAdd?: () => Redux.ActionCreator,
 }, {}> {
-  selectPage(title: string, index: number) {
-    this.props.pageSet(index);
-    this.props.editorMarkdownOpen(title, index);
-  }
-  render() {
+  public render() {
     const {tutorial} = this.props;
 
     // no tutorial or pages? no need for a tab bar
@@ -46,7 +43,7 @@ export default class TopPanel extends React.Component<{
     return (
       <Tabs tabItemContainerStyle={styles.tabs} style={styles.all}>
          {tutorial.pages.map((page: CR.Page, index) => (
-           <Tab
+          <Tab
             style={styles.tab}
             key={index}
             label={page.title.substring(0, 10)}
@@ -60,5 +57,9 @@ export default class TopPanel extends React.Component<{
       />*/}
      </Tabs>
    );
+  }
+  private selectPage(title: string, index: number) {
+    this.props.pageSet(index);
+    this.props.editorMarkdownOpen(title, index);
   }
 }

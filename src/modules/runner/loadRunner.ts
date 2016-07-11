@@ -1,5 +1,6 @@
-import {join, resolve} from 'path';
 import {readFileSync} from 'fs';
+import {join, resolve} from 'path';
+
 import fileExists from 'node-file-exists';
 
 function noRunner() {

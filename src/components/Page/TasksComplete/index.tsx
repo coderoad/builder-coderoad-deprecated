@@ -1,10 +1,11 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Card, CardText, CardHeader} from 'material-ui/Card';
-import {Markdown} from '../../index';
-import {cyan500, grey100} from 'material-ui/styles/colors';
+
 import {editorMarkdownOpen} from '../../../actions';
+import {Markdown} from '../../index';
 import {pageSelector} from 'core-coderoad';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+import {cyan500, grey100} from 'material-ui/styles/colors';
 
 const styles = {
   card: {
@@ -24,7 +25,7 @@ export default class TasksComplete extends React.Component<{
   page?: CR.Page,
   editorMarkdownOpen?: (content: string, index?: number) => Redux.ActionCreator
 }, {}> {
-  render() {
+  public render() {
     const {page, editorMarkdownOpen} = this.props;
     return (
       <Card style={styles.card}>

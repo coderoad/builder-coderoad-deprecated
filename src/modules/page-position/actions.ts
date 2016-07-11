@@ -1,5 +1,5 @@
-import {PAGE_SET} from './types';
 import {routeSet} from '../../actions';
+import {PAGE_SET} from './types';
 
 export function pageSet(pagePosition: number) {
   return (dispatch, getState) => {

@@ -1,4 +1,4 @@
-import {WINDOW_TOGGLE, QUIT} from './types';
+import {QUIT, WINDOW_TOGGLE} from './types';
 
 export function windowToggle() {
   return (dispatch, getState) => {

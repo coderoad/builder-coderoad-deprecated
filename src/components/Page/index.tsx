@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import Divider from 'material-ui/Divider';
-import {Card} from 'material-ui/Card';
+
+import {editorMarkdownOpen} from '../../actions';
+import {topElement} from '../TopPanel';
 import PageDescription from './PageDescription';
 import Tasks from './Tasks';
 import TasksComplete from './TasksComplete';
-import {topElement} from '../TopPanel';
-import {editorMarkdownOpen} from '../../actions';
+import {Card} from 'material-ui/Card';
+import Divider from 'material-ui/Divider';
 
 const styles = {
   page: {
@@ -20,14 +21,7 @@ const styles = {
 export default class Page extends React.Component<{
   editorMarkdownOpen?: (content?: string, index?: number) => Redux.ActionCreator
 }, {}> {
-  componentDidMount() {
-    this.props.editorMarkdownOpen(null, null);
-    topElement.toggle(true);
-  }
-  componentWillUnmount() {
-    topElement.toggle(false);
-  }
-  render() {
+  public render() {
     return (
       <section style={styles.page} className='cr-page'>
         <PageDescription />
@@ -35,5 +29,12 @@ export default class Page extends React.Component<{
         <TasksComplete />
       </section>
     );
+  }
+  private componentDidMount() {
+    this.props.editorMarkdownOpen(null, null);
+    topElement.toggle(true);
+  }
+  private componentWillUnmount() {
+    topElement.toggle(false);
   }
 };

@@ -1,4 +1,4 @@
-import {npmMinVersion, nodeMinVersion, requiresXCode} from './check-system';
+import {nodeMinVersion, npmMinVersion, requiresXCode} from './check-system';
 
 function allTrue(obj: Object): boolean {
   return Object.values(obj).every(x => x === true);

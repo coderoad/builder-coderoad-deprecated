@@ -1,5 +1,6 @@
-import * as React from 'react';
 import {join} from 'path';
+import * as React from 'react';
+
 import {RouteButton} from '../../index';
 
 // TODO: fix path

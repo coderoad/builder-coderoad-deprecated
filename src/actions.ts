@@ -16,5 +16,5 @@ export {
   alertOpen, alertClose, alertReplay,
   editorDevToolsToggle, editorOpen, editorInsert,
   editorSave, editorSet, editorScroll,
-  routeSet,
+  routeSet
 } from 'core-coderoad';

@@ -1,18 +1,19 @@
+import {join} from 'path';
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {List} from 'material-ui/List';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import Subheader from 'material-ui/Subheader';
-import Task from '../Task';
-import {lightGreen200} from 'material-ui/styles/colors';
-import Tests from '../Tests';
-import TaskActions from '../TaskActions';
-import Hints from '../Hints';
+
+import {editorMarkdownOpen, tutorialTaskAdd} from '../../../actions';
 import AddButton from '../AddButton';
-import {tutorialTaskAdd, editorMarkdownOpen} from '../../../actions';
-import {join} from 'path';
+import Hints from '../Hints';
+import Task from '../Task';
+import TaskActions from '../TaskActions';
+import Tests from '../Tests';
 import {tasksSelector} from 'core-coderoad';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
+import {List} from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import {Tab, Tabs} from 'material-ui/Tabs';
+import {lightGreen200} from 'material-ui/styles/colors';
 
 const styles = {
   card: {
@@ -46,7 +47,7 @@ export default class Tasks extends React.Component<{
   tutorialTaskAdd?: () => Redux.ActionCreator,
   editorMarkdownOpen?: (content: string, index?: number) => Redux.ActionCreator,
 }, {}> {
-  render() {
+  public render() {
     const {tasks, tutorialTaskAdd, editorMarkdownOpen} = this.props;
     return (
       <div>
@@ -55,7 +56,7 @@ export default class Tasks extends React.Component<{
             key={index}
             style={styles.card}
             initiallyExpanded={index === 0}
-            >
+          >
             <CardHeader
               actAsExpander={true}
               showExpandableButton={true}
@@ -88,8 +89,8 @@ export default class Tasks extends React.Component<{
 
                 <Tab label='Hints'>
                   <Hints
-                  hints={task.hints}
-                  taskPosition={index}
+                    hints={task.hints}
+                    taskPosition={index}
                   />
                 </Tab>
 

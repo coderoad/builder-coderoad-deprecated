@@ -1,5 +1,6 @@
 import * as React from 'react';
 // import {connect} from 'react-redux';
+
 import {Card, CardText, CardTitle} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -15,7 +16,7 @@ const styles = {
 export default class Result extends React.Component <{
   result?: Object
 }, {}> {
-  render() {
+  public render() {
     const {result} = this.props;
     return (
       <Card

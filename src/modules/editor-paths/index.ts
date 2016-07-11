@@ -1,7 +1,8 @@
 import {join} from 'path';
+
 import {editorOpen, editorScroll} from '../../actions';
-import {tutorialConfigOptions} from 'core-coderoad';
 import twoDigitify from '../../services/twoDigitify';
+import {tutorialConfigOptions} from 'core-coderoad';
 
 export function editorMarkdownOpen(content: string, index?: number) {
   return (dispatch, getState) => {

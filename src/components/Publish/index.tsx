@@ -1,12 +1,13 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import {validateTutorial, pjSave, pjLoad, tutorialLoad, routeSet, editorPjOpen} from '../../actions';
+
+import {editorPjOpen, pjLoad, pjSave, routeSet, tutorialLoad, validateTutorial} from '../../actions';
 import {topElement} from '../TopPanel';
-import {Stepper} from 'material-ui/Stepper';
-import publishStep from './publishStep';
 import PublishOptionsModal from './PublishOptions';
+import publishStep from './publishStep';
+import {Card, CardText, CardTitle} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Stepper} from 'material-ui/Stepper';
 
 const styles = {
   card: {
@@ -44,32 +45,7 @@ export default class TutorialPublish extends React.Component<{
       modalOpen: false,
     };
   }
-  componentWillMount() {
-    this.props.pjLoad();
-    this.props.editorPjOpen();
-  }
-  componentDidMount() {
-    topElement.toggle(false);
-    this.validate();
-  }
-  validate() {
-    this.props.pjLoad();
-    this.props.tutorialLoad();
-    this.props.validateTutorial();
-  }
-  selectStep(index) {
-    this.setState({
-      stepIndex: index,
-      modalOpen: false,
-    });
-  }
-  handleDialog(open: boolean) {
-    this.setState({
-      stepIndex: this.state.stepIndex,
-      modalOpen: open,
-    });
-  }
-  render() {
+  public render() {
     const {validation} = this.props;
     return (
     <section className='cr-page'>
@@ -135,5 +111,30 @@ export default class TutorialPublish extends React.Component<{
       </Card>
     </section>
     );
+  }
+  private componentWillMount() {
+    this.props.pjLoad();
+    this.props.editorPjOpen();
+  }
+  private componentDidMount() {
+    topElement.toggle(false);
+    this.validate();
+  }
+  private validate() {
+    this.props.pjLoad();
+    this.props.tutorialLoad();
+    this.props.validateTutorial();
+  }
+  private selectStep(index) {
+    this.setState({
+      stepIndex: index,
+      modalOpen: false,
+    });
+  }
+  private handleDialog(open: boolean) {
+    this.setState({
+      stepIndex: this.state.stepIndex,
+      modalOpen: open,
+    });
   }
 }

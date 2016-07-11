@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {Provider} from 'react-redux';
-import SidePanel from './SidePanel';
+
 import muiTheme from '../styles/theme';
+import SidePanel from './SidePanel';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const SideRoot = store => (

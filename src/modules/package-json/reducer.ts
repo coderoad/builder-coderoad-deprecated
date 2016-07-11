@@ -1,6 +1,6 @@
-import {PJ_SAVE, PJ_LOAD} from './types';
 import readFile from '../utils/readFile';
 import writeFile from '../utils/writeFile';
+import {PJ_LOAD, PJ_SAVE} from './types';
 import {sortPackageJson} from 'sort-package-json';
 
 const _pj: Tutorial.PJ = {

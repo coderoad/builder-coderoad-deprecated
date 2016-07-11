@@ -1,11 +1,14 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+
+import {runnerRun, runnerSet} from '../../actions';
+import {TextEditor} from '../index';
+import Result from './Result';
+import {languageSuffixSelector} from 'core-coderoad';
 import {Card, CardText, CardTitle} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import {TextEditor} from '../index';
-import {runnerRun, runnerSet} from '../../actions';
-import {languageSuffixSelector} from 'core-coderoad';
-import Result from './Result';
+
+// TODO: fix ref as callback
 
 const styles = {
   card: {
@@ -27,22 +30,11 @@ export default class Solution extends React.Component <{
   runnerRun?: (content: string) => Redux.ActionCreator,
   runnerSet?: () => Redux.ActionCreator,
 }, {}> {
-  refs: {
+  private refs: {
     [key: string]: Element;
     solution: any;
   };
-  componentDidMount() {
-    this.props.runnerSet();
-  }
-  runTest() {
-    // content = solution + tests
-    const content = `
-${this.refs.solution.get()}
-${atom.workspace.getActiveTextEditor().getText()}
-`;
-    this.props.runnerRun(content);
-  }
-  render() {
+  public render() {
     return (
       <Card
         style={styles.card}
@@ -77,4 +69,15 @@ ${atom.workspace.getActiveTextEditor().getText()}
       </Card>
     );
   }
+    private componentDidMount() {
+      this.props.runnerSet();
+    }
+    private runTest() {
+      // content = solution + tests
+      const content = `
+  ${this.refs.solution.get()}
+  ${atom.workspace.getActiveTextEditor().getText()}
+  `;
+      this.props.runnerRun(content);
+    }
 }

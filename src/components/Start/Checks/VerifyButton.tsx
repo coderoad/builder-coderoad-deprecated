@@ -1,13 +1,14 @@
 import * as React from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import {setupVerify} from '../../../actions';
 import {connect} from 'react-redux';
+
+import {setupVerify} from '../../../actions';
+import FlatButton from 'material-ui/FlatButton';
 
 @connect(null, {setupVerify})
 export default class VerifyButton extends React.Component<{
   setupVerify?: () => Redux.ActionCreator
 }, {}> {
-  render() {
+  public render() {
     return (
       <FlatButton
         label='Verify Setup Complete'

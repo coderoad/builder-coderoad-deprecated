@@ -1,5 +1,5 @@
-import {WINDOW_TOGGLE, QUIT} from './types';
 import {topElement} from '../../components/TopPanel';
+import {QUIT, WINDOW_TOGGLE} from './types';
 
 export default function windowToggle(
   open = false, action: Action

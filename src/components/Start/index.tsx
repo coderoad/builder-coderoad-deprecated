@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+
 import {Checks} from '../index';
 import Welcome from './Welcome';
 
@@ -16,7 +17,7 @@ const headerStyles = {
 export default class Start extends React.Component<{
   passed?: boolean
 }, {}> {
-  render() {
+  public render() {
     const {passed} = this.props;
     return (
       <section className='cr-start'>

@@ -1,5 +1,6 @@
-import {join} from 'path';
 import {readFileSync} from 'fs';
+import {join} from 'path';
+
 import fileExists from 'node-file-exists';
 
 export default function readFile(dir: string, file: string): Object|boolean {

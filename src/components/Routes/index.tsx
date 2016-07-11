@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {Page, Start, TutorialConfig, TutorialPublish, Test} from '../index';
+
+import {Page, Start, Test, TutorialConfig, TutorialPublish} from '../index';
 
 @connect(state => ({
   route: state.route,
@@ -8,7 +9,7 @@ import {Page, Start, TutorialConfig, TutorialPublish, Test} from '../index';
 export default class Routes extends React.Component<{
   route?: string
 }, {}> {
-  render() {
+  public render() {
     switch (this.props.route) {
       case 'page':
         return <Page />;

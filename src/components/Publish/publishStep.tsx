@@ -1,9 +1,10 @@
 import * as React from 'react';
+
+import {CodeBlock} from 'core-coderoad';
 import {Step, StepButton, StepContent} from 'material-ui/Stepper';
+import {amber500, pink500} from 'material-ui/styles/colors';
 import ErrorIcon from 'material-ui/svg-icons/alert/error';
 import WarningIcon from 'material-ui/svg-icons/alert/warning';
-import {pink500, amber500} from 'material-ui/styles/colors';
-import {CodeBlock} from 'core-coderoad';
 
 export default function publishStep(
   index: number, type: string, field: Validation.Error, click: () => any
@@ -21,10 +22,11 @@ export default function publishStep(
   <Step
     key={index}
     completed={false}
-    >
+  >
     <StepButton
       icon={icon}
-      onClick={click}>
+      onClick={click}
+    >
       {field.name}
     </StepButton>
     <StepContent>

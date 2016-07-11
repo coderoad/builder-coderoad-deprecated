@@ -1,6 +1,6 @@
-import loadRunner from './loadRunner';
-import handleResult from './handleResult';
 import {testResult} from '../../actions';
+import handleResult from './handleResult';
+import loadRunner from './loadRunner';
 
 const RUNNER_SET = 'RUNNER_SET';
 const RUNNER_RUN = 'RUNNER_RUN';

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
+
+import {tutorialPublish} from '../../actions';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import {tutorialPublish} from '../../actions';
 
 const styles = {
   dialog: {
@@ -26,11 +27,7 @@ export default class PublishOptionsModal extends React.Component<{
   tutorialPublish?: (type: string) => Redux.ActionCreator,
   updated?: boolean,
 }, {}> {
-  publish(type: string) {
-    this.props.tutorialPublish(type);
-    this.props.handleClose();
-  }
-  render() {
+  public render() {
     const {open, handleClose, version, updated} = this.props;
     return (
       <div>
@@ -78,5 +75,9 @@ export default class PublishOptionsModal extends React.Component<{
         </Dialog>
       </div>
     );
+  }
+  private publish(type: string) {
+    this.props.tutorialPublish(type);
+    this.props.handleClose();
   }
 }

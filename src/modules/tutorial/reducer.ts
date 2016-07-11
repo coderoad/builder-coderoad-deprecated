@@ -1,15 +1,16 @@
-import {
-  TUTORIAL_INIT, TUTORIAL_BUILD, TUTORIAL_LOAD, TUTORIAL_PUBLISH,
-  TUTORIAL_PAGE_ADD, TUTORIAL_TASK_ADD, TUTORIAL_HINT_ADD, TUTORIAL_ACTION_ADD
-} from './types';
-import {create, build} from 'coderoad-cli';
 import {readFileSync} from 'fs';
 import {join} from 'path';
-import taskUpdate from './utils/taskUpdate';
-import pageGet from './utils/pageGet';
-import taskGet from './utils/taskGet';
+
 import readFile from '../utils/readFile';
 import writeFile from '../utils/writeFile';
+import {
+  TUTORIAL_ACTION_ADD, TUTORIAL_BUILD, TUTORIAL_HINT_ADD, TUTORIAL_INIT,
+  TUTORIAL_LOAD, TUTORIAL_PAGE_ADD, TUTORIAL_PUBLISH, TUTORIAL_TASK_ADD
+} from './types';
+import pageGet from './utils/pageGet';
+import taskGet from './utils/taskGet';
+import taskUpdate from './utils/taskUpdate';
+import {build, create} from 'coderoad-cli';
 
 const _tutorial: Tutorial.Output = {
   info: {

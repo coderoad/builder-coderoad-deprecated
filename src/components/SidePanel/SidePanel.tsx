@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {AppMenu} from '../index';
+
 import Routes from '../Routes';
+import {AppMenu} from '../index';
 import Drawer from 'material-ui/Drawer';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 
@@ -19,7 +20,7 @@ const styles = {
 export default class SidePanel extends React.Component<{
   windowToggle?: boolean
 }, {}> {
-  render(): React.ReactElement<{}> {
+  public render(): React.ReactElement<{}> {
     const {windowToggle} = this.props;
     return (
       <section>

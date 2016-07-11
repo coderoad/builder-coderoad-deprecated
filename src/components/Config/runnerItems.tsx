@@ -1,6 +1,7 @@
 import * as React from 'react';
-import MenuItem from 'material-ui/MenuItem';
+
 import {tutorialConfigOptions} from 'core-coderoad';
+import MenuItem from 'material-ui/MenuItem';
 
 export default function runnerItems() {
   // map over languages (JS, Python, etc.)

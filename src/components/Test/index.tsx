@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {topElement} from '../TopPanel';
 import Solution from './Solution';
 import TestMenu from './TestMenu';
@@ -12,10 +13,7 @@ const styles = {
 };
 
 export default class Test extends React.Component<{}, {}> {
-  componentDidMount() {
-    topElement.toggle(true);
-  }
-  render() {
+  public render() {
     return (
       <section
         style={styles.page}
@@ -25,5 +23,8 @@ export default class Test extends React.Component<{}, {}> {
         <Solution />
       </section>
     );
+  }
+  private componentDidMount() {
+    topElement.toggle(true);
   }
 };

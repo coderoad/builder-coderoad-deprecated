@@ -1,8 +1,8 @@
-import {
-  TUTORIAL_INIT, TUTORIAL_LOAD, TUTORIAL_BUILD, TUTORIAL_PUBLISH,
-  TUTORIAL_PAGE_ADD, TUTORIAL_TASK_ADD, TUTORIAL_HINT_ADD, TUTORIAL_ACTION_ADD
-} from './types';
 import {tutorialUpdated} from '../../actions';
+import {
+  TUTORIAL_ACTION_ADD, TUTORIAL_BUILD, TUTORIAL_HINT_ADD, TUTORIAL_INIT,
+  TUTORIAL_LOAD, TUTORIAL_PAGE_ADD, TUTORIAL_PUBLISH, TUTORIAL_TASK_ADD
+} from './types';
 
 export function tutorialInit() {
   return function(dispatch, getState) {
