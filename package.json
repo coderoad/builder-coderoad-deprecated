@@ -30,6 +30,7 @@
     "react": "15.2.1",
     "react-dom": "15.2.1",
     "react-redux": "4.4.5",
+    "react-router-sans-urls": "0.1.0",
     "react-tap-event-plugin": "1.0.0",
     "redux": "3.5.2",
     "redux-form": "6.0.0-alpha.15",
@@ -41,6 +42,6 @@
   "devDependencies": {
     "tslint": "3.13.0",
     "tslint-react": "0.4.0",
-    "typescript": "^2.0.0-dev.20160707"
+    "typescript": "^2.0.0"
   }
 }
