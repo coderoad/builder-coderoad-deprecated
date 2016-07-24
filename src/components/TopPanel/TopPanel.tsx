@@ -62,4 +62,24 @@ export default class TopPanel extends React.Component<{
     this.props.pageSet(index);
     this.props.editorMarkdownOpen(title, index);
   }
+  private componentWillMount() {
+    this.startErrorLog();
+  }
+  private startErrorLog() {
+    window.onerror = (message, file, line, column, errorObject) => {
+      column = column || (window.event && window.event.errorCharacter);
+      const stack = errorObject ? errorObject.stack : null;
+
+      const data = {
+          message,
+          file,
+          line,
+          column,
+          errorStack: stack,
+      };
+
+      // call to server
+      return false;
+    };
+  }
 }
