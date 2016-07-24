@@ -21,7 +21,7 @@ const validate = values => {
     errors.name = 'Invalid "coderoad-*" name';
   }
   if (values.repo) {
-    if (!values.repo.match(/^https?:\/\/[a-zA-Z\.\/]+$/)) {
+    if (!values.repo.match(/^https?:\/\/[a-zA-Z\-\.\/]+$/)) {
       errors.repo = 'Invalid http(s)://github.com/user/repo';
     }
   }
