@@ -5,7 +5,7 @@ import StepCheck from './StepCheck';
 import VerifyButton from './VerifyButton';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-// import {openDirectory, createPackageJson} from '../../../reducers/checks/action-setup';
+// import {openDirectory} from '../../../reducers/checks/action-setup';
 
 const SetupChecks: React.StatelessComponent<{
   checks: Builder.Checks

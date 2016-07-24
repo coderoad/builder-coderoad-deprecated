@@ -16,13 +16,13 @@ const SystemChecks: React.StatelessComponent<{
   }
   const status = [system.node, system.npm];
  return (
-    <Card className='cr-check'>
-      <CardHeader
-        title='System Checks'
-        subtitle='CodeRoad requires several key dependencies'
-      />
-      <CardText>
-        <DynamicStepper status={status}>
+  <Card className='cr-check'>
+    <CardHeader
+      title='System Checks'
+      subtitle='CodeRoad requires several key dependencies'
+    />
+    <CardText>
+      <DynamicStepper status={status}>
         <StepCheck
           label='Node >= 0.10'
           completed={system.node}
@@ -54,7 +54,7 @@ const SystemChecks: React.StatelessComponent<{
     <CardActions>
       <VerifyButton />
     </CardActions>
-   </Card>
+  </Card>
   );
 };
 export default SystemChecks;
