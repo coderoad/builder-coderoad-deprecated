@@ -8,6 +8,9 @@ import Subscriptions from './subscriptions';
 import store from './store';
 import {setupVerify} from './modules/setup';
 
+// React optimization
+process.env.NODE_ENV = 'production';
+
 class Main {
   side: HTMLElement;
   top: HTMLElement;
