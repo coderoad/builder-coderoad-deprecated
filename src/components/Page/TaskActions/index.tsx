@@ -58,7 +58,7 @@ export default class TaskActions extends React.Component<{
       >
         {actionList.map((a, index) => (
           <Step key={index}>
-            <StepButton onClick={this.setStepIndex.bind(this)}>
+            <StepButton onClick={this.setStepIndex.bind(this, index)}>
             {a.action + (a.singleLine ? ' ' + a.content : '')}
             </StepButton>
             <StepContent>
@@ -90,12 +90,12 @@ export default class TaskActions extends React.Component<{
       </section>
     );
   }
-  private setStepIndex() {
+  private setStepIndex(index: number) {
     this.setState({
       stepIndex: index, as: this.state.as}
     );
   }
-  private handleSelect(event, index, value) {
+  private handleSelect(event, index: number, value) {
     this.setState({
       stepIndex: this.state.stepIndex,
       as: {
