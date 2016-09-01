@@ -22,15 +22,15 @@
   },
   "dependencies": {
     "atom-plugin-command-line": "1.0.2",
-    "coderoad-cli": "0.6.0",
-    "core-coderoad": "0.6.2",
-    "lodash.debounce": "4.0.7",
-    "material-ui": "0.15.2",
+    "coderoad-cli": "^0.9.0",
+    "core-coderoad": "0.8.1",
+    "lodash.debounce": "4.0.8",
+    "material-ui": "0.15.4",
     "node-file-exists": "1.1.0",
-    "react": "15.3.0",
-    "react-dom": "15.3.0",
+    "react": "15.3.1",
+    "react-dom": "15.3.1",
     "react-redux": "4.4.5",
-    "react-router-sans-urls": "0.1.0",
+    "react-router-sans-urls": "0.1.2",
     "react-tap-event-plugin": "1.0.0",
     "redux": "3.5.2",
     "redux-form": "6.0.0-alpha.15",
@@ -40,8 +40,8 @@
     "atom-workspace": "cb-viewer:toggle"
   },
   "devDependencies": {
-    "tslint": "3.14.0",
-    "tslint-react": "0.4.0",
+    "tslint": "3.15.1",
+    "tslint-react": "1.0.0",
     "typescript": "^2.0.0"
   }
 }
