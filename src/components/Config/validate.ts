@@ -1,5 +1,3 @@
-import * as debounce from 'lodash.debounce';
-
 import {tutorialConfigOptions} from 'core-coderoad';
 
 interface ConfigForm {

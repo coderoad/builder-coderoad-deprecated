@@ -43,69 +43,10 @@ class TutorialConfig extends React.Component <{
   language?: string, invalid?: boolean, initialize?: any,
   editorPjOpen?: () => Redux.ActionCreator,
 }, {}> {
-  private refs: {
+  public refs: {
     [key: string]: (Element);
     name: HTMLInputElement;
   };
-  private componentWillMount() {
-    this.props.pjLoad();
-    this.props.editorPjOpen();
-    // get props after pjLoad completes
-    setTimeout(() => {
-      const {name, config, repository} = this.props.packageJson;
-      this.props.initialize({
-        name,
-        runnerItem: config.language && config.runner ? `${config.language}: ${config.runner}` : null,
-        repo: repository ? repository : '',
-      });
-    });
-  }
-  private componentDidMount() {
-    topElement.toggle(false);
-    // focus first element
-    document.getElementsByTagName('input')[0].focus();
-  }
-  private shouldComponentUpdate() {
-    // hack to prevent lost focus on component update
-    const textInputIsActive = (
-      document.activeElement &&
-      typeof document.activeElement.value === 'string'
-    );
-    return this.props.submitting || !textInputIsActive;
-  }
-  private onSubmit(values) {
-    const {packageJson} = this.props;
-    const {name, runnerItem, repo} = values;
-    const [language, runner] = runnerItem.split(': ');
-    const dependencies = handleDeps(packageJson, runner);
-    const repoObj = repo ? {
-      repository: repo || '',
-      bugs: {
-        url: repo || '',
-      },
-    } : {};
-
-    // trigger submitted updates
-    this.props.submitting = true;
-    setTimeout(() => this.props.submitting = false, 300);
-
-    this.props.pjSave(Object.assign(
-      {},
-      packageJson,
-      {
-        name,
-        dependencies,
-        config: {
-          language, runner,
-        }
-      },
-      repoObj)
-    );
-  }
-  private routeToPage() {
-    this.props.tutorialInit();
-    this.props.routeSet('page');
-  }
   public render() {
     const {submitting, handleSubmit, invalid, packageJson} = this.props;
 
@@ -173,6 +114,65 @@ class TutorialConfig extends React.Component <{
       </Card>
     </section>
     );
+  }
+  private componentWillMount() {
+    this.props.pjLoad();
+    this.props.editorPjOpen();
+    // get props after pjLoad completes
+    setTimeout(() => {
+      const {name, config, repository} = this.props.packageJson;
+      this.props.initialize({
+        name,
+        runnerItem: config.language && config.runner ? `${config.language}: ${config.runner}` : null,
+        repo: repository ? repository : '',
+      });
+    });
+  }
+  private componentDidMount() {
+    topElement.toggle(false);
+    // focus first element
+    document.getElementsByTagName('input')[0].focus();
+  }
+  private shouldComponentUpdate() {
+    // hack to prevent lost focus on component update
+    const textInputIsActive = (
+      document.activeElement &&
+      typeof document.activeElement.value === 'string'
+    );
+    return this.props.submitting || !textInputIsActive;
+  }
+  private onSubmit(values) {
+    const {packageJson} = this.props;
+    const {name, runnerItem, repo} = values;
+    const [language, runner] = runnerItem.split(': ');
+    const dependencies = handleDeps(packageJson, runner);
+    const repoObj = repo ? {
+      repository: repo || '',
+      bugs: {
+        url: repo || '',
+      },
+    } : {};
+
+    // trigger submitted updates
+    this.props.submitting = true;
+    setTimeout(() => this.props.submitting = false, 300);
+
+    this.props.pjSave(Object.assign(
+      {},
+      packageJson,
+      {
+        name,
+        dependencies,
+        config: {
+          language, runner,
+        }
+      },
+      repoObj)
+    );
+  }
+  private routeToPage() {
+    this.props.tutorialInit();
+    this.props.routeSet('page');
   }
 }
 
