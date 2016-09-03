@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {CodeBlock} from '../../index';
+import {CodeBlock} from '../index';
 import {Step, StepButton, StepContent} from 'material-ui/Stepper';
 import {amber500, pink500} from 'material-ui/styles/colors';
 import ErrorIcon from 'material-ui/svg-icons/alert/error';

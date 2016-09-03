@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 
-import {editorMarkdownOpen, pageSelector} from '../../../actions';
+import {editorMarkdownOpen} from '../../../actions';
+import {pageSelector} from '../../../selectors';
 import {Markdown} from '../../index';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 

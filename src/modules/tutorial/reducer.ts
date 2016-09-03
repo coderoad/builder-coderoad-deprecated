@@ -24,8 +24,7 @@ export default function tutorial(t = _tutorial, action: Action): Tutorial.Output
   switch (action.type) {
 
     case TUTORIAL_INIT:
-      const {dir, name} = action.payload;
-      create(dir, name);
+      create(action.payload);
       if (t.info.title.length < 1) {
         // no title? save packageJson name as title
         const info = Object.assign({}, t.info, { title: name });
@@ -35,7 +34,10 @@ export default function tutorial(t = _tutorial, action: Action): Tutorial.Output
 
     case TUTORIAL_BUILD:
       // run CLI build to create a new coderoad.json file
-      build(action.payload.dir, join('tutorial', 'tutorial.md'));
+      build({
+        dir: action.payload.dir,
+        filePath: join('tutorial', 'tutorial.md'),
+      });
       return t;
 
     case TUTORIAL_LOAD:

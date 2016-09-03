@@ -5,7 +5,7 @@ import {
 } from './types';
 
 export function tutorialInit() {
-  return function(dispatch, getState) {
+  return (dispatch, getState) => {
     const {dir, packageJson} = getState();
     dispatch({ type: TUTORIAL_INIT, payload: { dir, name: packageJson.name } });
     dispatch(tutorialBuild());
