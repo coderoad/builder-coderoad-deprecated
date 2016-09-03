@@ -1,6 +1,7 @@
 import {SETUP_PACKAGE, SETUP_VERIFY} from './types';
 
-export function setupVerify(): ReduxThunk.ThunkInterface {
+export function setupVerify():
+  Redux.ThunkAction<any, {dir: string, packageJson: PackageJson}, {}> {
   return (dispatch, getState): void => {
     dispatch(setupPackage());
     const {dir, packageJson} = getState();
@@ -8,7 +9,8 @@ export function setupVerify(): ReduxThunk.ThunkInterface {
   };
 }
 
-export function setupPackage(): ReduxThunk.ThunkInterface {
+export function setupPackage():
+  Redux.ThunkAction<any, {dir: string}, {}> {
   return (dispatch, getState): void => {
     const {dir} = getState();
     dispatch({ type: SETUP_PACKAGE, payload: { dir } });
