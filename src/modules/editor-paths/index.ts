@@ -1,8 +1,8 @@
 import {join} from 'path';
 
 import {editorOpen, editorScroll} from '../../actions';
+import tutorialConfigOptions from '../../options/tutorialConfig';
 import twoDigitify from '../../services/twoDigitify';
-import {tutorialConfigOptions} from 'core-coderoad';
 
 export function editorMarkdownOpen(content: string, index?: number) {
   return (dispatch, getState) => {
@@ -14,7 +14,7 @@ export function editorMarkdownOpen(content: string, index?: number) {
       twoDigitify(index ? index + 1 : pagePosition + 1),
       'index.md'
     );
-    dispatch(editorOpen(filePath));
+    dispatch(editorOpen(filePath, {}));
 
     // scroll to content
     setTimeout(() => {
@@ -41,13 +41,13 @@ export function editorTestOpen(file: string) {
       'tutorial',
       file + '.' + suffix
     );
-    dispatch(editorOpen(filePath));
+    dispatch(editorOpen(filePath, {}));
   };
 }
 
 export function editorPjOpen() {
   return (dispatch, getState) => {
     const {dir} = getState();
-    dispatch(editorOpen('package.json'));
+    dispatch(editorOpen('package.json', {}));
   };
 }

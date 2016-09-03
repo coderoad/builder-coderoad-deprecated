@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {tutorialConfigOptions} from 'core-coderoad';
+import tutorialConfigOptions from '../../options/tutorialConfig';
 import MenuItem from 'material-ui/MenuItem';
 
 export default function runnerItems() {

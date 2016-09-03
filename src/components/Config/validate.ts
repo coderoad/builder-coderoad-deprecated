@@ -1,4 +1,4 @@
-import {tutorialConfigOptions} from 'core-coderoad';
+import tutorialConfigOptions from '../../options/tutorialConfig';
 
 interface ConfigForm {
   name?: string;

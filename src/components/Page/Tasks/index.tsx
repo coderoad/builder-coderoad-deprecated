@@ -3,17 +3,17 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 
 import {editorMarkdownOpen, tutorialTaskAdd} from '../../../actions';
+import {tasksSelector} from '../../../selectors';
 import AddButton from '../AddButton';
 import Hints from '../Hints';
 import Task from '../Task';
 import TaskActions from '../TaskActions';
 import Tests from '../Tests';
-import {tasksSelector} from 'core-coderoad';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import {List} from 'material-ui/List';
+import {lightGreen200} from 'material-ui/styles/colors';
 import Subheader from 'material-ui/Subheader';
 import {Tab, Tabs} from 'material-ui/Tabs';
-import {lightGreen200} from 'material-ui/styles/colors';
 
 const styles = {
   card: {

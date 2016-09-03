@@ -1,5 +1,5 @@
+import configureStore from './options/configureStore';
 import reducer from './reducers';
-import {configureStore} from 'core-coderoad';
 
 const store = configureStore({
   reducer,

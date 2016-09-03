@@ -1,4 +1,4 @@
-export {default as dir} from './dir';
+
 export {default as reducer} from './reducer';
 
 export {editorDevToolsToggle, editorOpen, editorInsert,

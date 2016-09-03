@@ -2,8 +2,9 @@ import {join} from 'path';
 import * as React from 'react';
 import {connect} from 'react-redux';
 
-import {editorTestOpen} from '../../../actions';
-import {configSelector, routeSet, tutorialConfigOptions} from 'core-coderoad';
+import {editorTestOpen, routeSet} from '../../../actions';
+import tutorialConfigOptions from '../../../options/tutorialConfig';
+import {configSelector} from '../../../selectors';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import CodeIcon from 'material-ui/svg-icons/action/code';

@@ -1,4 +1,4 @@
-import {openFolder} from 'core-coderoad';
+import {openFolder} from '../../../../actions';
 
 export function openDirectory(): void {
   openFolder();

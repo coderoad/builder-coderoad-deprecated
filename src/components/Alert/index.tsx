@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 
-import {alertClose} from '../actions';
+import {alertClose} from '../../actions';
 import Snackbar from 'material-ui/Snackbar';
 
 const defaultAlert = {

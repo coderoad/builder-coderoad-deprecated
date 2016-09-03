@@ -2,9 +2,9 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 
 import {runnerRun, runnerSet} from '../../actions';
+import {languageSuffixSelector} from '../../selectors';
 import {TextEditor} from '../index';
 import Result from './Result';
-import {languageSuffixSelector} from 'core-coderoad';
 import {Card, CardText, CardTitle} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 

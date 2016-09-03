@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 
-import {editorMarkdownOpen} from '../../../actions';
+import {editorMarkdownOpen, pageSelector} from '../../../actions';
 import {Markdown} from '../../index';
-import {pageSelector} from 'core-coderoad';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 const styles = {

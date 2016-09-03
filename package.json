@@ -23,7 +23,6 @@
   "dependencies": {
     "atom-plugin-command-line": "1.0.2",
     "coderoad-cli": "^0.9.0",
-    "core-coderoad": "0.8.1",
     "lodash.debounce": "4.0.8",
     "material-ui": "0.15.4",
     "node-file-exists": "1.1.0",

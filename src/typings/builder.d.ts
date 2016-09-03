@@ -1,4 +1,3 @@
-// declare module 'core-coderoad';
 // declare module 'react-router-sans-urls';
 
 declare namespace Builder {
