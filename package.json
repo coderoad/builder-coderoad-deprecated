@@ -1,6 +1,6 @@
 {
   "name": "builder-coderoad",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "Tutorial builder for Atom-Coderoad",
   "keywords": [
     "atom",
